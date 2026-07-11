@@ -1,0 +1,29 @@
+<!-- POSTER PLACEHOLDER do vídeo do hero.
+     DADO REAL NECESSÁRIO: substituir por um frame real do vídeo em JPG
+     (ex.: assets/hero-poster.jpg, ~1920x1080) e atualizar o atributo
+     poster="" no index.html. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="g" cx="70%" cy="18%" r="80%">
+      <stop offset="0" stop-color="#2a2018"/>
+      <stop offset="45%" stop-color="#16130f"/>
+      <stop offset="100%" stop-color="#0e0f0d"/>
+    </radialGradient>
+    <linearGradient id="vapor" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#ff7a3d" stop-opacity="0"/>
+      <stop offset="1" stop-color="#ff7a3d" stop-opacity=".25"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#g)"/>
+  <!-- xícara estilizada -->
+  <g transform="translate(1180 560)" fill="none" stroke="#ff7a3d" stroke-width="8" opacity=".55">
+    <path d="M-160 -40 h300 v120 a150 150 0 0 1 -150 150 h0 a150 150 0 0 1 -150 -150 z"/>
+    <path d="M140 -10 h60 a70 70 0 0 1 0 140 h-40" stroke-width="8"/>
+    <path d="M-120 -120 c0 -30 40 -30 40 -70" stroke-width="6" opacity=".6"/>
+    <path d="M-20 -120 c0 -30 40 -30 40 -70" stroke-width="6" opacity=".6"/>
+    <path d="M80 -120 c0 -30 40 -30 40 -70" stroke-width="6" opacity=".6"/>
+  </g>
+  <rect x="1120" y="380" width="120" height="200" fill="url(#vapor)" opacity=".5"/>
+  <text x="150" y="560" font-family="'Space Grotesk', sans-serif" font-size="70" font-weight="700" fill="#f2f0ec" opacity=".9">Mov <tspan fill="#ff7a3d">Coffee</tspan></text>
+  <text x="152" y="620" font-family="Inter, sans-serif" font-size="30" fill="#a8a89f">poster placeholder — troque pelo frame real do vídeo</text>
+</svg>

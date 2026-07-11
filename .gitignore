@@ -1,0 +1,10 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependências (não usadas neste site estático, mas por segurança)
+node_modules/
+
+# Servidor de teste local (não é necessário para o deploy)
+servidor-local.js
