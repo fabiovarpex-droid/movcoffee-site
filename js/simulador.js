@@ -181,9 +181,19 @@
     const i = readInputs();
 
     // rótulos
-    el("v-capex").textContent = BRL.format(i.capex);
+    // Investimento exibido é o TOTAL da rede: valor por quiosque × nº de quiosques
+    // (ex.: 1 quiosque = R$ 72.000 · 2 quiosques = R$ 144.000)
+    el("v-capex").textContent = BRL.format(i.capex * i.unid);
+    const capexHint = el("capex-hint");
+    if (i.unid > 1) {
+      capexHint.style.display = "block";
+      capexHint.innerHTML = `${BRL.format(i.capex)} por quiosque × <strong>${i.unid} quiosques</strong> = ${BRL.format(i.capex * i.unid)}`;
+    } else {
+      capexHint.style.display = "none";
+    }
     el("v-unid").textContent = i.unid;
-    el("v-ticket").textContent = BRL.format(i.ticket).replace(/\s?,00$/, "");
+    // Ticket pode ter passo de R$ 0,50 — mostra centavos só quando não é inteiro
+    el("v-ticket").textContent = (i.ticket % 1 === 0) ? BRL.format(i.ticket) : BRL2.format(i.ticket);
     el("v-copos").textContent = i.copos;
     el("v-dias").textContent = i.dias;
     el("v-cafe").textContent = BRL2.format(i.cafe);
