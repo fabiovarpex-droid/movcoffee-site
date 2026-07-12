@@ -102,6 +102,10 @@ if (heroVideo) {
 
 /* ============ 5. FORMULÁRIO ============ */
 const form = document.getElementById("form-franqueado");
+
+// O formulário só existe na home. Em outras páginas (ex.: simulador.html) este
+// bloco é ignorado, para que header/menu/chat continuem funcionando lá.
+if (form) {
 const confirmacao = document.getElementById("confirmacao");
 
 // Máscara simples de telefone brasileiro: (11) 99999-9999
@@ -197,6 +201,7 @@ form.addEventListener("submit", async (evento) => {
   confirmacao.hidden = false;
   confirmacao.scrollIntoView({ behavior: "smooth", block: "center" });
 });
+} // fim do bloco do formulário (só na home)
 
 /* ============ 6. WIDGET DE CHAT ============ */
 /* Placeholder de chat: respostas fixas vindas do FAQ.
@@ -207,6 +212,9 @@ const chatBotao = document.getElementById("chat-botao");
 const chatPainel = document.getElementById("chat-painel");
 const chatMensagens = document.getElementById("chat-mensagens");
 const chatPerguntas = document.getElementById("chat-perguntas");
+
+// O widget de chat pode não existir em todas as páginas; só ativa se estiver presente.
+if (chatBotao && chatPainel && chatMensagens && chatPerguntas) {
 
 const perguntasRapidas = [
   {
@@ -261,3 +269,4 @@ chatBotao.addEventListener("click", () => {
   chatBotao.setAttribute("aria-expanded", String(abrir));
   chatBotao.setAttribute("aria-label", abrir ? "Fechar chat de dúvidas" : "Abrir chat de dúvidas");
 });
+} // fim do bloco do chat

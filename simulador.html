@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO ===== -->
+  <title>Simulador de Plano de Negócio — Mov Coffee Franquias</title>
+  <meta name="description" content="Simule o plano de negócio de um quiosque Mov Coffee: veja payback e lucro líquido mensal ajustando cafés/dia, ticket médio, ocupação e nº de quiosques. Simulação ilustrativa." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Simulador de Plano de Negócio — Mov Coffee" />
+  <meta property="og:description" content="Veja payback e lucro líquido mensal do seu quiosque Mov Coffee. Simulação interativa e ilustrativa." />
+  <meta property="og:url" content="https://www.movcoffee.com.br/simulador.html" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="theme-color" content="#0e0f0d" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/simulador.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CABEÇALHO / NAVEGAÇÃO (mesmo do site)
+       ============================================================ -->
+  <header class="topo" id="topo">
+    <nav class="topo__nav container" aria-label="Navegação principal">
+      <a href="index.html#hero" class="logo" aria-label="Mov Coffee — início">
+        <svg class="logo__icone" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <rect x="3"  y="18" width="5" height="11" rx="1.5" fill="#FF7A3D"/>
+          <rect x="11" y="11" width="5" height="18" rx="1.5" fill="#FF7A3D"/>
+          <rect x="19" y="4"  width="5" height="25" rx="1.5" fill="#FF7A3D"/>
+        </svg>
+        <span class="logo__texto">Mov <strong>Coffee</strong></span>
+      </a>
+
+      <button class="topo__hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="topo__links" id="menu-links">
+        <li><a href="index.html#modelo">O modelo</a></li>
+        <li><a href="index.html#como-funciona">Como funciona</a></li>
+        <li><a href="index.html#numeros">Números</a></li>
+        <li><a href="simulador.html" aria-current="page">Simulador</a></li>
+        <li><a href="index.html#faq">Dúvidas</a></li>
+        <li><a href="index.html#cadastro" class="botao botao--pequeno">Quero ser licenciado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         SIMULADOR DE PLANO DE NEGÓCIO
+         ============================================================ -->
+    <section class="secao simulador" id="simulador">
+      <div class="container">
+        <p class="secao__rotulo revelar">Simulador</p>
+        <h1 class="revelar" style="font-size:clamp(1.9rem,4.8vw,2.8rem);font-weight:700;max-width:38rem;">
+          Simule o plano de negócio do seu quiosque
+        </h1>
+        <p class="secao__sub revelar">
+          Ajuste os números da sua operação e veja, na hora, o <strong>payback</strong> e o
+          <strong>lucro líquido mensal</strong> estimados. Sem cadastro para simular.
+        </p>
+
+        <!-- ============ LAYOUT: CONTROLES + RESULTADOS ============
+             Sem 'revelar' de propósito: a calculadora é o conteúdo principal e
+             deve aparecer imediatamente, sem depender da animação de scroll. -->
+        <div class="sim-layout">
+
+          <!-- ---------- COLUNA DE CONTROLES (inputs do prospect) ---------- -->
+          <div class="sim-controls">
+
+            <!-- Receita: cafés/dia é o input principal -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Sua operação</div>
+
+              <div class="sim-field sim-field--destaque" style="margin-bottom:18px">
+                <div class="sim-field-head">
+                  <span class="sim-field-label">☕ Cafés vendidos por dia</span>
+                  <span class="sim-field-val accent" id="v-copos">40</span>
+                </div>
+                <input type="range" id="copos" min="5" max="200" step="1" value="40"
+                       aria-label="Cafés vendidos por dia" />
+                <div class="sim-hint">O principal fator do resultado. Uma unidade nova costuma amadurecer ao longo dos primeiros meses.</div>
+              </div>
+
+              <div class="sim-grid2">
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">Ticket médio</span><span class="sim-field-val accent" id="v-ticket">R$ 12</span></div>
+                  <input type="range" id="ticket" min="8" max="18" step="0.5" value="12" aria-label="Ticket médio" />
+                </div>
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">Dias de operação / mês</span><span class="sim-field-val" id="v-dias">30</span></div>
+                  <input type="range" id="dias" min="20" max="31" step="1" value="30" aria-label="Dias de operação por mês" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Investimento -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Investimento</div>
+              <div class="sim-grid2">
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head">
+                    <span class="sim-field-label">Investimento inicial <span class="sim-lock">inclui estoque 1º mês</span></span>
+                    <span class="sim-field-val accent" id="v-capex">R$ 72.000</span>
+                  </div>
+                  <input type="range" id="capex" min="69000" max="75000" step="500" value="72000" aria-label="Investimento inicial" />
+                </div>
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">Nº de quiosques</span><span class="sim-field-val" id="v-unid">1</span></div>
+                  <input type="range" id="unid" min="1" max="10" step="1" value="1" aria-label="Número de quiosques" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Custos que o prospect controla -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Custos fixos que você controla</div>
+              <div class="sim-field">
+                <div class="sim-field-head"><span class="sim-field-label">Ocupação do ponto (aluguel / condomínio)</span><span class="sim-field-val" id="v-ocup">R$ 1.500</span></div>
+                <input type="range" id="ocup" min="800" max="3500" step="50" value="1500" aria-label="Custo de ocupação do ponto" />
+              </div>
+
+              <div class="sim-labor">
+                <div class="sim-field-head" style="margin-bottom:11px">
+                  <span class="sim-field-label">Quem opera o quiosque?</span>
+                </div>
+                <div class="sim-toggle toggle-wide" role="group" aria-label="Quem opera o quiosque">
+                  <button type="button" id="lab-self" class="on">🧑‍🔧 Licenciado opera</button>
+                  <button type="button" id="lab-hire">👥 Contratar colaborador</button>
+                </div>
+                <div id="labor-wrap" style="display:none;margin-top:16px">
+                  <div class="sim-field-head"><span class="sim-field-label">Custo do colaborador (salário + encargos)</span><span class="sim-field-val" id="v-mo">R$ 2.600</span></div>
+                  <input type="range" id="mo" min="1500" max="5000" step="100" value="2600" aria-label="Custo do colaborador" />
+                  <div class="sim-hint">Valor mensal já com encargos (FGTS, 13º, férias). No autoatendimento, meio período costuma bastar; para operação integral, use a faixa superior.</div>
+                </div>
+                <div id="labor-self-note" class="sim-hint" style="margin-top:11px">Autoatendimento: reabastecimento e limpeza feitos pelo próprio licenciado → <strong style="color:var(--sim-positive)">sem custo de mão de obra</strong>.</div>
+              </div>
+
+              <!-- Premissas da rede (travadas, só leitura) -->
+              <details class="sim-premissas">
+                <summary><span class="chev">▶</span>Ver premissas da rede (CMV, royalties, impostos…)</summary>
+                <div class="body">
+                  <div id="sim-premissas-body"><!-- preenchido pelo simulador.js --></div>
+                  <p class="sim-prem-note">
+                    Estas são as premissas padronizadas da franqueadora, usadas no cálculo. São
+                    exibidas para transparência e não são editáveis nesta simulação. Valores de
+                    referência (jul/2026), sujeitos a confirmação.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <!-- ---------- COLUNA DE RESULTADOS ---------- -->
+          <div class="sim-results">
+            <div class="sim-hero">
+              <div class="sim-hero-grid">
+                <div class="sim-hero-item">
+                  <div class="lbl">⏱ Payback</div>
+                  <div class="sim-hero-num payback" id="r-payback">9,3</div>
+                  <div class="sim-hero-unit" id="r-payback-u">meses</div>
+                </div>
+                <div class="sim-hero-item">
+                  <div class="lbl">💰 Lucro líquido / mês</div>
+                  <div class="sim-hero-num profit" id="r-lucro">R$ 7.736</div>
+                  <div class="sim-hero-unit">em volume pleno</div>
+                </div>
+              </div>
+              <div class="sim-hero-sep"></div>
+              <div class="sim-kpi-row">
+                <div class="sim-kpi"><div class="kv" id="r-margem">54%</div><div class="kl">Margem líquida</div></div>
+                <div class="sim-kpi"><div class="kv" id="r-be">12</div><div class="kl">Break-even (cafés/dia)</div></div>
+                <div class="sim-kpi"><div class="kv" id="r-receita">R$ 14,4k</div><div class="kl">Receita / mês</div></div>
+              </div>
+              <a class="sim-cta" href="index.html#cadastro">Quero ser licenciado Mov Coffee</a>
+              <div class="sim-disclaimer">Simulação ilustrativa. Não constitui promessa de rentabilidade nem oferta de franquia. Resultados variam conforme ponto, operação e mercado.</div>
+            </div>
+
+            <div class="sim-card">
+              <div class="sim-chart-head">
+                <div class="sim-card-title" style="margin-bottom:0"><span class="dot"></span>Fluxo de caixa acumulado</div>
+                <span class="sim-toggle" role="group" aria-label="Horizonte do gráfico">
+                  <button type="button" class="hz" data-hz="12">12m</button>
+                  <button type="button" class="hz on" data-hz="36">36m</button>
+                  <button type="button" class="hz" data-hz="60">60m</button>
+                </span>
+              </div>
+              <div class="sim-chart-box"><svg id="sim-chart" viewBox="0 0 400 190" preserveAspectRatio="none" style="width:100%;height:190px" role="img" aria-label="Gráfico do fluxo de caixa acumulado ao longo dos meses"></svg></div>
+              <div class="sim-chart-cap" id="sim-chart-cap">O caixa cruza o zero (retorno do investimento) em ~9,3 meses.</div>
+            </div>
+
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>DRE mensal simplificada</div>
+              <div id="sim-dre"><!-- preenchido pelo simulador.js --></div>
+            </div>
+
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Cenários por volume</div>
+              <table class="sim-scen">
+                <colgroup><col><col><col class="real"><col></colgroup>
+                <thead><tr><th></th><th>Conserv.</th><th class="real-h">Realista</th><th>Otim.</th></tr></thead>
+                <tbody id="sim-scen"><!-- preenchido pelo simulador.js --></tbody>
+              </table>
+              <p class="sim-hint" style="margin-top:12px">Conservador = 30% menos cafés/dia · Otimista = 30% mais, sobre o volume que você definiu.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       RODAPÉ (mesmo do site)
+       ============================================================ -->
+  <footer class="rodape">
+    <div class="container rodape__grade">
+      <div>
+        <a href="index.html#hero" class="logo logo--rodape" aria-label="Mov Coffee">
+          <svg class="logo__icone" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="18" width="5" height="11" rx="1.5" fill="#FF7A3D"/><rect x="11" y="11" width="5" height="18" rx="1.5" fill="#FF7A3D"/><rect x="19" y="4" width="5" height="25" rx="1.5" fill="#FF7A3D"/></svg>
+          <span class="logo__texto">Mov <strong>Coffee</strong></span>
+        </a>
+        <p class="rodape__slogan">Café automatizado. Operação enxuta.</p>
+      </div>
+      <div class="rodape__info">
+        <p>Mov Coffee Franchising Ltda. · CNPJ 00.000.000/0001-00</p>
+        <p><a href="politica-de-privacidade.html">Política de Privacidade</a></p>
+        <p class="rodape__lgpd">
+          Os dados enviados pelo formulário são utilizados exclusivamente para contato
+          comercial sobre a franquia, em conformidade com a Lei Geral de Proteção de
+          Dados (Lei nº 13.709/2018). Você pode solicitar a exclusão dos seus dados a
+          qualquer momento.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/simulador.js" defer></script>
+</body>
+</html>
