@@ -220,7 +220,7 @@ const perguntasRapidas = [
   {
     pergunta: "Qual o investimento?",
     resposta:
-      "O investimento do quiosque completo é de R$ 69.000 (valor de referência, sujeito a confirmação): máquina, mobiliário e estoque do 1º mês. Frete não incluso.",
+      "O investimento do quiosque completo é de R$ 72.000 (valor de referência, sujeito a confirmação): máquina, mobiliário e estoque do 1º mês. Frete não incluso.",
   },
   {
     pergunta: "Prazo de instalação?",

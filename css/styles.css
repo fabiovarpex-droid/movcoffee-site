@@ -467,6 +467,22 @@ select:focus-visible, summary:focus-visible {
 .grade-numeros--unico { display: flex; justify-content: center; }
 .grade-numeros--unico .card-vidro { width: 100%; max-width: 460px; }
 
+/* Chamada centralizada para o simulador + seta móvel de incentivo */
+.secao__sub--centro { text-align: center; max-width: 42rem; margin-inline: auto; margin-top: 2.4rem; }
+.cta-simulador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.3rem;
+}
+.seta-incentivo { color: var(--neon); line-height: 0; animation: setaIncentivo 1.4s ease-in-out infinite; }
+.seta-incentivo svg { width: 30px; height: 38px; filter: drop-shadow(0 4px 10px var(--neon-brilho)); }
+@keyframes setaIncentivo {
+  0%, 100% { transform: translateY(0); opacity: .85; }
+  50%      { transform: translateY(9px); opacity: 1; }
+}
+
 /* ============ 5. VANTAGENS ============ */
 .lista-vantagens { list-style: none; display: grid; gap: 1rem; }
 .lista-vantagens li {
