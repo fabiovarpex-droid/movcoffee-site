@@ -188,10 +188,17 @@ details.sim-adv .body { margin-top: 16px; }
 .sim-kpi .kl { font-size: 10.5px; color: var(--sim-text-mid); margin-top: 3px; line-height: 1.25; }
 
 /* CTA */
+.sim-cta-lead {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--sim-text-mid);
+  text-align: center;
+}
 .sim-cta {
   display: block;
   width: 100%;
-  margin-top: 18px;
+  margin-top: 12px;
   background: var(--sim-primary);
   color: #1a1206;
   border: none;

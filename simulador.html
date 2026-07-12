@@ -244,7 +244,8 @@
                 <div class="sim-kpi"><div class="kv" id="r-be">12</div><div class="kl">Break-even (cafés/dia)</div></div>
                 <div class="sim-kpi"><div class="kv" id="r-receita">R$ 14,4k</div><div class="kl">Receita / mês</div></div>
               </div>
-              <a class="sim-cta" href="index.html#cadastro">Receber meu plano de negócio em PDF</a>
+              <p class="sim-cta-lead">Preencha o formulário para se tornar um franqueado e agendar uma reunião com nossos consultores.</p>
+              <a class="sim-cta" href="#cadastro">Quero me tornar franqueado</a>
               <div class="sim-disclaimer">Simulação ilustrativa. Não constitui promessa de rentabilidade nem oferta de franquia. Resultados variam conforme ponto, operação e mercado.</div>
             </div>
 
@@ -276,6 +277,81 @@
               <p class="sim-hint" style="margin-top:12px">Conservador = 30% menos cafés/dia · Otimista = 30% mais, sobre o volume que você definiu.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CADASTRO (mesmo formulário da home; validado pelo script.js)
+         ============================================================ -->
+    <section class="secao secao--cta" id="cadastro">
+      <div class="container container--estreito">
+        <p class="secao__rotulo revelar">Cadastro</p>
+        <h2 class="revelar">Preencha o formulário para se tornar um franqueado</h2>
+        <p class="secao__sub revelar">Preencha seus dados e nossa equipe de expansão entrará em contato para agendar uma reunião com nossos consultores.</p>
+
+        <form class="formulario revelar" id="form-franqueado" novalidate>
+          <div class="campo">
+            <label for="nome">Nome completo <span aria-hidden="true">*</span></label>
+            <input type="text" id="nome" name="nome" autocomplete="name" required minlength="5" />
+            <p class="campo__erro" id="erro-nome" role="alert" hidden>Informe seu nome completo.</p>
+          </div>
+
+          <div class="formulario__linha">
+            <div class="campo">
+              <label for="telefone">Telefone / WhatsApp <span aria-hidden="true">*</span></label>
+              <input type="tel" id="telefone" name="telefone" autocomplete="tel" inputmode="tel" placeholder="(11) 99999-9999" required />
+              <p class="campo__erro" id="erro-telefone" role="alert" hidden>Informe um telefone válido com DDD.</p>
+            </div>
+            <div class="campo">
+              <label for="email">E-mail <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+              <p class="campo__erro" id="erro-email" role="alert" hidden>Informe um e-mail válido.</p>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="cidade">Cidade / região de interesse <span aria-hidden="true">*</span></label>
+            <input type="text" id="cidade" name="cidade" required minlength="3" placeholder="Ex.: São Paulo — Zona Sul" />
+            <p class="campo__erro" id="erro-cidade" role="alert" hidden>Informe a cidade ou região de interesse.</p>
+          </div>
+
+          <div class="formulario__linha">
+            <div class="campo">
+              <label for="capital">Capital disponível <span aria-hidden="true">*</span></label>
+              <select id="capital" name="capital" required>
+                <option value="">Selecione uma faixa</option>
+                <option value="ate-100k">Até R$ 100 mil</option>
+                <option value="100k-150k">R$ 100 mil a R$ 150 mil</option>
+                <option value="150k-250k">R$ 150 mil a R$ 250 mil</option>
+                <option value="acima-250k">Acima de R$ 250 mil</option>
+              </select>
+              <p class="campo__erro" id="erro-capital" role="alert" hidden>Selecione a faixa de capital disponível.</p>
+            </div>
+            <fieldset class="campo campo--radio">
+              <legend>Já teve experiência em varejo ou franquia? <span aria-hidden="true">*</span></legend>
+              <div class="campo__opcoes">
+                <label><input type="radio" name="experiencia" value="sim" required /> Sim</label>
+                <label><input type="radio" name="experiencia" value="nao" /> Não</label>
+              </div>
+              <p class="campo__erro" id="erro-experiencia" role="alert" hidden>Selecione uma opção.</p>
+            </fieldset>
+          </div>
+
+          <p class="formulario__lgpd">
+            Ao enviar, você concorda com o uso dos seus dados exclusivamente para
+            contato sobre a franquia Mov Coffee, conforme nossa
+            <a href="politica-de-privacidade.html">Política de Privacidade</a> (LGPD).
+          </p>
+
+          <button type="submit" class="botao botao--grande botao--largura-total">Enviar cadastro</button>
+        </form>
+
+        <!-- Mensagem de confirmação (aparece no lugar do formulário após envio) -->
+        <div class="confirmacao" id="confirmacao" hidden role="status">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Cadastro recebido!</h3>
+          <p>Obrigado pelo interesse na Mov Coffee. Nossa equipe de expansão entrará em contato para agendar sua reunião em até <strong>2 dias úteis</strong>.</p>
         </div>
       </div>
     </section>
