@@ -1,11 +1,9 @@
 /* ============================================================
    Mov Coffee — Simulador de Plano de Negócio
-   Estilos da calculadora (glassmorphism + laranja neon).
-   Portado do protótipo validado; reaproveita a identidade do site.
-   Tudo fica sob .simulador para não interferir no resto do site.
+   Port fiel do protótipo validado (todos os controles visíveis).
+   Namespaced sob .simulador para não colidir com o resto do site.
    ============================================================ */
 
-/* Fonte de display para os números-herói (Manrope). O corpo continua Inter. */
 .simulador {
   --sim-primary: var(--neon, #ff7a3d);
   --sim-primary-hover: #ff6a24;
@@ -20,18 +18,12 @@
   --sim-text-low: var(--texto-fraco, #6c7280);
   --sim-radius: 16px;
   --sim-font-display: "Manrope", "Space Grotesk", system-ui, sans-serif;
+  --sim-font-body: var(--fonte-texto, "Inter", system-ui, sans-serif);
 }
 
 /* ---------- Layout ---------- */
-.sim-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 22px;
-  margin-top: 2.4rem;
-}
-@media (min-width: 960px) {
-  .sim-layout { grid-template-columns: 1fr 420px; align-items: start; }
-}
+.sim-layout { display: grid; grid-template-columns: 1fr; gap: 22px; margin-top: 2.4rem; }
+@media (min-width: 960px) { .sim-layout { grid-template-columns: 1fr 420px; align-items: start; } }
 
 /* ---------- Cards ---------- */
 .sim-card {
@@ -72,30 +64,12 @@
   gap: 10px;
   margin-bottom: 9px;
 }
-.sim-field-label {
-  font-size: 13px;
-  color: var(--sim-text-mid);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.sim-field-val {
-  font-family: var(--sim-font-display);
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--sim-text-high);
-}
+.sim-field-label { font-size: 13px; color: var(--sim-text-mid); font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.sim-field-val { font-family: var(--sim-font-display); font-weight: 700; font-size: 15px; color: var(--sim-text-high); }
 .sim-field-val.accent { color: var(--sim-primary); }
-.sim-lock {
-  font-size: 10px;
-  color: var(--sim-text-low);
-  border: 1px solid var(--sim-divider);
-  border-radius: 5px;
-  padding: 1px 5px;
-  letter-spacing: .05em;
-}
+.sim-lock { font-size: 10px; color: var(--sim-text-low); border: 1px solid var(--sim-divider); border-radius: 5px; padding: 1px 5px; letter-spacing: .05em; }
 .sim-hint { font-size: 11.5px; color: var(--sim-text-low); margin-top: 6px; line-height: 1.45; }
+.sim-hint strong { color: var(--sim-text-high); }
 
 .simulador input[type="range"] {
   -webkit-appearance: none;
@@ -134,16 +108,7 @@
 .sim-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
 @media (max-width: 420px) { .sim-grid2 { grid-template-columns: 1fr; } }
 
-/* Destaque para o input principal (cafés/dia) */
-.sim-field--destaque {
-  background: rgba(255, 122, 61, .06);
-  border: 1px solid rgba(255, 122, 61, .22);
-  border-radius: 12px;
-  padding: 14px 14px 16px;
-  margin-bottom: 0;
-}
-
-/* ---------- Toggle (quem opera) ---------- */
+/* ---------- Toggle ---------- */
 .sim-toggle {
   display: inline-flex;
   background: rgba(0, 0, 0, .25);
@@ -153,7 +118,7 @@
   gap: 3px;
 }
 .sim-toggle button {
-  font-family: var(--fonte-texto, "Inter", sans-serif);
+  font-family: var(--sim-font-body);
   font-size: 12px;
   font-weight: 600;
   color: var(--sim-text-mid);
@@ -169,9 +134,9 @@
 .sim-toggle.toggle-wide button { padding: 9px 10px; font-size: 12.5px; }
 .sim-labor { border-top: 1px solid var(--sim-divider); margin-top: 6px; padding-top: 16px; }
 
-/* ---------- Painel de premissas (recolhível, read-only) ---------- */
-.sim-premissas { margin-top: 4px; }
-.sim-premissas summary {
+/* ---------- Collapsible "Demais custos fixos" ---------- */
+details.sim-adv { border-top: 1px solid var(--sim-divider); margin-top: 4px; padding-top: 14px; }
+details.sim-adv summary {
   cursor: pointer;
   font-size: 12.5px;
   color: var(--sim-text-mid);
@@ -181,27 +146,13 @@
   align-items: center;
   gap: 7px;
   user-select: none;
-  padding: 4px 0;
 }
-.sim-premissas summary::-webkit-details-marker { display: none; }
-.sim-premissas summary .chev { transition: transform .2s; color: var(--sim-primary); }
-.sim-premissas[open] summary .chev { transform: rotate(90deg); }
-.sim-premissas .body { margin-top: 14px; }
-.sim-prem-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  padding: 7px 0;
-  font-size: 12.5px;
-  border-bottom: 1px solid var(--sim-divider);
-}
-.sim-prem-row:last-child { border-bottom: none; }
-.sim-prem-row .l { color: var(--sim-text-mid); }
-.sim-prem-row .r { font-family: var(--sim-font-display); font-weight: 600; color: var(--sim-text-high); white-space: nowrap; }
-.sim-prem-note { font-size: 11.5px; color: var(--sim-text-low); margin-top: 12px; line-height: 1.5; }
+details.sim-adv summary::-webkit-details-marker { display: none; }
+details.sim-adv summary .chev { transition: transform .2s; color: var(--sim-primary); }
+details.sim-adv[open] summary .chev { transform: rotate(90deg); }
+details.sim-adv .body { margin-top: 16px; }
 
-/* ---------- Painel de resultados (sticky no desktop) ---------- */
+/* ---------- Resultados ---------- */
 .sim-results { position: static; }
 @media (min-width: 960px) { .sim-results { position: sticky; top: 90px; } }
 
@@ -226,13 +177,7 @@
   align-items: center;
   gap: 6px;
 }
-.sim-hero-num {
-  font-family: var(--sim-font-display);
-  font-weight: 800;
-  letter-spacing: -.03em;
-  line-height: 1;
-  color: var(--sim-primary);
-}
+.sim-hero-num { font-family: var(--sim-font-display); font-weight: 800; letter-spacing: -.03em; line-height: 1; color: var(--sim-primary); }
 .sim-hero-num.payback { font-size: 44px; }
 .sim-hero-num.profit { font-size: 30px; color: var(--sim-positive); }
 .sim-hero-num.profit.neg { color: var(--sim-negative); }
@@ -242,7 +187,7 @@
 .sim-kpi .kv { font-family: var(--sim-font-display); font-weight: 700; font-size: 17px; }
 .sim-kpi .kl { font-size: 10.5px; color: var(--sim-text-mid); margin-top: 3px; line-height: 1.25; }
 
-/* CTA dentro do herói (leva ao cadastro) */
+/* CTA */
 .sim-cta {
   display: block;
   width: 100%;
@@ -270,14 +215,7 @@
 .sim-chart-cap { font-size: 11px; color: var(--sim-text-low); margin-top: 8px; text-align: center; line-height: 1.45; }
 
 /* ---------- DRE ---------- */
-.sim-dre-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
-  font-size: 13px;
-  border-bottom: 1px solid var(--sim-divider);
-}
+.sim-dre-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--sim-divider); }
 .sim-dre-row:last-child { border-bottom: none; }
 .sim-dre-row .l { color: var(--sim-text-mid); }
 .sim-dre-row .v { font-family: var(--sim-font-display); font-weight: 600; }
@@ -295,12 +233,12 @@ table.sim-scen th, table.sim-scen td { padding: 9px 8px; text-align: right; }
 table.sim-scen th:first-child, table.sim-scen td:first-child { text-align: left; }
 table.sim-scen thead th { color: var(--sim-text-mid); font-weight: 600; border-bottom: 1px solid var(--sim-divider); font-size: 11.5px; }
 table.sim-scen td { font-family: var(--sim-font-display); font-weight: 600; border-bottom: 1px solid var(--sim-divider); }
-table.sim-scen td:first-child { font-family: var(--fonte-texto, "Inter", sans-serif); color: var(--sim-text-mid); font-weight: 500; }
+table.sim-scen td:first-child { font-family: var(--sim-font-body); color: var(--sim-text-mid); font-weight: 500; }
 table.sim-scen col.real { background: rgba(255, 122, 61, .08); }
 table.sim-scen .real-h { color: var(--sim-primary); }
 
 /* ---------- Movimento reduzido ---------- */
 @media (prefers-reduced-motion: reduce) {
   .simulador input[type="range"]::-webkit-slider-thumb,
-  .sim-toggle button, .sim-cta, .sim-premissas summary .chev { transition: none !important; }
+  .sim-toggle button, .sim-cta, details.sim-adv summary .chev { transition: none !important; }
 }

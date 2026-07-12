@@ -73,59 +73,94 @@
              deve aparecer imediatamente, sem depender da animação de scroll. -->
         <div class="sim-layout">
 
-          <!-- ---------- COLUNA DE CONTROLES (inputs do prospect) ---------- -->
+          <!-- ---------- COLUNA DE CONTROLES ---------- -->
           <div class="sim-controls">
-
-            <!-- Receita: cafés/dia é o input principal -->
-            <div class="sim-card">
-              <div class="sim-card-title"><span class="dot"></span>Sua operação</div>
-
-              <div class="sim-field sim-field--destaque" style="margin-bottom:18px">
-                <div class="sim-field-head">
-                  <span class="sim-field-label">☕ Cafés vendidos por dia</span>
-                  <span class="sim-field-val accent" id="v-copos">40</span>
-                </div>
-                <input type="range" id="copos" min="5" max="200" step="1" value="40"
-                       aria-label="Cafés vendidos por dia" />
-                <div class="sim-hint">O principal fator do resultado. Uma unidade nova costuma amadurecer ao longo dos primeiros meses.</div>
-              </div>
-
-              <div class="sim-grid2">
-                <div class="sim-field" style="margin-bottom:0">
-                  <div class="sim-field-head"><span class="sim-field-label">Ticket médio</span><span class="sim-field-val accent" id="v-ticket">R$ 12</span></div>
-                  <input type="range" id="ticket" min="8" max="18" step="0.5" value="12" aria-label="Ticket médio" />
-                </div>
-                <div class="sim-field" style="margin-bottom:0">
-                  <div class="sim-field-head"><span class="sim-field-label">Dias de operação / mês</span><span class="sim-field-val" id="v-dias">30</span></div>
-                  <input type="range" id="dias" min="20" max="31" step="1" value="30" aria-label="Dias de operação por mês" />
-                </div>
-              </div>
-            </div>
 
             <!-- Investimento -->
             <div class="sim-card">
               <div class="sim-card-title"><span class="dot"></span>Investimento</div>
+              <div class="sim-field">
+                <div class="sim-field-head">
+                  <span class="sim-field-label">Investimento inicial <span class="sim-lock">inclui estoque 1º mês</span></span>
+                  <span class="sim-field-val accent" id="v-capex">R$ 72.000</span>
+                </div>
+                <input type="range" id="capex" min="69000" max="75000" step="500" value="72000" aria-label="Investimento inicial" />
+              </div>
+              <div class="sim-field" style="margin-bottom:0">
+                <div class="sim-field-head"><span class="sim-field-label">Nº de quiosques</span><span class="sim-field-val" id="v-unid">1</span></div>
+                <input type="range" id="unid" min="1" max="10" step="1" value="1" aria-label="Número de quiosques" />
+              </div>
+            </div>
+
+            <!-- Receita -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Receita</div>
               <div class="sim-grid2">
-                <div class="sim-field" style="margin-bottom:0">
-                  <div class="sim-field-head">
-                    <span class="sim-field-label">Investimento inicial <span class="sim-lock">inclui estoque 1º mês</span></span>
-                    <span class="sim-field-val accent" id="v-capex">R$ 72.000</span>
-                  </div>
-                  <input type="range" id="capex" min="69000" max="75000" step="500" value="72000" aria-label="Investimento inicial" />
+                <div class="sim-field">
+                  <div class="sim-field-head"><span class="sim-field-label">Ticket médio</span><span class="sim-field-val accent" id="v-ticket">R$ 12</span></div>
+                  <input type="range" id="ticket" min="8" max="18" step="0.5" value="12" aria-label="Ticket médio" />
+                </div>
+                <div class="sim-field">
+                  <div class="sim-field-head"><span class="sim-field-label">Cafés / dia</span><span class="sim-field-val accent" id="v-copos">40</span></div>
+                  <input type="range" id="copos" min="5" max="200" step="1" value="40" aria-label="Cafés por dia" />
                 </div>
                 <div class="sim-field" style="margin-bottom:0">
-                  <div class="sim-field-head"><span class="sim-field-label">Nº de quiosques</span><span class="sim-field-val" id="v-unid">1</span></div>
-                  <input type="range" id="unid" min="1" max="10" step="1" value="1" aria-label="Número de quiosques" />
+                  <div class="sim-field-head"><span class="sim-field-label">Dias / mês</span><span class="sim-field-val" id="v-dias">30</span></div>
+                  <input type="range" id="dias" min="20" max="31" step="1" value="30" aria-label="Dias por mês" />
                 </div>
               </div>
             </div>
 
-            <!-- Custos que o prospect controla -->
+            <!-- CMV — custo por café -->
             <div class="sim-card">
-              <div class="sim-card-title"><span class="dot"></span>Custos fixos que você controla</div>
-              <div class="sim-field">
-                <div class="sim-field-head"><span class="sim-field-label">Ocupação do ponto (aluguel / condomínio)</span><span class="sim-field-val" id="v-ocup">R$ 1.500</span></div>
-                <input type="range" id="ocup" min="800" max="3500" step="50" value="1500" aria-label="Custo de ocupação do ponto" />
+              <div class="sim-card-title" style="justify-content:space-between">
+                <span style="display:flex;align-items:center;gap:9px"><span class="dot"></span>CMV — custo por café</span>
+                <span class="sim-toggle">
+                  <button type="button" id="cmv-det" class="on">Detalhado</button>
+                  <button type="button" id="cmv-simp">% simples</button>
+                </span>
+              </div>
+              <div id="cmv-detailed">
+                <div class="sim-grid2">
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Café (grão torrado)</span><span class="sim-field-val" id="v-cafe">R$ 0,90</span></div>
+                    <input type="range" id="cafe" min="0.30" max="1.60" step="0.01" value="0.90" aria-label="Custo do café por copo" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Leite (rateio mix)</span><span class="sim-field-val" id="v-leite">R$ 0,45</span></div>
+                    <input type="range" id="leite" min="0" max="1.00" step="0.01" value="0.45" aria-label="Custo do leite por copo" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Descartáveis</span><span class="sim-field-val" id="v-desc">R$ 0,30</span></div>
+                    <input type="range" id="desc" min="0.10" max="0.60" step="0.01" value="0.30" aria-label="Custo de descartáveis por copo" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Outros insumos</span><span class="sim-field-val" id="v-outros">R$ 0,15</span></div>
+                    <input type="range" id="outros" min="0" max="0.50" step="0.01" value="0.15" aria-label="Outros insumos por copo" />
+                  </div>
+                </div>
+                <div class="sim-hint">Total por café: <strong id="v-cmvcopo">R$ 1,80</strong> · ~15% do ticket, ponderado pelo mix (37,5% expresso / 62,5% bebidas de R$15). Grão torrado ~R$85/kg; leite ~R$6,50/L.</div>
+              </div>
+              <div id="cmv-simple" style="display:none">
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">CMV sobre a receita</span><span class="sim-field-val" id="v-cmvpct">15,0%</span></div>
+                  <input type="range" id="cmvpct" min="6" max="30" step="0.5" value="15" aria-label="CMV como percentual da receita" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Custos fixos mensais -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Custos fixos mensais</div>
+              <div class="sim-grid2">
+                <div class="sim-field">
+                  <div class="sim-field-head"><span class="sim-field-label">Ocupação do ponto</span><span class="sim-field-val" id="v-ocup">R$ 1.500</span></div>
+                  <input type="range" id="ocup" min="800" max="3500" step="50" value="1500" aria-label="Custo de ocupação do ponto" />
+                </div>
+                <div class="sim-field">
+                  <div class="sim-field-head"><span class="sim-field-label">Royalties <span class="sim-lock">travado</span></span><span class="sim-field-val" id="v-roy">R$ 800</span></div>
+                  <input type="range" id="roy" min="800" max="800" value="800" disabled aria-label="Royalties (fixo)" />
+                </div>
               </div>
 
               <div class="sim-labor">
@@ -139,23 +174,52 @@
                 <div id="labor-wrap" style="display:none;margin-top:16px">
                   <div class="sim-field-head"><span class="sim-field-label">Custo do colaborador (salário + encargos)</span><span class="sim-field-val" id="v-mo">R$ 2.600</span></div>
                   <input type="range" id="mo" min="1500" max="5000" step="100" value="2600" aria-label="Custo do colaborador" />
-                  <div class="sim-hint">Valor mensal já com encargos (FGTS, 13º, férias). No autoatendimento, meio período costuma bastar; para operação integral, use a faixa superior.</div>
+                  <div class="sim-hint">Valor mensal já com encargos (FGTS, 13º, férias). No autoatendimento, um colaborador de meio período costuma bastar — para operação integral, use a faixa superior.</div>
                 </div>
-                <div id="labor-self-note" class="sim-hint" style="margin-top:11px">Autoatendimento: reabastecimento e limpeza feitos pelo próprio licenciado → <strong style="color:var(--sim-positive)">sem custo de mão de obra</strong>.</div>
+                <div id="labor-self-note" class="sim-hint" style="margin-top:11px">Autoatendimento: reabastecimento e limpeza diários feitos pelo próprio licenciado → <strong style="color:var(--sim-positive)">sem custo de mão de obra</strong>.</div>
               </div>
 
-              <!-- Premissas da rede (travadas, só leitura) -->
-              <details class="sim-premissas">
-                <summary><span class="chev">▶</span>Ver premissas da rede (CMV, royalties, impostos…)</summary>
-                <div class="body">
-                  <div id="sim-premissas-body"><!-- preenchido pelo simulador.js --></div>
-                  <p class="sim-prem-note">
-                    Estas são as premissas padronizadas da franqueadora, usadas no cálculo. São
-                    exibidas para transparência e não são editáveis nesta simulação. Valores de
-                    referência (jul/2026), sujeitos a confirmação.
-                  </p>
+              <details class="sim-adv">
+                <summary><span class="chev">▶</span>Demais custos fixos (energia, contabilidade, etc.)</summary>
+                <div class="body sim-grid2">
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Energia</span><span class="sim-field-val" id="v-ener">R$ 200</span></div>
+                    <input type="range" id="ener" min="100" max="400" step="10" value="200" aria-label="Energia" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Conectividade</span><span class="sim-field-val" id="v-conec">R$ 70</span></div>
+                    <input type="range" id="conec" min="0" max="200" step="10" value="70" aria-label="Conectividade" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Manutenção técnica</span><span class="sim-field-val" id="v-manut">R$ 150</span></div>
+                    <input type="range" id="manut" min="0" max="400" step="10" value="150" aria-label="Manutenção técnica" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Contabilidade</span><span class="sim-field-val" id="v-cont">R$ 400</span></div>
+                    <input type="range" id="cont" min="0" max="800" step="10" value="400" aria-label="Contabilidade" />
+                  </div>
+                  <div class="sim-field">
+                    <div class="sim-field-head"><span class="sim-field-label">Seguro + higienização</span><span class="sim-field-val" id="v-seg">R$ 160</span></div>
+                    <input type="range" id="seg" min="0" max="400" step="10" value="160" aria-label="Seguro e higienização" />
+                  </div>
                 </div>
+                <div class="sim-hint">Contabilidade: R$ 400 assume plano para <strong>comércio no Simples</strong> (com NF, estoque e conciliação de cartão/PIX). A <strong>abertura da empresa</strong> (~R$500–1.500) é custo único e entra no investimento inicial, não aqui.</div>
               </details>
+            </div>
+
+            <!-- Impostos & taxas -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Impostos &amp; taxas</div>
+              <div class="sim-grid2">
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">Impostos (Simples)</span><span class="sim-field-val" id="v-imp">6,0%</span></div>
+                  <input type="range" id="imp" min="4" max="16" step="0.5" value="6" aria-label="Impostos (Simples)" />
+                </div>
+                <div class="sim-field" style="margin-bottom:0">
+                  <div class="sim-field-head"><span class="sim-field-label">Taxa de pagamento</span><span class="sim-field-val" id="v-tax">2,5%</span></div>
+                  <input type="range" id="tax" min="0" max="4" step="0.1" value="2.5" aria-label="Taxa de pagamento" />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -180,7 +244,7 @@
                 <div class="sim-kpi"><div class="kv" id="r-be">12</div><div class="kl">Break-even (cafés/dia)</div></div>
                 <div class="sim-kpi"><div class="kv" id="r-receita">R$ 14,4k</div><div class="kl">Receita / mês</div></div>
               </div>
-              <a class="sim-cta" href="index.html#cadastro">Quero ser licenciado Mov Coffee</a>
+              <a class="sim-cta" href="index.html#cadastro">Receber meu plano de negócio em PDF</a>
               <div class="sim-disclaimer">Simulação ilustrativa. Não constitui promessa de rentabilidade nem oferta de franquia. Resultados variam conforme ponto, operação e mercado.</div>
             </div>
 
