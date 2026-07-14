@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mov Coffee — Brand Book B2C (PDV)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOV COFFEE — BRAND BOOK B2C
+   Aplica o próprio design system da marca ao documento.
+   Tema único (grafite) por decisão de marca. Print = tinta em papel.
+   ============================================================ */
+
+:root{
+  --base:#14161A;
+  --surface:#1B1E24;
+  --surface-2:#20242B;
+  --line:#2A2E36;
+  --line-2:#363B45;
+  --text:#F2F3F5;
+  --muted:#8B919C;      /* cinza grafite frio, escolhido — leve viés azulado */
+  --muted-2:#5E646E;
+  --primary:#FF7A3D;    /* laranja cirúrgico */
+  --primary-dim:rgba(255,122,61,.14);
+  --primary-line:rgba(255,122,61,.35);
+  --positive:#3DD68C;
+  --warn:#F5B740;       /* âmbar exclusivo de PENDÊNCIA */
+  --warn-dim:rgba(245,183,64,.12);
+  --warn-line:rgba(245,183,64,.42);
+
+  --font-display:"Manrope","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-body:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+
+  --maxw:820px;
+  --rail:266px;
+  --r:14px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--base);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* ambient: leve gradiente grafite + halo laranja discreto no topo */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1100px 520px at 78% -8%, rgba(255,122,61,.10), transparent 60%),
+    linear-gradient(180deg,#16181D 0%, var(--base) 45%);
+}
+
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);text-wrap:balance;margin:0}
+p{margin:0}
+::selection{background:var(--primary);color:#12130f}
+
+/* ---------------- Layout shell ---------------- */
+.shell{display:flex;gap:0;align-items:flex-start}
+
+/* ---------------- Sidebar / TOC ---------------- */
+.rail{
+  position:sticky;top:0;height:100vh;width:var(--rail);flex:0 0 var(--rail);
+  border-right:1px solid var(--line);
+  padding:30px 22px 30px 30px;
+  display:flex;flex-direction:column;gap:20px;
+  background:linear-gradient(180deg,#15171C,#131519);
+}
+.brandmark{display:flex;align-items:center;gap:11px}
+.brandmark .glyph{
+  width:38px;height:38px;border-radius:10px;flex:0 0 38px;
+  background:var(--primary);color:#141414;
+  display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:22px;
+  box-shadow:0 0 22px rgba(255,122,61,.45);
+}
+.brandmark .wm{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1}
+.brandmark .wm span{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.14em;display:block;margin-top:3px}
+
+.toc{display:flex;flex-direction:column;gap:1px;overflow-y:auto;margin:-4px -6px 0;padding:4px 6px}
+.toc a{
+  display:flex;gap:12px;align-items:baseline;text-decoration:none;color:var(--muted);
+  padding:7px 10px;border-radius:8px;font-size:13.5px;line-height:1.3;transition:color .15s,background .15s;
+}
+.toc a .num{font-family:var(--font-display);font-weight:700;font-size:11px;color:var(--muted-2);min-width:20px;font-variant-numeric:tabular-nums}
+.toc a:hover{color:var(--text);background:rgba(255,255,255,.03)}
+.toc a.active{color:var(--text);background:var(--primary-dim)}
+.toc a.active .num{color:var(--primary)}
+.rail-foot{margin-top:auto;font-size:11px;color:var(--muted-2);line-height:1.5;border-top:1px solid var(--line);padding-top:16px}
+
+/* ---------------- Main ---------------- */
+main{flex:1 1 auto;min-width:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+section{padding:74px 0;border-top:1px solid var(--line)}
+section:first-child{border-top:0}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--font-display);font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);
+  margin-bottom:18px;
+}
+.eyebrow .cnum{color:var(--muted-2);font-variant-numeric:tabular-nums}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--primary);border-radius:2px}
+
+h2.title{font-size:clamp(28px,4.4vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.04}
+.lede{color:var(--muted);font-size:18px;margin-top:16px;max-width:60ch}
+h3.sub{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:38px 0 14px}
+h4.sub{font-size:14px;font-weight:700;letter-spacing:.02em;margin:0 0 8px}
+p+p{margin-top:14px}
+.body p{color:#D5D8DD}
+
+.tag{font-size:11px;font-family:var(--font-display);font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.tag.locked{color:var(--positive);background:rgba(61,214,140,.12);border:1px solid rgba(61,214,140,.3)}
+.tag.pend{color:var(--warn);background:var(--warn-dim);border:1px solid var(--warn-line)}
+
+/* cards / grid */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:720px){.g2,.g3{grid-template-columns:1fr}}
+
+/* pending block */
+.pending{
+  background:var(--warn-dim);border:1px solid var(--warn-line);border-radius:12px;padding:16px 18px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.pending .pi{flex:0 0 auto;color:var(--warn);font-family:var(--font-display);font-weight:800;font-size:15px;
+  border:1.5px solid var(--warn-line);border-radius:8px;padding:2px 8px;letter-spacing:.05em}
+.pending b{color:var(--warn)}
+.pending .ptxt{font-size:14.5px;color:#D9D2C2}
+
+/* placard numbers */
+.placard{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:.9}
+
+/* ---------- HERO ---------- */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:84px 0 60px;border-top:0}
+.hero .kick{font-family:var(--font-display);font-weight:700;letter-spacing:.24em;text-transform:uppercase;font-size:12px;color:var(--muted);margin-bottom:26px}
+.hero h1{font-size:clamp(46px,9vw,104px);font-weight:800;letter-spacing:-.045em;line-height:.92}
+.hero h1 em{font-style:normal;color:var(--primary)}
+.manifesto{margin-top:34px;max-width:30ch;font-family:var(--font-display);font-weight:600;font-size:clamp(20px,2.7vw,28px);line-height:1.28;color:var(--text)}
+.manifesto span{color:var(--muted)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:26px;margin-top:52px;padding-top:26px;border-top:1px solid var(--line)}
+.hero-meta div{min-width:120px}
+.hero-meta .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);font-family:var(--font-display);font-weight:700}
+.hero-meta .v{font-size:14px;color:var(--muted);margin-top:5px}
+.scroll-num{position:absolute;right:clamp(20px,5vw,64px);top:50%;transform:translateY(-50%);
+  font-family:var(--font-display);font-weight:800;font-size:clamp(120px,20vw,300px);color:rgba(255,255,255,.028);letter-spacing:-.05em;pointer-events:none;user-select:none}
+@media(max-width:900px){.scroll-num{display:none}}
+
+/* ---------- território diagram ---------- */
+.terr-wrap{position:relative}
+.terr-wrap svg{width:100%;height:auto;display:block}
+
+/* ---------- verbal table ---------- */
+.vtable{width:100%;border-collapse:collapse;font-size:14.5px}
+.vtable th{text-align:left;font-family:var(--font-display);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:0 0 10px;border-bottom:1px solid var(--line)}
+.vtable td{padding:13px 16px 13px 0;border-bottom:1px solid var(--line);vertical-align:top;width:50%}
+.vtable td.say{color:var(--text)}
+.vtable td.say::before{content:"✓ ";color:var(--positive);font-weight:700}
+.vtable td.dont{color:var(--muted)}
+.vtable td.dont::before{content:"✕ ";color:#E5644B;font-weight:700}
+
+/* microcopy chips */
+.copybank{display:flex;flex-wrap:wrap;gap:11px;margin-top:6px}
+.chip{
+  font-family:var(--font-display);font-weight:600;font-size:14.5px;
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--primary);
+  border-radius:8px;padding:12px 16px;color:var(--text);
+}
+.chip small{display:block;color:var(--muted-2);font-family:var(--font-body);font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-top:5px}
+
+/* menu list */
+.menu{display:flex;flex-direction:column;gap:2px}
+.menu .row{display:flex;align-items:baseline;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.menu .name{font-family:var(--font-display);font-weight:800;font-size:20px;letter-spacing:-.02em;min-width:118px}
+.menu .classic{color:var(--muted);font-size:14px;flex:1}
+.menu .mg{font-family:var(--font-display);font-weight:700;color:var(--primary);font-variant-numeric:tabular-nums;font-size:14px}
+
+/* swatches */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.sw{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.sw .chipc{height:78px}
+.sw .meta{padding:11px 13px}
+.sw .nm{font-family:var(--font-display);font-weight:700;font-size:13.5px}
+.sw .hex{font-family:var(--font-display);font-weight:600;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.sw .role{font-size:11px;color:var(--muted-2);margin-top:3px}
+
+/* ratio bar (acento cirúrgico) */
+.ratiobar{display:flex;height:44px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.ratiobar i{display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:12px}
+
+/* type scale samples */
+.tscale{display:flex;flex-direction:column;gap:2px}
+.tsr{display:flex;align-items:baseline;gap:22px;padding:16px 0;border-bottom:1px solid var(--line)}
+.tsr .dist{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--primary);min-width:56px;text-transform:uppercase}
+.tsr .samp{font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;color:var(--text);line-height:1}
+.tsr .note{color:var(--muted-2);font-size:12px;margin-left:auto;text-align:right;max-width:24ch}
+
+/* "nunca fazer" */
+.never{border:1px solid rgba(229,100,75,.3);background:rgba(229,100,75,.06);border-radius:12px;padding:16px 18px;display:flex;gap:13px;align-items:flex-start}
+.never .x{color:#E5644B;font-family:var(--font-display);font-weight:800;font-size:18px;line-height:1.4}
+.never b{color:#F0A08E}
+.never p{color:#D8C3BD;font-size:14px}
+
+/* ganchos mock displays */
+.disp{background:#0C0D10;border:1px solid var(--line-2);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.disp::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px);pointer-events:none}
+.disp .dlabel{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.disp .big{font-family:var(--font-display);font-weight:800;letter-spacing:-.02em;line-height:.95;margin-top:8px;font-variant-numeric:tabular-nums}
+.disp .amber{color:var(--primary);text-shadow:0 0 26px rgba(255,122,61,.55)}
+.disp .green{color:var(--positive);text-shadow:0 0 26px rgba(61,214,140,.4)}
+
+/* ---- protótipo interativo: CTA cronômetro ---- */
+.proto{position:relative;background:linear-gradient(180deg,#0C0D10,#090A0C);border:1px solid var(--line-2);border-radius:18px;overflow:hidden}
+.proto-scan::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.016) 0 1px,transparent 1px 3px);pointer-events:none;z-index:0}
+.proto-head{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--line);font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
+.proto-live{display:inline-flex;align-items:center;gap:7px;color:var(--primary)}
+.proto-live i{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 8px var(--primary);animation:proto-blink 1.1s infinite}
+@keyframes proto-blink{50%{opacity:.2}}
+.proto-body{padding:36px 28px 32px;display:flex;gap:34px;align-items:center;position:relative;z-index:1}
+@media(max-width:600px){.proto-body{flex-direction:column;text-align:center}}
+.proto-ring{position:relative;width:180px;height:180px;flex:0 0 auto}
+.proto-ring [data-ring]{transition:stroke-dashoffset .14s linear,stroke .3s}
+.proto[data-state="ready"] [data-ring]{stroke:var(--positive)}
+.proto-clock{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:42px;letter-spacing:-.03em;color:var(--text);font-variant-numeric:tabular-nums;text-shadow:0 0 22px rgba(255,122,61,.4)}
+.proto-clock--ready{color:var(--positive);font-size:30px;letter-spacing:.02em;text-shadow:0 0 22px rgba(61,214,140,.45)}
+.proto-info{min-width:0}
+.proto-status{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.proto-sub{font-family:var(--font-display);font-weight:800;font-size:26px;letter-spacing:-.02em;color:var(--text);margin:6px 0 20px;line-height:1.06}
+.proto-btn{font-family:var(--font-display);font-weight:800;font-size:15px;letter-spacing:.01em;background:var(--primary);color:#141414;border:0;border-radius:11px;padding:15px 28px;cursor:pointer;box-shadow:0 0 26px rgba(255,122,61,.42);transition:transform .1s,filter .15s}
+.proto-btn:hover{filter:brightness(1.08)}
+.proto-btn:active{transform:translateY(1px)}
+.proto-btn:disabled{background:var(--surface-2);color:var(--muted);box-shadow:none;cursor:default}
+.proto-btn:focus-visible{outline:2px solid #F2F3F5;outline-offset:3px}
+.proto-mid{font-size:11px;color:var(--muted-2);margin-top:16px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.proto-live i{animation:none}.proto-ring [data-ring]{transition:none}}
+
+/* env matrix */
+.matrix{width:100%;border-collapse:separate;border-spacing:0;font-size:14px}
+.matrix th,.matrix td{padding:14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.matrix thead th{font-family:var(--font-display);font-size:13px;letter-spacing:.02em;background:var(--surface);position:sticky;top:0}
+.matrix tbody th{font-family:var(--font-display);font-weight:700;font-size:13px;color:var(--muted);white-space:nowrap}
+.matrix td strong{color:var(--text);font-weight:600}
+.mscroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.mtag{font-family:var(--font-display);font-weight:700;font-size:11px;color:var(--primary);display:inline-block;margin-bottom:4px}
+
+/* checklist */
+.checklist{display:grid;gap:10px;counter-reset:ck}
+.ck{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.ck::before{counter-increment:ck;content:counter(ck,decimal-leading-zero);font-family:var(--font-display);font-weight:800;font-size:13px;color:var(--primary);font-variant-numeric:tabular-nums;flex:0 0 auto;line-height:1.5}
+.ck span{font-size:14.5px;color:#DDE0E4}
+.ck b{color:#fff;font-weight:600}
+
+/* governance table */
+.gov{width:100%;border-collapse:collapse;font-size:13.5px}
+.gov th{text-align:left;font-family:var(--font-display);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px;border-bottom:1px solid var(--line-2);background:var(--surface)}
+.gov td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:#D5D8DD}
+.gov td .default{color:var(--muted);display:block;margin-top:3px;font-size:12.5px}
+.gov tr td:first-child{font-family:var(--font-display);font-weight:600;color:var(--text)}
+.govscroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+
+/* boundary two-col */
+.boundary{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+@media(max-width:640px){.boundary{grid-template-columns:1fr}}
+.boundary>div{padding:22px}
+.boundary .b2c{background:var(--primary-dim);border-right:1px solid var(--primary-line)}
+.boundary .b2b{background:var(--surface)}
+.boundary h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.boundary .b2c h4{color:var(--primary)}
+.boundary .b2b h4{color:var(--muted)}
+.boundary .phrase{font-family:var(--font-display);font-weight:700;font-size:16px;line-height:1.35;margin-bottom:12px}
+.boundary ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px}
+.boundary li{margin:5px 0}
+@media(max-width:640px){.boundary .b2c{border-right:0;border-bottom:1px solid var(--primary-line)}}
+
+/* attribute cards */
+.attrs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:640px){.attrs{grid-template-columns:1fr}}
+.attr{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.attr .an{font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:-.01em}
+.attr .ad{color:var(--muted);font-size:13.5px;margin-top:6px}
+
+/* persona */
+.persona{display:grid;grid-template-columns:132px 1fr;gap:22px;align-items:start}
+@media(max-width:560px){.persona{grid-template-columns:1fr}}
+.persona .avatar{width:132px;height:132px;border-radius:16px;background:linear-gradient(135deg,#20242B,#2A2E36);border:1px solid var(--line-2);display:grid;place-items:center}
+.stats{display:flex;flex-wrap:wrap;gap:26px;margin-top:14px}
+.stat .n{font-family:var(--font-display);font-weight:800;font-size:26px;color:var(--primary);letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.stat .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin-top:5px}
+
+.callout{border-left:3px solid var(--primary);padding:4px 0 4px 18px;color:var(--text);font-family:var(--font-display);font-weight:600;font-size:17px;line-height:1.4;margin:6px 0}
+
+.footer{padding:50px 0 90px;color:var(--muted-2);font-size:12.5px;border-top:1px solid var(--line);line-height:1.7}
+
+/* ---------------- PRINT: tinta em papel ---------------- */
+@media print{
+  :root{--text:#141414;--muted:#555;--muted-2:#888;--base:#fff;--surface:#fff;--surface-2:#f4f4f4;--line:#ddd;--line-2:#ccc}
+  body{background:#fff;color:#141414;font-size:11.5pt}
+  body::before,.scroll-num,.rail{display:none!important}
+  .shell{display:block}
+  .wrap{max-width:none;padding:0 8mm}
+  section{page-break-inside:avoid;padding:14mm 0;border-top:1px solid #ddd}
+  .hero{min-height:auto;page-break-after:always;padding:10mm 0}
+  .hero h1{color:#141414}.hero h1 em{color:#D9581F}
+  h2.title,.hero .kick{color:#141414}
+  .eyebrow{color:#D9581F}
+  .disp{background:#111;color:#fff}
+  .card,.attr,.ck,.chip,.sw,.pending{border:1px solid #ccc}
+  a{text-decoration:none;color:inherit}
+  .tag.pend{color:#8a6d00;border-color:#caa73a}
+  .tag.locked{color:#1f7d4d}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ============ SIDEBAR / TOC ============ -->
+  <aside class="rail">
+    <div class="brandmark">
+      <div class="glyph">M</div>
+      <div class="wm">MOV COFFEE<span>BRAND BOOK · B2C / PDV</span></div>
+    </div>
+    <nav class="toc" id="toc">
+      <a href="#manifesto"><span class="num">00</span>Manifesto</a>
+      <a href="#fronteira"><span class="num">01</span>Fronteira B2B × B2C</a>
+      <a href="#posicionamento"><span class="num">02</span>Posicionamento</a>
+      <a href="#perfis"><span class="num">03</span>Perfis de Ponto</a>
+      <a href="#publico"><span class="num">04</span>Público</a>
+      <a href="#verbal"><span class="num">05</span>Identidade verbal</a>
+      <a href="#visual"><span class="num">06</span>Identidade visual</a>
+      <a href="#quiosque"><span class="num">07</span>O quiosque como mídia</a>
+      <a href="#assinaturas"><span class="num">08</span>Assinaturas da marca</a>
+      <a href="#ambientes"><span class="num">09</span>Adaptação por ambiente</a>
+      <a href="#checklist"><span class="num">10</span>Checklist de conformidade</a>
+      <a href="#governanca"><span class="num">11</span>Pendências e governança</a>
+    </nav>
+    <div class="rail-foot">
+      Documento vivo · v1.0<br>
+      Cobre a marca <b style="color:var(--text)">no PDV</b>.<br>
+      Material B2B de expansão segue outro guia.
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main>
+  <div class="wrap">
+
+    <!-- 00 — MANIFESTO / CAPA -->
+    <section class="hero" id="manifesto">
+      <div class="scroll-num">M</div>
+      <div class="kick">Território de marca · Café em movimento</div>
+      <h1>O café que<br>não <em>desacelera</em><br>você.</h1>
+      <div class="manifesto">
+        Não é cafeteria. Não é vending.<br>
+        É café de especialidade <span>moído na hora</span>,
+        pronto em <span>menos de um minuto</span>,
+        <span>sempre igual</span> — porque
+        máquina calibrada não tem dia ruim.
+      </div>
+      <div class="hero-meta">
+        <div><div class="k">Categoria</div><div class="v">Café de performance</div></div>
+        <div><div class="k">Ticket médio</div><div class="v">R$ 12</div></div>
+        <div><div class="k">Janela de atenção</div><div class="v">~3 segundos</div></div>
+        <div><div class="k">Escopo deste guia</div><div class="v">Consumidor no PDV</div></div>
+      </div>
+    </section>
+
+    <!-- 01 — FRONTEIRA -->
+    <section id="fronteira">
+      <div class="eyebrow"><span class="cnum">01</span> Fronteira B2B × B2C</div>
+      <h2 class="title">Duas marcas que nunca se misturam.</h2>
+      <p class="lede">A Mov fala com dois públicos com objetivos opostos. Este brand book cobre <b style="color:var(--text)">apenas a camada B2C</b> — a marca que o consumidor encontra no quiosque. A camada B2B (captação de franqueado) vive em outro lugar e não empresta seus argumentos ao PDV.</p>
+      <div class="boundary" style="margin-top:26px">
+        <div class="b2c">
+          <h4>Cobre — B2C · consumidor no PDV</h4>
+          <div class="phrase">"Café de verdade, em menos de 1 minuto."</div>
+          <p style="color:var(--muted);font-size:14px">Todo este documento. Conversão de fluxo em venda no ponto: posicionamento, tom, identidade visual, o quiosque como mídia e os ganchos de curiosidade.</p>
+          <ul>
+            <li>Vive no totem, no cardápio, na luz e no módulo físico.</li>
+            <li>Fala com quem está passando — não com quem vai investir.</li>
+          </ul>
+        </div>
+        <div class="b2b">
+          <h4>Não cobre — B2B · franqueado <span class="tag pend" style="vertical-align:middle">nota de fronteira</span></h4>
+          <div class="phrase" style="color:var(--muted)">"O café é o produto. A liberdade é o negócio."</div>
+          <p style="color:var(--muted);font-size:14px">Site institucional e material de expansão. Citado aqui só para marcar o limite: esta frase <b style="color:#F0A08E">nunca</b> aparece como mensagem de PDV.</p>
+          <ul>
+            <li>Argumento de retorno, autonomia e operação enxuta.</li>
+            <li>Não herda os ganchos do PDV (cronômetro, cafeína, etc.).</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">Nota de fronteira — o perfil Alto Giro no discurso B2B</h3>
+      <p class="body" style="color:#D5D8DD">Para o franqueado, o perfil Alto Giro é <b style="color:var(--text)">alavanca de escala e fluxo de ponto</b> — nunca "franquia mais barata". O investimento é o mesmo; muda o mapa de preço e mix do ponto. Honestidade comercial obrigatória: o Alto Giro exige fluxo <b style="color:var(--text)">≥ 60 cafés/dia</b> e favorece a operação pelo próprio licenciado. <b style="color:var(--primary)">A seleção do ponto é o fator nº 1 do resultado.</b> Este enquadramento vive no material de expansão — nunca no PDV.</p>
+    </section>
+
+    <!-- 02 — POSICIONAMENTO -->
+    <section id="posicionamento">
+      <div class="eyebrow"><span class="cnum">02</span> Posicionamento</div>
+      <h2 class="title">Uma terceira categoria.</h2>
+      <p class="lede">A Mov não disputa a cafeteria (que vende pausa) nem a vending (que vende desespero). Ela reivindica o quadrante que a vending ocupa mal — automação + movimento — e o faz com qualidade. Isso cria a categoria: <b style="color:var(--text)">o café que acompanha o ritmo de quem não para.</b></p>
+
+      <!-- Diagrama de território -->
+      <div class="card terr-wrap" style="margin-top:26px;padding:14px">
+        <svg viewBox="0 0 680 540" role="img" aria-label="Diagrama de território: eixo movimento-pausa por artesanal-automação, posicionando Mov, cafeterias, vending e The Coffee.">
+          <defs>
+            <radialGradient id="movglow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FF7A3D" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#FF7A3D" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- quadrant tints -->
+          <rect x="350" y="40" width="290" height="210" fill="#FF7A3D" opacity=".05"/>
+          <!-- grid -->
+          <rect x="60" y="40" width="580" height="420" fill="none" stroke="#2A2E36"/>
+          <line x1="350" y1="40" x2="350" y2="460" stroke="#363B45" stroke-dasharray="4 5"/>
+          <line x1="60" y1="250" x2="640" y2="250" stroke="#363B45" stroke-dasharray="4 5"/>
+          <!-- axis labels -->
+          <text x="350" y="24" text-anchor="middle" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="2">↑ MOVIMENTO</text>
+          <text x="350" y="490" text-anchor="middle" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="2">PAUSA ↓</text>
+          <text x="52" y="254" text-anchor="end" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="1">ARTESANAL</text>
+          <text x="648" y="254" text-anchor="start" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="1">AUTOMAÇÃO</text>
+          <text x="628" y="60" text-anchor="end" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="700" font-size="11" letter-spacing="1" opacity=".8">QUADRANTE MOV</text>
+
+          <!-- Cafeteria tradicional: x15 y85 -->
+          <circle cx="147" cy="397" r="8" fill="#5E646E"/>
+          <text x="163" y="394" fill="#8B919C" font-family="Inter,sans-serif" font-size="13" font-weight="600">Cafeteria tradicional</text>
+          <text x="163" y="411" fill="#5E646E" font-family="Inter,sans-serif" font-size="11">pausa · ritual · madeira</text>
+
+          <!-- The Coffee: x55 y45 -->
+          <circle cx="379" cy="229" r="8" fill="#8B919C"/>
+          <text x="367" y="215" text-anchor="end" fill="#8B919C" font-family="Inter,sans-serif" font-size="13" font-weight="600">The Coffee</text>
+          <text x="367" y="231" text-anchor="end" fill="#5E646E" font-family="Inter,sans-serif" font-size="11">design + grab-and-go</text>
+
+          <!-- Vending: x80 y28 -->
+          <circle cx="524" cy="158" r="8" fill="#5E646E"/>
+          <text x="512" y="150" text-anchor="end" fill="#8B919C" font-family="Inter,sans-serif" font-size="13" font-weight="600">Vending</text>
+          <text x="512" y="167" text-anchor="end" fill="#5E646E" font-family="Inter,sans-serif" font-size="11">automação sem qualidade</text>
+
+          <!-- Mov: x92 y12 -->
+          <circle cx="594" cy="90" r="46" fill="url(#movglow)"/>
+          <circle cx="594" cy="90" r="12" fill="#FF7A3D"/>
+          <circle cx="594" cy="90" r="12" fill="none" stroke="#14161A" stroke-width="2"/>
+          <text x="594" y="52" text-anchor="middle" fill="#F2F3F5" font-family="Manrope,sans-serif" font-size="17" font-weight="800" letter-spacing="-.5">MOV COFFEE</text>
+          <text x="594" y="128" text-anchor="middle" fill="#FF7A3D" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">precisão premium + movimento</text>
+        </svg>
+      </div>
+      <p style="color:var(--muted-2);font-size:12.5px;margin-top:10px">Vending e Mov ocupam o mesmo quadrante nos dois eixos — a diferença é qualidade. A estratégia da Mov é <b style="color:var(--text)">fazer bem o que a vending faz mal</b>, e assim tomar o quadrante.</p>
+
+      <h3 class="sub">Inimigo declarado</h3>
+      <div class="callout">A fila e o café ruim de máquina. A marca quebra a equação brasileira "rápido = ruim".</div>
+
+      <h3 class="sub">Frase de posicionamento <span class="tag locked" style="vertical-align:middle">interna</span></h3>
+      <div class="card" style="border-left:3px solid var(--primary);font-family:var(--font-display);font-weight:600;font-size:17px;line-height:1.45">
+        Para pessoas em movimento que não aceitam café ruim, a Mov Coffee é o quiosque autônomo que entrega café de especialidade em menos de um minuto, <span style="color:var(--primary)">porque máquina calibrada não tem dia ruim.</span>
+      </div>
+
+      <h3 class="sub">Atributos-chave</h3>
+      <div class="attrs">
+        <div class="attr"><div class="an">Velocidade com qualidade</div><div class="ad">Moído na hora, entregue em menos de 1 min. Rápido não é sinônimo de ruim.</div></div>
+        <div class="attr"><div class="an">Autonomia</div><div class="ad">Você opera — e isso é bom. Controle total, sem intermediário, sem espera.</div></div>
+        <div class="attr"><div class="an">Precisão</div><div class="ad">Calibragem remota. Sempre igual, do primeiro ao último café do dia.</div></div>
+        <div class="attr"><div class="an">Presença no trajeto</div><div class="ad">Interceptação, não destino. A Mov está no seu caminho — você não desvia.</div></div>
+      </div>
+    </section>
+
+    <!-- 03 — PERFIS DE PONTO -->
+    <section id="perfis">
+      <div class="eyebrow"><span class="cnum">03</span> Perfis de Ponto</div>
+      <h2 class="title">Uma marca. Dois ritmos de ponto.</h2>
+      <p class="lede">A rede opera <b style="color:var(--text)">dois arquétipos de ponto sob a mesma marca</b> — Premium e Alto Giro — para capturar fluxo em contextos diferentes sem diluir o posicionamento. Mesma máquina, mesma identidade, mesmo padrão de qualidade. O que muda é o mapa de preço e mix, calibrado para o ponto. Não é submarca, nem versão alternativa: é arquitetura de preço por arquétipo de ponto.</p>
+
+      <h3 class="sub">Os dois perfis</h3>
+      <div class="mscroll">
+        <table class="matrix">
+          <thead><tr><th></th><th>Perfil Premium</th><th>Perfil Alto Giro</th></tr></thead>
+          <tbody>
+            <tr><th>Arquétipo de ponto</th><td>Shoppings, aeroportos, academias</td><td>Supermercados, terminais, cidades do interior</td></tr>
+            <tr><th>Ticket blended</th><td><strong>~R$ 12,00</strong></td><td><strong>~R$ 7,50</strong></td></tr>
+            <tr><th>Blend (calibragem)</th><td>Specialty</td><td>Tradicional</td></tr>
+            <tr><th>Âncora de mix</th><td>Bebidas com leite e especiais</td><td>Café preto e bebidas P</td></tr>
+            <tr><th>Papel estratégico</th><td>Margem e imagem</td><td>Giro e escala</td></tr>
+            <tr><th>Critério de fluxo</th><td>—</td><td><strong>≥ 60 cafés/dia</strong> (mínimo de ponto)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">O mecanismo</h3>
+      <div class="card" style="border-left:3px solid var(--primary)">
+        <p class="body" style="color:#D5D8DD"><b style="color:var(--text)">Calibragem remota + abastecimento de blend por perfil.</b> A mesma máquina e a mesma marca operam dois mapas de preço e mix. O CMV acompanha o <b style="color:var(--text)">blend</b> — não o preço — e a margem se equilibra pelo giro. Uma máquina, dois ritmos de ponto.</p>
+      </div>
+
+      <h3 class="sub">Régua de preço — good · better · best</h3>
+      <div class="mscroll">
+        <table class="matrix">
+          <thead><tr><th>Faixa</th><th>Item</th><th>Preço</th><th>Perfil</th></tr></thead>
+          <tbody>
+            <tr><th rowspan="3">Entrada / isca<br><span style="color:var(--muted-2);font-weight:400">giro</span></th><td>Espresso curto</td><td><strong>R$ 3,90</strong></td><td>Premium · Alto Giro</td></tr>
+            <tr><td>Café preto</td><td>R$ 4,90</td><td>Premium · Alto Giro</td></tr>
+            <tr><td>Café com leite P</td><td><strong>R$ 6,90</strong></td><td>Premium · Alto Giro</td></tr>
+            <tr><th rowspan="3">Workhorse</th><td>Cappuccino / Latte P</td><td>R$ 7,90</td><td>Premium · Alto Giro</td></tr>
+            <tr><td>Cappuccino / Latte M</td><td>R$ 9,50</td><td>Premium · Alto Giro</td></tr>
+            <tr><td>Café com leite M</td><td>R$ 9,90</td><td>Premium · Alto Giro</td></tr>
+            <tr><th rowspan="2">Topo<br><span style="color:var(--primary);font-weight:400">só Premium</span></th><td>Tamanho G premium</td><td>R$ 12,90</td><td><span style="color:var(--primary)">Premium</span></td></tr>
+            <tr><td>Sazonal</td><td>R$ 13,90</td><td><span style="color:var(--primary)">Premium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid g3" style="margin-top:16px">
+        <div class="card"><h4 class="sub">Terminações ,90</h4><p style="color:var(--muted);font-size:14px">Charm pricing em toda a régua, sem exceção.</p></div>
+        <div class="card"><h4 class="sub">Piso de ticket</h4><p style="color:var(--muted);font-size:14px">R$ 3,90 (preto) · R$ 6,90 (leite). Nada abaixo disso.</p></div>
+        <div class="card"><h4 class="sub">Topo trava fora do Alto Giro</h4><p style="color:var(--muted);font-size:14px">Sazonal e tamanho G premium não entram no mix Alto Giro.</p></div>
+      </div>
+
+      <h3 class="sub">Exposição do preço <span class="tag locked" style="vertical-align:middle">decisão travada</span></h3>
+      <div class="card" style="border-left:3px solid var(--primary)">
+        <p class="body" style="color:#D5D8DD">O gancho <b style="color:var(--primary)">"a partir de R$ 3,90"</b> é mensagem <b style="color:var(--text)">exclusiva do perfil Alto Giro</b>. Nunca exibida em ponto Premium — proteção da percepção premium e anti-canibalização. Mockup Alto Giro pode exibir a âncora de preço; mockup Premium, jamais.</p>
+      </div>
+
+      <h3 class="sub">Narrativa do blend</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:12px">Blend exclusivo da rede em <b style="color:var(--text)">duas calibragens</b> — specialty (Premium) e tradicional (Alto Giro) — ambas sob padrão centralizado e torra dedicada. Linguagem única: <b style="color:var(--text)">"calibrado para o ponto"</b>. Nunca hierarquizar qualidade entre perfis.</p>
+      <div class="pending"><div class="pi">⚠ P-6</div><div class="ptxt">Premissa pendente: <b>sourcing do blend tradicional</b> (torrado, direto de cooperativa/torrefação, private label) em negociação — trava o CMV do Alto Giro.</div></div>
+    </section>
+
+    <!-- 04 — PÚBLICO -->
+    <section id="publico">
+      <div class="eyebrow"><span class="cnum">04</span> Público</div>
+      <h2 class="title">O otimizador de rotina.</h2>
+      <p class="lede">Núcleo de 22 a 40 anos, perfil "otimizador de rotina". Nativo digital, mede tudo, valoriza conveniência sem abrir mão de qualidade. Não quer sentar — quer resolver e seguir.</p>
+
+      <div class="card" style="margin-top:26px">
+        <div class="persona">
+          <div class="avatar">
+            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#FF7A3D" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+          </div>
+          <div>
+            <h3 class="sub" style="margin-top:0">Perfil núcleo</h3>
+            <p class="body" style="color:#D5D8DD">Vai à academia antes ou depois do trabalho, mede o próprio sono e treino no relógio, escolhe fila menor sobre marca conhecida. Café é combustível de rotina, não cerimônia. Decide em segundos e valoriza quem respeita o tempo dele.</p>
+            <div class="stats">
+              <div class="stat"><div class="n">22–40</div><div class="l">Idade</div></div>
+              <div class="stat"><div class="n">4–5×</div><div class="l">Cafés / semana</div></div>
+              <div class="stat"><div class="n">&lt;60s</div><div class="l">Tolerância de espera</div></div>
+              <div class="stat"><div class="n">R$ 12</div><div class="l">Ticket habitual</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">Ocasiões de consumo por ambiente</h3>
+      <div class="grid g3">
+        <div class="card"><div class="mtag">ACADEMIA</div><h4 class="sub">Pré / pós-treino</h4><p style="color:var(--muted);font-size:14px">Cafeína como pré-treino ou recuperação. A dosagem em mg vira argumento. Ritmo acelerado, decisão funcional.</p></div>
+        <div class="card"><div class="mtag">SHOPPING</div><h4 class="sub">Pausa em movimento</h4><p style="color:var(--muted);font-size:14px">Entre lojas e compromissos. Quer qualidade de cafeteria sem o tempo da cafeteria. Sensível a fila.</p></div>
+        <div class="card"><div class="mtag">AEROPORTO / TERMINAL</div><h4 class="sub">Trânsito e tempo apertado</h4><p style="color:var(--muted);font-size:14px">Ansiedade de horário. Velocidade previsível é ouro. "Menos de 1 minuto" é promessa de sobrevivência.</p></div>
+      </div>
+
+      <h3 class="sub">Anti-público</h3>
+      <div class="never">
+        <div class="x">✕</div>
+        <p><b>O contemplativo do café.</b> Quem quer sentar, conversar com o barista e transformar o café em ritual. A Mov não briga por ele — e não deve tentar. Toda comunicação que sugere aconchego, pausa ou romance de café mira o público errado.</p>
+      </div>
+
+      <h3 class="sub">Um comportamento, todos os pontos</h3>
+      <p class="body" style="color:#D5D8DD">O otimizador de rotina <b style="color:var(--text)">não é um recorte de renda — é um comportamento</b>. Ele existe no aeroporto e na entrada do supermercado do interior: quer café bom, rápido, sem fila e confiável. A marca não muda para alcançá-lo em novos pontos; muda a <b style="color:var(--text)">arquitetura de preço e mix por arquétipo de ponto</b> (ver <a href="#perfis" style="color:var(--primary)">Perfis de Ponto</a>).</p>
+      <div class="mscroll" style="margin-top:16px">
+        <table class="matrix">
+          <thead><tr><th></th><th>Núcleo — ponto Premium</th><th>Extensão — ponto Alto Giro</th></tr></thead>
+          <tbody>
+            <tr><th>Ponto-alvo</th><td>Shoppings, aeroportos, academias</td><td>Supermercados, terminais, interior</td></tr>
+            <tr><th>Papel</th><td>Margem / imagem</td><td>Giro / escala</td></tr>
+            <tr><th>Ticket-alvo</th><td><strong>~R$ 12,00</strong></td><td><strong>~R$ 7,50</strong></td></tr>
+            <tr><th>Âncora de mix</th><td>Bebidas com leite e especiais</td><td>Café preto e bebidas P</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 — IDENTIDADE VERBAL -->
+    <section id="verbal">
+      <div class="eyebrow"><span class="cnum">05</span> Identidade verbal</div>
+      <h2 class="title">Fala como um treino: objetivo.</h2>
+      <p class="lede">Tom direto, cinético, levemente provocador. Frases curtas. Verbos de movimento. Números como argumento. Zero romantismo de café.</p>
+
+      <h3 class="sub">Dizemos / Não dizemos</h3>
+      <table class="vtable">
+        <thead><tr><th>Dizemos</th><th>Não dizemos</th></tr></thead>
+        <tbody>
+          <tr><td class="say">Pronto em 47 segundos.</td><td class="dont">Aguarde, estamos preparando com carinho.</td></tr>
+          <tr><td class="say">Máquina calibrada não tem dia ruim.</td><td class="dont">O toque especial do nosso barista.</td></tr>
+          <tr><td class="say">Moído agora. Não ontem.</td><td class="dont">Grãos selecionados com amor e tradição.</td></tr>
+          <tr><td class="say">Você opera. Você manda.</td><td class="dont">Nossa equipe está aqui para te atender.</td></tr>
+          <tr><td class="say">Café de verdade, na velocidade de verdade.</td><td class="dont">Um momento de pausa só seu.</td></tr>
+          <tr><td class="say">Sua fila? Não existe.</td><td class="dont">Vale a pena esperar pelo melhor.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">Banco de microcopy — totem <span style="color:var(--muted-2);font-weight:400;font-size:13px;font-family:var(--font-body)">(12 exemplos)</span></h3>
+      <div class="copybank">
+        <div class="chip">Pronto em 47 segundos. Cronometre.<small>Prova de velocidade</small></div>
+        <div class="chip">Moído agora. Não ontem.<small>Qualidade</small></div>
+        <div class="chip">Sua fila? Não existe.<small>Inimigo</small></div>
+        <div class="chip">Máquina calibrada não tem dia ruim.<small>Precisão</small></div>
+        <div class="chip">Aperte. Conte até 50. Pegue.<small>Instrução cinética</small></div>
+        <div class="chip">Você opera. Você manda.<small>Autonomia</small></div>
+        <div class="chip">Café de verdade, na velocidade de verdade.<small>Categoria</small></div>
+        <div class="chip">Menos de 1 minuto. Sempre igual.<small>Consistência</small></div>
+        <div class="chip">O corredor é longo. Seu café não.<small>Contexto de fluxo</small></div>
+        <div class="chip">Ignição: 128 mg. Bora.<small>Academia · cafeína-dado</small></div>
+        <div class="chip">Sem espera. Sem desculpa.<small>Provocação</small></div>
+        <div class="chip">Preparado pela M-07. Calibrada hoje, 6h12.<small>Máquina com identidade</small></div>
+      </div>
+
+      <h3 class="sub">Naming de cardápio <span class="tag pend" style="vertical-align:middle">nomes em teste</span></h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:14px">Nomes funcionais / de intensidade, com o clássico em subtítulo. A cafeína aparece como dado, nunca como claim de saúde. Os nomes abaixo são <b style="color:var(--warn)">direção, não versão final</b>.</p>
+      <div class="card menu">
+        <div class="row"><div class="name">Ignição</div><div class="classic">Expresso duplo</div><div class="mg">128 mg</div></div>
+        <div class="row"><div class="name">Base</div><div class="classic">Latte</div><div class="mg">64 mg</div></div>
+        <div class="row"><div class="name">Curto</div><div class="classic">Espresso curto</div><div class="mg">64 mg</div></div>
+        <div class="row"><div class="name">Longo</div><div class="classic">Americano</div><div class="mg">96 mg</div></div>
+        <div class="row"><div class="name">Frio 12h</div><div class="classic">Cold brew</div><div class="mg">150 mg</div></div>
+        <div class="row" style="border-bottom:0"><div class="name">Gelo</div><div class="classic">Iced latte</div><div class="mg">64 mg</div></div>
+      </div>
+
+      <h3 class="sub">Vocabulário por perfil</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:14px">A marca fala do mesmo jeito nos dois perfis. Muda só o que se pode liderar: o Alto Giro pode ser direto em preço; o Premium <b style="color:var(--text)">nunca lidera por preço</b>. Nada hierarquiza qualidade entre perfis.</p>
+      <table class="vtable">
+        <thead><tr><th>Dizemos</th><th>Não dizemos</th></tr></thead>
+        <tbody>
+          <tr><td class="say">Arquétipo de ponto · perfil de ponto</td><td class="dont">Qualquer recorte de renda ou status social</td></tr>
+          <tr><td class="say">Blend calibrado para o ponto</td><td class="dont">Sugerir um café inferior ou "de segunda"</td></tr>
+          <tr><td class="say">Premium · Alto Giro</td><td class="dont">Qualquer hierarquia de qualidade entre perfis</td></tr>
+          <tr><td class="say">A partir de R$ 3,90 <span style="color:var(--muted-2)">(só Alto Giro)</span></td><td class="dont">Âncora de preço em ponto Premium</td></tr>
+        </tbody>
+      </table>
+      <div class="grid g2" style="margin-top:18px">
+        <div class="card"><h4 class="sub" style="color:var(--primary)">Headlines — Premium</h4><div class="copybank">
+          <div class="chip">Seu café não pode te atrasar.<small>Lidera por tempo</small></div>
+          <div class="chip">Especialidade em menos de 1 minuto.<small>Qualidade + velocidade</small></div>
+          <div class="chip">Máquina calibrada. Sempre igual.<small>Precisão</small></div>
+        </div></div>
+        <div class="card"><h4 class="sub" style="color:var(--primary)">Headlines — Alto Giro</h4><div class="copybank">
+          <div class="chip">Café de verdade a partir de R$ 3,90.<small>Lidera por preço</small></div>
+          <div class="chip">Sem fila. Sem enrolação. Bora.<small>Direto</small></div>
+          <div class="chip">Rápido de verdade. Bom de verdade.<small>Quebra do "rápido = ruim"</small></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- 06 — IDENTIDADE VISUAL -->
+    <section id="visual">
+      <div class="eyebrow"><span class="cnum">06</span> Identidade visual</div>
+      <h2 class="title">Precisão industrial premium.</h2>
+      <p class="lede">Metal, vidro, base escura. A automação é o show — exibida com orgulho, nunca escondida. Proibido o código visual da cafeteria artesanal: madeira ripada dominante, rusticidade, aconchego.</p>
+
+      <h3 class="sub">Paleta</h3>
+      <div class="swatches">
+        <div class="sw"><div class="chipc" style="background:#14161A"></div><div class="meta"><div class="nm">Base</div><div class="hex">#14161A</div><div class="role">Fundo grafite</div></div></div>
+        <div class="sw"><div class="chipc" style="background:#1B1E24"></div><div class="meta"><div class="nm">Superfície</div><div class="hex">#1B1E24</div><div class="role">Cards / painéis</div></div></div>
+        <div class="sw"><div class="chipc" style="background:#FF7A3D"></div><div class="meta"><div class="nm">Primário</div><div class="hex">#FF7A3D</div><div class="role">Acento cirúrgico</div></div></div>
+        <div class="sw"><div class="chipc" style="background:#3DD68C"></div><div class="meta"><div class="nm">Positivo</div><div class="hex">#3DD68C</div><div class="role">Confirmação / pronto</div></div></div>
+        <div class="sw"><div class="chipc" style="background:#F2F3F5"></div><div class="meta"><div class="nm">Texto</div><div class="hex">#F2F3F5</div><div class="role">Alto contraste</div></div></div>
+      </div>
+
+      <h3 class="sub">Proporção de uso — a regra do acento cirúrgico</h3>
+      <div class="ratiobar" role="img" aria-label="Barra de proporção: base grafite domina, superfície secundária, laranja apenas cerca de 5 por cento.">
+        <i style="flex:70;background:#14161A;color:#8B919C">Base 70%</i>
+        <i style="flex:22;background:#1B1E24;color:#8B919C">Superfície 22%</i>
+        <i style="flex:8;background:#FF7A3D;color:#141414">Laranja ≈5%</i>
+      </div>
+      <p style="color:var(--muted-2);font-size:12.5px;margin-top:10px">O laranja é acento, nunca fundo. Ele marca <b style="color:var(--text)">apenas elementos da marca</b> — nunca selos, parceiros ou avisos de terceiros. Um totem com fundo laranja está errado.</p>
+
+      <h3 class="sub">Tipografia — placar esportivo</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:8px">Sans-serif geométrica pesada. Números grandes como elemento gráfico: tempo, cafeína, preço. Sistema: <b style="color:var(--text)">Manrope</b> (display/números 600–800) + <b style="color:var(--text)">Inter</b> (corpo). Amostras na escala de leitura por distância:</p>
+      <div class="tscale">
+        <div class="tsr"><span class="dist">15 m</span><span class="samp" style="font-size:52px;color:var(--primary)">MOV</span><span class="note">Cor, luz e logo. Reconhecível do fim do corredor.</span></div>
+        <div class="tsr"><span class="dist">5 m</span><span class="samp" style="font-size:30px">Café em &lt;1 min</span><span class="note">Uma promessa. Nada além dela.</span></div>
+        <div class="tsr"><span class="dist">1 m</span><span class="samp" style="font-size:20px">Ignição · R$ 7,90 · 00:43</span><span class="note">Cardápio, preço, cronômetro. Zona de decisão.</span></div>
+      </div>
+
+      <h3 class="sub">Nunca fazer</h3>
+      <div class="grid g2">
+        <div class="never"><div class="x">✕</div><p><b>Madeira dominante.</b> Ripado, tábua, rusticidade como material principal. Madeira só como detalhe pontual — nunca a atmosfera.</p></div>
+        <div class="never"><div class="x">✕</div><p><b>Laranja como fundo.</b> O acento vira ruído e perde a função de sinalizar a marca. Laranja é cirúrgico.</p></div>
+        <div class="never"><div class="x">✕</div><p><b>Mais de uma promessa por faixa.</b> Duas mensagens a 5 m = nenhuma mensagem. Uma faixa, uma ideia.</p></div>
+        <div class="never"><div class="x">✕</div><p><b>Romantismo de café.</b> "Aconchego", "ritual", vapor subindo em câmera lenta, barista sorrindo. Público errado.</p></div>
+      </div>
+    </section>
+
+    <!-- 07 — O QUIOSQUE COMO MÍDIA -->
+    <section id="quiosque">
+      <div class="eyebrow"><span class="cnum">07</span> O quiosque como mídia</div>
+      <h2 class="title">O módulo é o outdoor.</h2>
+      <p class="lede">A hierarquia de mensagem obedece à distância: 15 m, 5 m, 1 m. Nunca mais de uma mensagem por faixa. Se não chama o olho a 15 metros, o design falhou.</p>
+
+      <div class="grid g2" style="margin-top:26px;align-items:stretch">
+        <!-- Elevação frontal -->
+        <div class="card" style="padding:16px">
+          <h4 class="sub" style="margin-bottom:10px;color:var(--muted)">VISTA FRONTAL ESQUEMÁTICA</h4>
+          <svg viewBox="0 0 260 400" width="100%" role="img" aria-label="Vista frontal do quiosque com janela de extração iluminada, cardápio, totem e bico de retirada.">
+            <!-- corpo -->
+            <rect x="30" y="20" width="200" height="360" rx="12" fill="#1B1E24" stroke="#363B45"/>
+            <!-- topo iluminado / logo -->
+            <rect x="30" y="20" width="200" height="52" rx="12" fill="#0F1013"/>
+            <text x="130" y="53" text-anchor="middle" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="800" font-size="26" letter-spacing="-1" style="filter:drop-shadow(0 0 8px rgba(255,122,61,.7))">MOV</text>
+            <!-- cardápio -->
+            <rect x="46" y="86" width="168" height="60" rx="6" fill="#0C0D10" stroke="#2A2E36"/>
+            <text x="56" y="106" fill="#F2F3F5" font-family="Manrope,sans-serif" font-weight="700" font-size="10">IGNIÇÃO · R$ 7,90</text>
+            <text x="56" y="122" fill="#8B919C" font-family="Inter,sans-serif" font-size="9">BASE · R$ 9,50</text>
+            <text x="56" y="137" fill="#8B919C" font-family="Inter,sans-serif" font-size="9">FRIO 12H · R$ 12,90</text>
+            <!-- janela de extração iluminada (o teatro) -->
+            <rect x="46" y="160" width="168" height="120" rx="8" fill="#0A0B0D" stroke="#FF7A3D" stroke-opacity=".5"/>
+            <rect x="46" y="160" width="168" height="120" rx="8" fill="url(#winglow)"/>
+            <defs><linearGradient id="winglow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A3D" stop-opacity=".18"/><stop offset="1" stop-color="#FF7A3D" stop-opacity="0"/></linearGradient></defs>
+            <circle cx="130" cy="205" r="26" fill="none" stroke="#5E646E" stroke-width="2"/>
+            <rect x="120" y="228" width="20" height="26" rx="3" fill="#2A2E36" stroke="#5E646E"/>
+            <text x="130" y="298" text-anchor="middle" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="700" font-size="9" letter-spacing="1">JANELA DE EXTRAÇÃO</text>
+            <!-- totem / cronômetro -->
+            <rect x="150" y="308" width="64" height="30" rx="5" fill="#0C0D10" stroke="#2A2E36"/>
+            <text x="182" y="328" text-anchor="middle" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="800" font-size="15" font-variant-numeric="tabular-nums">00:43</text>
+            <!-- bico de retirada -->
+            <rect x="46" y="308" width="86" height="46" rx="6" fill="#101216" stroke="#2A2E36"/>
+            <circle cx="89" cy="331" r="12" fill="#0A0B0D" stroke="#5E646E"/>
+            <text x="89" y="368" text-anchor="middle" fill="#8B919C" font-family="Inter,sans-serif" font-size="8">bico de retirada</text>
+          </svg>
+        </div>
+
+        <!-- Zonas 15/5/1 -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card" style="border-left:3px solid var(--primary)">
+            <div style="display:flex;align-items:baseline;gap:12px"><span class="placard" style="font-size:34px;color:var(--primary)">15<span style="font-size:16px">m</span></span><b style="font-family:var(--font-display)">Cor · luz · logo</b></div>
+            <p style="color:var(--muted);font-size:14px;margin-top:8px">O quiosque mais bem iluminado do corredor. Se não chama o olho aqui, nada mais importa. Luz é sinalização de marca.</p>
+          </div>
+          <div class="card" style="border-left:3px solid var(--primary)">
+            <div style="display:flex;align-items:baseline;gap:12px"><span class="placard" style="font-size:34px;color:var(--primary)">5<span style="font-size:16px">m</span></span><b style="font-family:var(--font-display)">Uma promessa</b></div>
+            <p style="color:var(--muted);font-size:14px;margin-top:8px">"Café de verdade em menos de 1 minuto." Uma frase. Não duas. É a faixa onde a decisão de parar acontece.</p>
+          </div>
+          <div class="card" style="border-left:3px solid var(--primary)">
+            <div style="display:flex;align-items:baseline;gap:12px"><span class="placard" style="font-size:34px;color:var(--primary)">1<span style="font-size:16px">m</span></span><b style="font-family:var(--font-display)">Cardápio · preço · totem</b></div>
+            <p style="color:var(--muted);font-size:14px;margin-top:8px">Percurso do olho: <b style="color:var(--text)">cardápio → totem → bico de retirada</b>. Nada mais nessa zona. Ela é limpa por regra.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:16px">
+        <div class="card"><h4 class="sub">Teatro da automação</h4><p style="color:var(--muted);font-size:14px">A janela de extração é iluminada e visível. A máquina moendo e extraindo é o espetáculo — prova ao vivo de que o café é feito na hora. Esconder a máquina é esconder o argumento.</p></div>
+        <div class="card"><h4 class="sub">Regra de iluminação</h4><p style="color:var(--muted);font-size:14px">Meta binária: o quiosque é o ponto mais luminoso do trecho. Luz define a leitura a 15 m. Corredor escuro + módulo aceso = interceptação garantida.</p></div>
+      </div>
+
+      <h3 class="sub">A hierarquia por perfil de ponto</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:14px">A 15 m os dois perfis são idênticos — marca e movimento. A diferença aparece na zona de decisão: o Alto Giro acrescenta a âncora de preço; o Premium nunca a exibe. A zona de 1 m permanece limpa nos dois.</p>
+      <div class="mscroll">
+        <table class="matrix">
+          <thead><tr><th>Distância</th><th>Premium</th><th>Alto Giro</th></tr></thead>
+          <tbody>
+            <tr><th>15 m</th><td>Marca + movimento</td><td>Marca + movimento <span style="color:var(--muted-2)">(idêntico)</span></td></tr>
+            <tr><th>5 m</th><td>Ganchos: cronômetro · dose de cafeína · identidade da máquina</td><td>Ganchos + <strong style="color:var(--primary)">âncora de preço</strong> ("a partir de R$ 3,90")</td></tr>
+            <tr><th>1 m</th><td>Mix completo; destaque em especiais e M–G</td><td>Mix enxuto: café preto + P em destaque; sem sazonal/G</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 08 — ASSINATURAS -->
+    <section id="assinaturas">
+      <div class="eyebrow"><span class="cnum">08</span> Assinaturas da marca</div>
+      <h2 class="title">Três ganchos de curiosidade.</h2>
+      <p class="lede">Elementos que param o fluxo e viram assinatura. Aplicados com regra clara por ambiente. O cronômetro é prioridade 1 — presente em toda unidade.</p>
+
+      <h3 class="sub">Protótipo — o CTA nº 1: o cronômetro público</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:16px">A promessa da marca, ao vivo. Toque em <b style="color:var(--text)">Preparar meu café</b> e veja a contagem — a espera vira prova de velocidade. <span style="color:var(--muted-2)">Simulação acelerada para demonstração.</span></p>
+      <div class="proto proto-scan" id="proto" data-state="idle">
+        <div class="proto-head">
+          <span>MOV · TOTEM</span>
+          <span class="proto-live"><i></i> AO VIVO</span>
+        </div>
+        <div class="proto-body">
+          <div class="proto-ring">
+            <svg viewBox="0 0 180 180" width="180" height="180" aria-hidden="true">
+              <circle cx="90" cy="90" r="76" fill="none" stroke="#2A2E36" stroke-width="8"/>
+              <circle data-ring cx="90" cy="90" r="76" fill="none" stroke="#FF7A3D" stroke-width="8" stroke-linecap="round" stroke-dasharray="477.5" stroke-dashoffset="0" transform="rotate(-90 90 90)"/>
+            </svg>
+            <div class="proto-clock" data-clock aria-live="polite" role="timer">00:43</div>
+          </div>
+          <div class="proto-info">
+            <div class="proto-status" data-status>Seu café está a</div>
+            <div class="proto-sub" data-sub>43 segundos de distância</div>
+            <button class="proto-btn" data-btn type="button">Preparar meu café</button>
+            <div class="proto-mid" data-mid>M-07 · calibrada hoje 6h12</div>
+          </div>
+        </div>
+      </div>
+      <script>
+      (function(){
+        var root=document.getElementById('proto'); if(!root) return;
+        var clock=root.querySelector('[data-clock]'), ring=root.querySelector('[data-ring]');
+        var btn=root.querySelector('[data-btn]'), status=root.querySelector('[data-status]');
+        var sub=root.querySelector('[data-sub]'), mid=root.querySelector('[data-mid]');
+        var TOTAL=43, C=477.5, timer=null, remaining=TOTAL;
+        function fmt(s){var ss=('0'+(s%60)).slice(-2);return '00:'+ss;}
+        function setRing(p){ring.style.strokeDashoffset=(C*(1-p)).toFixed(1);}
+        function reset(){
+          clearInterval(timer); remaining=TOTAL;
+          clock.textContent=fmt(remaining); clock.className='proto-clock';
+          ring.style.stroke='#FF7A3D';
+          setRing(1); root.dataset.state='idle';
+          status.textContent='Seu café está a';
+          sub.textContent='43 segundos de distância';
+          btn.textContent='Preparar meu café'; btn.disabled=false;
+          mid.textContent='M-07 · calibrada hoje 6h12';
+        }
+        function done(){
+          root.dataset.state='ready';
+          clock.textContent='PRONTO'; clock.className='proto-clock proto-clock--ready';
+          ring.style.stroke='#3DD68C'; setRing(1);
+          status.textContent='Pode pegar';
+          sub.textContent='Retire no bico. Bom treino.';
+          btn.disabled=false; btn.textContent='Repetir';
+          mid.textContent='Preparado pela M-07';
+        }
+        function start(){
+          root.dataset.state='brewing';
+          btn.disabled=true; btn.textContent='Extraindo…';
+          status.textContent='Preparando';
+          timer=setInterval(function(){
+            remaining--;
+            clock.textContent=fmt(Math.max(remaining,0));
+            setRing(Math.max(remaining,0)/TOTAL);
+            sub.textContent=remaining>0?remaining+' segundos restantes':'Pronto';
+            if(remaining<=0){clearInterval(timer);done();}
+          },140); // acelerado: ~6s p/ demonstrar os 43s
+        }
+        btn.addEventListener('click',function(){
+          var st=root.dataset.state;
+          if(st==='brewing') return;
+          if(st==='ready'){reset();return;}
+          start();
+        });
+        reset();
+      })();
+      </script>
+
+      <div class="grid g3" style="margin-top:26px">
+        <div>
+          <div class="disp">
+            <div class="dlabel">Prioridade 1 · Cronômetro público</div>
+            <div class="big amber" style="font-size:52px">00:43</div>
+            <div style="color:#8B919C;font-size:12px;margin-top:6px;font-family:var(--font-display)">SEU EXPRESSO · AO VIVO</div>
+          </div>
+          <p style="color:var(--muted);font-size:13.5px;margin-top:12px"><b style="color:var(--text)">Cronômetro público.</b> Display cronometrando cada café em tempo real. Transforma a espera em prova. <b style="color:var(--primary)">Todos os ambientes.</b></p>
+        </div>
+        <div>
+          <div class="disp">
+            <div class="dlabel">Ambiente academia · Cafeína como dado</div>
+            <div class="big green" style="font-size:44px">128<span style="font-size:20px"> mg</span></div>
+            <div style="color:#8B919C;font-size:12px;margin-top:6px;font-family:var(--font-display)">IGNIÇÃO · CAFEÍNA</div>
+          </div>
+          <p style="color:var(--muted);font-size:13.5px;margin-top:12px"><b style="color:var(--text)">Cafeína como dado.</b> Dosagem por bebida. Informativo, <b style="color:#F0A08E">nunca claim de saúde.</b> <span class="tag pend">valida jurídico</span> <b style="color:var(--primary)">Academia.</b></p>
+        </div>
+        <div>
+          <div class="disp">
+            <div class="dlabel">Todos · Máquina com identidade</div>
+            <div class="big" style="font-size:40px;color:#F2F3F5">M-07</div>
+            <div style="color:#8B919C;font-size:12px;margin-top:6px;font-family:var(--font-display)">CALIBRADA HOJE · 6H12</div>
+          </div>
+          <p style="color:var(--muted);font-size:13.5px;margin-top:12px"><b style="color:var(--text)">Máquina com identidade.</b> Nome e assinatura por unidade: "Preparado pela M-07, calibrada hoje às 6h12." Humaniza a precisão. <b style="color:var(--primary)">Todos.</b></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 — ADAPTAÇÃO POR AMBIENTE -->
+    <section id="ambientes">
+      <div class="eyebrow"><span class="cnum">09</span> Adaptação por ambiente</div>
+      <h2 class="title">Mesma marca, mensagem afinada.</h2>
+      <p class="lede">A promessa central não muda. O que muda é qual gancho lidera e como a mensagem é calibrada para o contexto do fluxo.</p>
+
+      <div class="mscroll" style="margin-top:24px">
+        <table class="matrix">
+          <thead><tr><th></th><th>Academia</th><th>Shopping</th><th>Aeroporto / Terminal</th></tr></thead>
+          <tbody>
+            <tr>
+              <th>Promessa que lidera</th>
+              <td><strong>"Cafeína é pré-treino."</strong> Combustível de performance.</td>
+              <td><strong>"Café de verdade em menos de 1 min."</strong> Qualidade sem tempo de cafeteria.</td>
+              <td><strong>"Seu café não pode te atrasar."</strong> Velocidade previsível.</td>
+            </tr>
+            <tr>
+              <th>Gancho principal</th>
+              <td>Cafeína como dado (mg por bebida) <span class="tag pend" style="font-size:9px">jurídico</span></td>
+              <td>Cronômetro público</td>
+              <td>Cronômetro público + "&lt;1 min" reforçado</td>
+            </tr>
+            <tr>
+              <th>Tom da mensagem</th>
+              <td>Intensidade, dosagem, energia. Linguagem de treino.</td>
+              <td>Contraste com a fila da praça de alimentação.</td>
+              <td>Alívio de tempo. Objetividade máxima.</td>
+            </tr>
+            <tr>
+              <th>Cardápio em destaque</th>
+              <td>Ignição · Frio 12h (alta cafeína)</td>
+              <td>Base · Ignição (mix equilibrado)</td>
+              <td>Ignição · Longo (rápido e forte)</td>
+            </tr>
+            <tr>
+              <th>Perfil / pricing</th>
+              <td colspan="2">Perfil Premium — ticket blended <strong>~R$ 12,00</strong>, pela <a href="#perfis" style="color:var(--primary)">régua good-better-best</a>. Nunca lidera por preço.</td>
+              <td>Perfil Premium; variação de ponto (ex.: aeroporto) a definir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 — CHECKLIST -->
+    <section id="checklist">
+      <div class="eyebrow"><span class="cnum">10</span> Checklist de conformidade</div>
+      <h2 class="title">Aprova ou reprova qualquer peça.</h2>
+      <p class="lede">Lista objetiva para validar mockup, módulo, foto ou vídeo antes de ir para produção. Todos os itens precisam ser verdadeiros.</p>
+      <div class="checklist" style="margin-top:24px">
+        <div class="ck"><span><b>Leitura a 15 m:</b> a marca é reconhecível pela cor, luz e logo do fim do corredor.</span></div>
+        <div class="ck"><span><b>Promessa única por faixa:</b> nenhuma faixa (15/5/1 m) carrega mais de uma mensagem.</span></div>
+        <div class="ck"><span><b>Zona de 1 m limpa:</b> só cardápio, preço e totem; percurso do olho preservado.</span></div>
+        <div class="ck"><span><b>Laranja exclusivo da marca:</b> #FF7A3D não aparece em selo, parceiro ou fundo.</span></div>
+        <div class="ck"><span><b>Acento cirúrgico:</b> laranja ocupa ≈5% da área; base grafite domina.</span></div>
+        <div class="ck"><span><b>Cliente operando sozinho:</b> nas fotos/vídeos, o consumidor se autoatende.</span></div>
+        <div class="ck"><span><b>Operador só em bastidor:</b> aparece reabastecendo/higienizando, nunca atendendo no balcão.</span></div>
+        <div class="ck"><span><b>Automação visível:</b> a janela de extração está iluminada e à mostra.</span></div>
+        <div class="ck"><span><b>Iluminação líder:</b> o módulo é o ponto mais bem iluminado do trecho.</span></div>
+        <div class="ck"><span><b>Tom cinético:</b> frases curtas, verbos de movimento, zero romantismo de café.</span></div>
+        <div class="ck"><span><b>Número como gráfico:</b> tempo, mg ou preço em tipografia de placar (Manrope 700–800).</span></div>
+        <div class="ck"><span><b>Sem código de cafeteria:</b> nada de madeira dominante, aconchego ou rusticidade.</span></div>
+        <div class="ck"><span><b>Cronômetro presente:</b> unidade exibe o tempo de preparo ao vivo.</span></div>
+        <div class="ck"><span><b>Fronteira respeitada:</b> nenhuma mensagem B2B ("liberdade é o negócio") no PDV.</span></div>
+        <div class="ck"><span><b>Âncora de preço no lugar certo:</b> "a partir de R$ 3,90" só em peça de perfil Alto Giro; nunca em Premium.</span></div>
+        <div class="ck"><span><b>Vocabulário por arquétipo:</b> nenhum recorte de renda/status e nenhuma hierarquia de qualidade entre perfis; blend sempre "calibrado para o ponto".</span></div>
+        <div class="ck"><span><b>Preços pela régua:</b> todo valor exibido tem terminação ,90 e consta da régua good-better-best.</span></div>
+        <div class="ck"><span><b>Identidade única:</b> mesmo grafite + laranja + tipografia nos dois perfis; só preço, mix e mensagem mudam.</span></div>
+      </div>
+    </section>
+
+    <!-- 11 — GOVERNANÇA -->
+    <section id="governanca">
+      <div class="eyebrow"><span class="cnum">11</span> Pendências e governança</div>
+      <h2 class="title">O que ainda precisa travar.</h2>
+      <p class="lede">Decisões marcadas <span class="tag pend" style="vertical-align:middle">pendente</span> usam o default indicado, mas precisam de dono e prazo. Distinguem-se claramente das decisões <span class="tag locked" style="vertical-align:middle">fechadas</span>.</p>
+
+      <h3 class="sub">Decisões travadas nesta atualização (v2)</h3>
+      <div class="checklist" style="margin-top:8px">
+        <div class="ck"><span><b>D-15 —</b> Dois perfis de ponto (Premium / Alto Giro) sob marca única — sem submarca.</span></div>
+        <div class="ck"><span><b>D-16 —</b> Régua de preço good-better-best com terminações ,90 e piso R$ 3,90 (preto) / R$ 6,90 (leite).</span></div>
+        <div class="ck"><span><b>D-17 —</b> Sazonal e tamanho G premium exclusivos do perfil Premium.</span></div>
+        <div class="ck"><span><b>D-18 —</b> Âncora "a partir de R$ 3,90" exclusiva de ponto Alto Giro.</span></div>
+        <div class="ck"><span><b>D-19 —</b> Naming público exclusivamente por arquétipo de ponto; vetado vocabulário de renda/status.</span></div>
+        <div class="ck"><span><b>D-20 —</b> Narrativa de blend = "calibrado para o ponto"; vetada hierarquização de qualidade.</span></div>
+      </div>
+
+      <h3 class="sub">Pendências</h3>
+      <div class="govscroll">
+        <table class="gov">
+          <thead><tr><th>Decisão pendente</th><th>Default aplicado</th><th>Dono sugerido</th><th>Prazo</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Materialidade do módulo físico<span class="default">Crítica — vai para produção fabril</span></td>
+              <td>Grafite/metal escuro + acento laranja; madeira só como detalhe pontual.</td>
+              <td>Fabricante do módulo + Design</td>
+              <td>Antes do piloto</td>
+            </tr>
+            <tr>
+              <td>Tagline externa<span class="default">3 candidatas em teste</span></td>
+              <td>"Seu café não pode te atrasar." / "Café na velocidade do seu dia." / "Cafeína é pré-treino." (academia)</td>
+              <td>Marketing / Agência</td>
+              <td>Teste no piloto</td>
+            </tr>
+            <tr>
+              <td>Pricing por tipo de ponto</td>
+              <td>Régua good-better-best vigente (ver Perfis de Ponto). Variações finas por ambiente (ex.: aeroporto premium) a definir.</td>
+              <td>Comercial / Expansão</td>
+              <td>Pós-piloto</td>
+            </tr>
+            <tr>
+              <td>Validação jurídica — mg de cafeína</td>
+              <td>Exibir dosagem como dado informativo; redação a validar antes de escalar.</td>
+              <td>Jurídico</td>
+              <td>Antes de escalar academia</td>
+            </tr>
+            <tr>
+              <td>Nomes finais do cardápio</td>
+              <td>Ignição / Base / Curto / Longo / Frio 12h / Gelo — direção, não versão final.</td>
+              <td>Marca / Produto</td>
+              <td>Antes do lançamento</td>
+            </tr>
+            <tr>
+              <td>P-6 · Sourcing do blend tradicional<span class="default">Trava o CMV do perfil Alto Giro</span></td>
+              <td>Blend torrado, private label, direto de cooperativa/torrefação — em negociação; tratado como política vigente até a cotação real.</td>
+              <td>Suprimentos / Compras</td>
+              <td>Antes do rollout Alto Giro</td>
+            </tr>
+            <tr>
+              <td>P-7 · Teste sensorial cego — blend Alto Giro</td>
+              <td>Validar piso de qualidade do blend tradicional antes do rollout.</td>
+              <td>Produto / Qualidade</td>
+              <td>Antes do rollout Alto Giro</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">Regra de atualização do documento</h3>
+      <div class="card">
+        <p class="body" style="color:#D5D8DD">Este é um documento vivo. Cada pendência resolvida <b style="color:var(--text)">migra de âmbar para verde</b> (de <span class="tag pend">pendente</span> para <span class="tag locked">fechada</span>) com data e responsável registrados. Nenhuma decisão fechada é reaberta sem revisão formal. Toda nova peça é validada contra o Checklist (cap. 09) antes de produção. As decisões travadas e as pendências devem ser espelhadas no <b style="color:var(--text)">módulo 06 do projeto de expansão</b>.</p>
+      </div>
+    </section>
+
+    <div class="footer">
+      <b style="color:var(--muted)">Mov Coffee — Brand Book B2C (PDV) · v1.0</b><br>
+      Este guia cobre a marca no ponto de venda. O material B2B de captação de franqueados segue o posicionamento do site institucional e não herda os ganchos de PDV.<br>
+      Revisar com: (a) fabricante do módulo — cap. 06 vira input de produção; (b) jurídico — cap. 07, gancho de cafeína; (c) registrar decisões e pendências no módulo 06 do projeto de expansão.
+    </div>
+
+  </div>
+  </main>
+</div>
+
+<script>
+// Scrollspy: destaca o capítulo ativo no sumário
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toc a'));
+  var map = {};
+  links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){ l.classList.remove('active'); });
+        var a = map[e.target.id];
+        if(a) a.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+  document.querySelectorAll('section[id]').forEach(function(s){ obs.observe(s); });
+})();
+</script>
+</body>
+</html>
