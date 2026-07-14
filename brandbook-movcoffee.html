@@ -305,6 +305,47 @@ p+p{margin-top:14px}
 
 .footer{padding:50px 0 90px;color:var(--muted-2);font-size:12.5px;border-top:1px solid var(--line);line-height:1.7}
 
+/* ---------------- MOBILE: sumário vira barra superior ---------------- */
+@media (max-width:860px){
+  .shell{flex-direction:column;align-items:stretch}
+  main{width:100%;min-width:0}
+  .rail{
+    position:sticky;top:0;height:auto;width:100%;flex:0 0 auto;
+    flex-direction:column;gap:9px;
+    border-right:0;border-bottom:1px solid var(--line);
+    padding:10px 14px;z-index:60;
+    background:rgba(20,22,27,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  }
+  .brandmark .glyph{width:32px;height:32px;flex-basis:32px;font-size:18px}
+  .brandmark .wm{font-size:16px}
+  .brandmark .wm span{font-size:9.5px;letter-spacing:.12em;margin-top:2px}
+  .toc{
+    flex-direction:row;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;
+    gap:6px;margin:0;padding:2px 0 5px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .toc::-webkit-scrollbar{display:none}
+  .toc a{white-space:nowrap;padding:7px 13px;border:1px solid var(--line);border-radius:999px;font-size:12.5px;gap:7px}
+  .toc a.active{border-color:var(--primary-line)}
+  .rail-foot{display:none}
+  section{padding:52px 0;scroll-margin-top:104px}
+  .wrap{padding:0 18px}
+  h2.title{font-size:clamp(24px,7vw,32px)}
+  .lede{font-size:16px}
+  .tsr{flex-wrap:wrap;gap:10px}
+  .tsr .samp{white-space:normal}
+  .tsr .note{margin-left:0;flex-basis:100%;max-width:none;text-align:left}
+  .vtable td{padding:11px 10px 11px 0;font-size:13.5px}
+  .stats{gap:18px}
+}
+@media (max-width:430px){
+  .toc a .num{display:none}
+  .hero h1{font-size:42px}
+  .manifesto{font-size:19px}
+  .callout{font-size:16px}
+  .placard{overflow-wrap:anywhere}
+}
+
 /* ---------------- PRINT: tinta em papel ---------------- */
 @media print{
   :root{--text:#141414;--muted:#555;--muted-2:#888;--base:#fff;--surface:#fff;--surface-2:#f4f4f4;--line:#ddd;--line-2:#ccc}
@@ -1046,7 +1087,16 @@ p+p{margin-top:14px}
       if(e.isIntersecting){
         links.forEach(function(l){ l.classList.remove('active'); });
         var a = map[e.target.id];
-        if(a) a.classList.add('active');
+        if(a){
+          a.classList.add('active');
+          // no mobile, centraliza o chip ativo na barra rolável
+          if(window.matchMedia('(max-width:860px)').matches){
+            var nav=document.getElementById('toc');
+            var left=a.offsetLeft-(nav.clientWidth-a.clientWidth)/2;
+            var smooth=!window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+            nav.scrollTo({left:left, behavior:smooth?'smooth':'auto'});
+          }
+        }
       }
     });
   }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
