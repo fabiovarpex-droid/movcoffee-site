@@ -841,7 +841,7 @@ p+p{margin-top:14px}
             setRing(Math.max(remaining,0)/TOTAL);
             sub.textContent=remaining>0?remaining+' segundos restantes':'Pronto';
             if(remaining<=0){clearInterval(timer);done();}
-          },140); // acelerado: ~6s p/ demonstrar os 43s
+          },300); // ritmo legível: ~13s p/ demonstrar os 43s (era 140ms, rápido demais)
         }
         btn.addEventListener('click',function(){
           var st=root.dataset.state;
