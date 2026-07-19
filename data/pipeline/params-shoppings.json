@@ -1,0 +1,21 @@
+{
+  "_doc": [
+    "Parâmetros do pipeline de shoppings por LISTA NOMINAL (fase 3).",
+    "Nenhum número de negócio vive no script — tudo aqui. Valores marcados",
+    "PREMISSA são decisão da franqueadora, não fato de fonte.",
+    "qualificacao.abl_min_m2: ABL mínima (m2) para um shopping ser 'qualificado'",
+    "  para receber quiosque — PREMISSA, espelha a taxa_qualif de 70% da fase 1.",
+    "tiers.premium_abl_min_m2: ABL a partir da qual o shopping é tier premium",
+    "  (mais fluxo AB, ticket 12) — PREMISSA, espelha o split 45/55 da fase 1.",
+    "prioridade: mesma formula da fase 2 (qtd x ticket x peso_tier, normalizado",
+    "  1..100 sobre TODAS as linhas da base) — peso_tier vem de params.yaml fase 2."
+  ],
+  "qualificacao": { "abl_min_m2": 15000 },
+  "tiers": { "premium_abl_min_m2": 40000 },
+  "prioridade": {
+    "peso_tier": { "premium": 1.0, "convencional": 0.7 },
+    "escala_min": 1,
+    "escala_max": 100
+  },
+  "metodologia_rotulo": "lista nominal ABRASCE — censo de shoppings qualificados (ABL >= {abl_min} m2) × split por ABL (premium >= {abl_premium} m2)"
+}

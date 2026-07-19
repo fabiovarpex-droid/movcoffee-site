@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== SEO ===== -->
+  <title>Mapa de Potencial de Mercado — Mov Coffee Franquias</title>
+  <meta name="description" content="Veja o tamanho estimado da oportunidade Mov Coffee na sua região: potencial endereçável por canal (academia, supermercado, shopping e mais), por município. Análise prévia estimada." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mapa de Potencial de Mercado — Mov Coffee" />
+  <meta property="og:description" content="Qual o tamanho da oportunidade Mov Coffee na sua região? Explore o potencial estimado por município e canal." />
+  <meta property="og:url" content="https://www.movcoffee.com.br/mapa-potencial.html" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="theme-color" content="#0e0f0d" />
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet: motor de mapa (pan/zoom/touch prontos). Única dependência externa
+       real desta página — o resto do site é JS puro, mas reconstruir manipulação
+       de mapa/gesto em 5.564 polígonos do zero não se justifica. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/mapa.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       CABEÇALHO / NAVEGAÇÃO (mesmo do site)
+       ============================================================ -->
+  <header class="topo" id="topo">
+    <nav class="topo__nav container" aria-label="Navegação principal">
+      <a href="index.html#hero" class="logo" aria-label="Mov Coffee — início">
+        <svg class="logo__icone" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <rect x="3"  y="18" width="5" height="11" rx="1.5" fill="#FF7A3D"/>
+          <rect x="11" y="11" width="5" height="18" rx="1.5" fill="#FF7A3D"/>
+          <rect x="19" y="4"  width="5" height="25" rx="1.5" fill="#FF7A3D"/>
+        </svg>
+        <span class="logo__texto">Mov <strong>Coffee</strong></span>
+      </a>
+
+      <button class="topo__hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="topo__links" id="menu-links">
+        <li><a href="index.html#modelo">O modelo</a></li>
+        <li><a href="index.html#como-funciona">Como funciona</a></li>
+        <li><a href="index.html#numeros">Números</a></li>
+        <li><a href="simulador.html">Simulador</a></li>
+        <li><a href="mapa-potencial.html" aria-current="page">Mapa de potencial</a></li>
+        <li><a href="index.html#faq">Dúvidas</a></li>
+        <li><a href="index.html#cadastro" class="botao botao--pequeno">Quero ser licenciado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============================================================
+         MAPA DE POTENCIAL DE MERCADO
+         ============================================================ -->
+    <section class="secao mapa-potencial" id="mapa" aria-label="Mapa de potencial de mercado">
+      <div class="container container--full">
+
+        <p class="secao__rotulo revelar">Mapa de potencial</p>
+        <h1 class="revelar mp-titulo">Qual o tamanho da oportunidade na sua região?</h1>
+        <p class="secao__sub revelar mp-sub">
+          Mapeamos, município a município, onde a Mov Coffee enxerga espaço para novos quiosques —
+          por canal, com fonte setorial e nível de confiança abertos. Escolha seu estado e veja o
+          potencial perto de você. <strong>Estimativa de mercado, não lista de pontos disponíveis.</strong>
+        </p>
+
+        <!-- Números de impacto (calculados do CSV — nada hardcoded) -->
+        <div class="mp-stats revelar" id="mp-stats" aria-label="Resumo do potencial mapeado"></div>
+
+        <!-- ---------- FILTROS ---------- -->
+        <div class="mp-filtros" role="group" aria-label="Filtros do mapa">
+          <div class="mp-filtro">
+            <label for="f-uf">Estado</label>
+            <select id="f-uf">
+              <option value="">Todas as UFs</option>
+            </select>
+          </div>
+
+          <div class="mp-filtro mp-filtro--busca">
+            <label for="f-municipio">Cidade</label>
+            <input type="text" id="f-municipio" placeholder="Buscar cidade… ex.: Curitiba" autocomplete="off" />
+            <div class="mp-autocomplete" id="mp-autocomplete" hidden></div>
+          </div>
+
+          <div class="mp-filtro mp-filtro--canais">
+            <label id="lbl-canais">Canais</label>
+            <div class="mp-chips" id="mp-canais" role="group" aria-labelledby="lbl-canais"></div>
+          </div>
+
+          <div class="mp-filtro">
+            <label id="lbl-tier">Tier</label>
+            <div class="sim-toggle" role="group" aria-labelledby="lbl-tier" id="mp-tier">
+              <button type="button" data-tier="ambos" class="on">Ambos</button>
+              <button type="button" data-tier="premium">Premium</button>
+              <button type="button" data-tier="convencional">Convencional</button>
+            </div>
+          </div>
+
+          <button type="button" class="botao botao--fantasma botao--pequeno mp-btn-lista" id="mp-toggle-lista" aria-pressed="false">
+            Ver em lista
+          </button>
+        </div>
+
+        <!-- ---------- MAPA + LEGENDA ---------- -->
+        <div class="mp-mapa-shell">
+          <div id="mp-loading" class="mp-loading">
+            <div class="mp-spinner" aria-hidden="true"></div>
+            <p>Carregando malha municipal e dados de potencial…</p>
+          </div>
+
+          <div id="mp-leaflet" class="mp-leaflet" role="application" aria-label="Mapa coroplético de potencial de mercado por município" hidden></div>
+
+          <!-- Lista alternativa (acessibilidade + comparação) -->
+          <div class="mp-lista" id="mp-lista" hidden>
+            <div class="tbl-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Município</th><th>UF</th><th>Potencial (SAM)</th><th>Confiança</th><th>Prioridade</th>
+                  </tr>
+                </thead>
+                <tbody id="mp-lista-corpo"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Botão de voltar ao nível Brasil (aparece dentro de um estado) -->
+          <button type="button" class="mp-btn-brasil" id="mp-btn-brasil" hidden>← Brasil inteiro</button>
+
+          <!-- Dica de navegação (some após a primeira interação) -->
+          <div class="mp-dica" id="mp-dica" role="note">
+            👆 Toque em um estado para ver o potencial cidade por cidade
+          </div>
+
+          <!-- Legenda -->
+          <div class="mp-legenda" id="mp-legenda">
+            <div class="mp-legenda-bloco">
+              <div class="mp-legenda-titulo">Potencial endereçável (SAM)</div>
+              <div class="mp-legenda-escala" id="mp-escala-sam"></div>
+            </div>
+            <div class="mp-legenda-bloco">
+              <div class="mp-legenda-titulo">Confiança</div>
+              <div class="mp-legenda-confianca">
+                <span class="mp-chip mp-chip--alto"><i></i>Alta</span>
+                <span class="mp-chip mp-chip--medio"><i></i>Média</span>
+                <span class="mp-chip mp-chip--baixo"><i></i>Baixa</span>
+              </div>
+            </div>
+            <div class="mp-legenda-bloco">
+              <label class="mp-toggle-priorizado">
+                <input type="checkbox" id="mp-so-prioridade" />
+                Destacar só prioridade alta
+              </label>
+            </div>
+            <button type="button" class="mp-link-como" id="btn-como-calculamos">Como calculamos ⓘ</button>
+          </div>
+        </div>
+
+        <!-- Top oportunidades do recorte atual (ranking clicável) -->
+        <div class="mp-top-wrap">
+          <div class="mp-top-head">
+            <h2 class="mp-top-titulo" id="mp-top-titulo">Maiores oportunidades mapeadas</h2>
+            <span class="mp-top-nota">pelo recorte de filtros atual · toque para explorar</span>
+          </div>
+          <div class="mp-top" id="mp-top"><!-- preenchido por mapa.js --></div>
+        </div>
+
+        <!-- Funil TAM → SAM → priorizado (contexto, sempre visível abaixo do mapa) -->
+        <div class="mp-funil" id="mp-funil"></div>
+
+        <!-- Disclaimer fixo da seção (repetido no card e no drawer) -->
+        <p class="mp-disclaimer-rodape">
+          Estimativa de potencial de mercado elaborada a partir de dados públicos setoriais
+          <span id="mp-fontes-rodape">[fontes, ano-base]</span>. Não constitui levantamento de
+          disponibilidade, reserva de território ou projeção de faturamento. A viabilidade de
+          cada localização depende de prospecção e negociação individual com o host.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================
+       PAINEL DE DETALHE (card de município/UF) — lateral no desktop,
+       bottom sheet no mobile
+       ============================================================ -->
+  <aside class="mp-painel" id="mp-painel" aria-hidden="true">
+    <div class="mp-painel-arraste" id="mp-painel-arraste" aria-hidden="true"></div>
+    <button type="button" class="mp-painel-fechar" id="mp-painel-fechar" aria-label="Fechar detalhe">✕</button>
+    <div class="mp-painel-corpo" id="mp-painel-corpo"><!-- preenchido por mapa.js --></div>
+  </aside>
+  <div class="mp-overlay" id="mp-overlay" hidden></div>
+
+  <!-- ============================================================
+       DRAWER "COMO CALCULAMOS"
+       ============================================================ -->
+  <aside class="mp-drawer" id="mp-drawer" aria-hidden="true" aria-label="Como calculamos">
+    <button type="button" class="mp-painel-fechar" id="mp-drawer-fechar" aria-label="Fechar">✕</button>
+    <div class="mp-drawer-corpo" id="mp-drawer-corpo"><!-- preenchido por mapa.js --></div>
+  </aside>
+
+  <!-- ============================================================
+       RODAPÉ (mesmo do site)
+       ============================================================ -->
+  <footer class="rodape">
+    <div class="container rodape__grade">
+      <div>
+        <a href="index.html#hero" class="logo logo--rodape" aria-label="Mov Coffee">
+          <svg class="logo__icone" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="18" width="5" height="11" rx="1.5" fill="#FF7A3D"/><rect x="11" y="11" width="5" height="18" rx="1.5" fill="#FF7A3D"/><rect x="19" y="4" width="5" height="25" rx="1.5" fill="#FF7A3D"/></svg>
+          <span class="logo__texto">Mov <strong>Coffee</strong></span>
+        </a>
+        <p class="rodape__slogan">Café automatizado. Operação enxuta.</p>
+      </div>
+      <div class="rodape__info">
+        <p>Mov Coffee Franchising Ltda. · CNPJ 00.000.000/0001-00</p>
+        <p><a href="politica-de-privacidade.html">Política de Privacidade</a></p>
+        <p class="rodape__lgpd">
+          Os dados enviados pelo formulário são utilizados exclusivamente para contato
+          comercial sobre a franquia, em conformidade com a Lei Geral de Proteção de
+          Dados (Lei nº 13.709/2018). Você pode solicitar a exclusão dos seus dados a
+          qualquer momento.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Leaflet + topojson-client: únicas dependências externas desta página -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/topojson-client@3/dist/topojson-client.min.js"></script>
+
+  <script src="js/script.js" defer></script>
+  <script src="js/mapa.js" defer></script>
+</body>
+</html>
