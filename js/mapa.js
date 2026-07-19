@@ -1188,12 +1188,18 @@ async function iniciar() {
   montarStats();
   montarFunil();
   atualizarFontesRodape();
+
+  // O Leaflet mede o contêiner no momento de L.map()/fitBounds() dentro de
+  // iniciarMapa(). Por isso #mp-leaflet precisa ficar visível (tamanho real)
+  // ANTES de iniciarMapa() rodar — se estiver [hidden] (0x0) nesse momento,
+  // o fitBounds calcula um zoom inválido e os polígonos nunca aparecem,
+  // mesmo depois do contêiner virar visível.
+  document.getElementById("mp-loading").hidden = true;
+  document.getElementById("mp-leaflet").hidden = false;
+
   iniciarMapa();
   recalcularMapa();
   montarConteudoDrawer();
-
-  document.getElementById("mp-loading").hidden = true;
-  document.getElementById("mp-leaflet").hidden = false;
 }
 
 document.addEventListener("DOMContentLoaded", iniciar);
