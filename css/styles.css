@@ -827,3 +827,141 @@ select:focus-visible, summary:focus-visible {
   .revelar { opacity: 1; transform: none; }
   .hero__rolar span { display: none; }
 }
+
+/* ============================================================
+   REVISÃO COMERCIAL B2B — componentes adicionados
+   (usa apenas os tokens do design system existente)
+   ============================================================ */
+
+/* CTA persistente no mobile (fora do menu colapsado) */
+.topo__cta-mobile { margin-left: auto; margin-right: .9rem; white-space: nowrap; }
+@media (min-width: 800px) {
+  .topo__cta-mobile { display: none; }
+}
+
+/* Faixa de urgência legítima (exclusividade por ponto) */
+.urgencia-legitima {
+  margin-top: 2.4rem;
+  background: rgba(255, 122, 61, .08);
+  border: 1px solid var(--neon-brilho);
+  border-left: 3px solid var(--neon);
+  border-radius: var(--raio);
+  padding: 1rem 1.3rem;
+  font-size: .95rem;
+  color: var(--texto-suave);
+  max-width: 46rem;
+}
+.urgencia-legitima strong { color: var(--texto); }
+
+/* Comparativo quiosque × cafeteria tradicional */
+.comparativo { margin-top: 2.8rem; }
+.comparativo__scroll { overflow-x: auto; border-radius: var(--raio); }
+.comparativo__tabela {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  background: var(--grafite-800);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+  font-size: .92rem;
+}
+.comparativo__tabela th, .comparativo__tabela td {
+  padding: .9rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--borda);
+  vertical-align: top;
+}
+.comparativo__tabela thead th {
+  font-family: var(--fonte-titulo);
+  font-size: .95rem;
+  color: var(--texto);
+  background: var(--grafite-850);
+}
+.comparativo__tabela tbody th {
+  font-weight: 600;
+  color: var(--texto-suave);
+  width: 26%;
+}
+.comparativo__tabela td { color: var(--texto-suave); }
+.comparativo__tabela .comparativo__mov {
+  color: var(--texto);
+  background: rgba(255, 122, 61, .06);
+  border-left: 2px solid var(--neon);
+}
+.comparativo__tabela tbody tr:last-child th,
+.comparativo__tabela tbody tr:last-child td { border-bottom: none; }
+.comparativo__nota { margin-top: .8rem; font-size: .78rem; color: var(--texto-fraco); }
+
+/* Texto só para leitores de tela */
+.visualmente-oculto {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Investimento: dois cards lado a lado no desktop */
+.grade-numeros--investimento { max-width: 960px; margin-inline: auto; }
+@media (min-width: 800px) {
+  .grade-numeros--investimento { grid-template-columns: 1fr 1fr; }
+}
+.grade-numeros--investimento .card-vidro__nota strong,
+.grade-numeros--investimento .card-vidro__obs strong { color: var(--texto); }
+
+/* Disclaimer legal fixo (seções com números financeiros) */
+.disclaimer-legal {
+  margin-top: 1.6rem;
+  text-align: center;
+  font-size: .78rem;
+  color: var(--texto-fraco);
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+/* CTA de fim de seção */
+.cta-secao { margin-top: 2.4rem; display: flex; }
+
+/* Card "fundador da rede" (prova social honesta pré-lançamento) */
+.card-fundador {
+  margin-top: 2.8rem;
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  border-color: var(--neon-brilho);
+}
+.card-fundador h3 {
+  font-size: 1.35rem;
+  margin-block: .5rem .8rem;
+  color: var(--texto);
+}
+.card-fundador__texto {
+  font-size: .95rem;
+  color: var(--texto-suave);
+  margin-bottom: 1.4rem;
+}
+.card-fundador__texto strong { color: var(--texto); }
+
+/* Consentimento LGPD explícito no formulário */
+.campo--consentimento { margin-top: .4rem; }
+.consentimento {
+  display: flex;
+  gap: .7rem;
+  align-items: flex-start;
+  cursor: pointer;
+  font-size: .85rem;
+  color: var(--texto-suave);
+}
+.consentimento input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 1.15rem; height: 1.15rem;
+  margin-top: .15rem;
+  accent-color: var(--neon);
+  cursor: pointer;
+}
+
+/* Correção: o atributo [hidden] deve vencer qualquer display definido por
+   classe (ex.: .formulario { display: grid } mantinha o formulário visível
+   após o envio, junto com a confirmação). */
+[hidden] { display: none !important; }

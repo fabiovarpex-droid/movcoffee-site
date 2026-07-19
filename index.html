@@ -41,17 +41,21 @@
         <span class="logo__texto">Mov <strong>Coffee</strong></span>
       </a>
 
+      <!-- CTA sempre visível no mobile (fora do menu colapsado) -->
+      <a href="#cadastro" class="botao botao--pequeno topo__cta-mobile">Quero ser licenciado</a>
+
       <button class="topo__hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
         <span></span><span></span><span></span>
       </button>
 
+      <!-- Menu no eixo da jornada de decisão do candidato:
+           oportunidade → modelo → investimento → simulador → dúvidas → cadastro -->
       <ul class="topo__links" id="menu-links">
-        <li><a href="#modelo">O modelo</a></li>
+        <li><a href="#oportunidade">A oportunidade</a></li>
         <li><a href="#como-funciona">Como funciona</a></li>
-        <li><a href="#numeros">Números</a></li>
+        <li><a href="#investimento">Investimento</a></li>
         <li><a href="simulador.html">Simulador</a></li>
         <li><a href="mapa-potencial.html">Mapa de potencial</a></li>
-        <li><a href="#prova">Modelos</a></li>
         <li><a href="#faq">Dúvidas</a></li>
         <li><a href="#cadastro" class="botao botao--pequeno">Quero ser licenciado</a></li>
       </ul>
@@ -97,30 +101,87 @@
           O café é o produto.<br /><span>A liberdade é o negócio.</span>
         </h1>
         <p class="hero__sub">
-          Um quiosque de autoatendimento que cabe num corredor, opera com
-          <strong>uma pessoa por turno</strong> e coloca você no comando do
-          próprio tempo.
+          Um quiosque de café automatizado em pontos de alto fluxo: investimento a
+          partir de <strong>R$ 72 mil</strong>, <strong>uma pessoa por turno</strong>
+          e ~6&nbsp;m² de ponto. Um negócio desenhado para operar quase sozinho —
+          e para você ter mais de um.
         </p>
         <div class="hero__acoes">
           <a href="#cadastro" class="botao botao--grande">Quero ser licenciado</a>
-          <a href="#como-funciona" class="botao botao--fantasma">Ver como funciona ›</a>
+          <a href="simulador.html" class="botao botao--fantasma">Simular meu plano ›</a>
         </div>
         <ul class="hero__provas" aria-label="Destaques do modelo">
+          <li><strong>R$ 72 mil</strong> quiosque completo</li>
           <li><strong>1</strong> operador por turno</li>
           <li><strong>~6&nbsp;m²</strong> de ponto</li>
           <li><strong>100%</strong> autoatendimento</li>
         </ul>
       </div>
 
-      <a href="#modelo" class="hero__rolar" aria-label="Rolar para baixo">
+      <a href="#oportunidade" class="hero__rolar" aria-label="Rolar para baixo">
         <span></span>
       </a>
     </section>
 
     <!-- ============================================================
-         2. POR QUE QUIOSQUE, NÃO LOJA (cards com ícones)
+         2. A OPORTUNIDADE / POR QUE AGORA
+         Objetivo comercial: enquadrar mercado e timing, declarar o
+         "inimigo" (fila + café ruim de vending) e plantar a urgência
+         legítima (exclusividade por ponto).
+         DADO REAL NECESSÁRIO: se quiser citar números de mercado
+         (ex.: crescimento do consumo fora do lar), incluir fonte
+         validada (ABIC/Euromonitor). Sem fonte, o texto permanece
+         qualitativo de propósito — não inventar estatística.
          ============================================================ -->
-    <section class="secao" id="modelo">
+    <section class="secao" id="oportunidade">
+      <div class="container">
+        <p class="secao__rotulo revelar">A oportunidade</p>
+        <h2 class="revelar">Todo mundo quer café. Ninguém quer fila.</h2>
+        <p class="secao__sub revelar">
+          O consumo de café fora de casa cresce ano após ano no Brasil — mas a
+          experiência ainda obriga a escolher entre a fila da cafeteria e o café
+          ruim da máquina de vending. O Mov Coffee ocupa exatamente esse espaço:
+          <strong>café de qualidade, em segundos, no caminho das pessoas</strong>.
+        </p>
+
+        <div class="grade-cards">
+          <div class="card-recurso revelar">
+            <div class="card-recurso__icone">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 38l10-12 8 7 12-16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 17h8v8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Demanda diária e recorrente</h3>
+            <p>Café não é compra por impulso: é hábito. Quem passa pelo seu ponto hoje volta amanhã — a receita se constrói na recorrência.</p>
+          </div>
+          <div class="card-recurso revelar">
+            <div class="card-recurso__icone">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M24 13v11l8 5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Venda em segundos, não em minutos</h3>
+            <p>Formato de interceptação: o cliente decide em segundos, no fluxo de passagem. Sem mesa, sem comanda, sem espera — mais vendas por metro quadrado.</p>
+          </div>
+          <div class="card-recurso revelar">
+            <div class="card-recurso__icone">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5l6 12 13 2-9.5 9 2.2 13L24 35l-11.7 6 2.2-13L5 19l13-2z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>O concorrente é a fila — e a vending</h3>
+            <p>De um lado, cafeterias caras e lentas; do outro, máquinas de vending com café esquecível. No meio, um público enorme sem opção à altura.</p>
+          </div>
+        </div>
+
+        <p class="urgencia-legitima revelar" role="note">
+          <strong>Cada ponto é exclusivo de um licenciado.</strong> Os melhores
+          pontos da sua praça — shoppings, academias, terminais — saem primeiro,
+          e quem chega antes fica com eles.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. POR QUE QUIOSQUE, NÃO LOJA (cards com ícones)
+         Objetivo comercial: derrubar a objeção "abrir negócio de café
+         é caro e complexo" com contraste explícito quiosque × loja.
+         ============================================================ -->
+    <section class="secao secao--alternada" id="modelo">
       <div class="container">
         <p class="secao__rotulo revelar">O modelo</p>
         <h2 class="revelar">Por que um quiosque, e não uma loja?</h2>
@@ -159,24 +220,81 @@
             <p>Insumos de longa validade e poucos SKUs. Quase sem desperdício e sem a dor de cabeça do alimento fresco.</p>
           </div>
         </div>
+
+        <!-- Comparativo direto: quiosque Mov × cafeteria tradicional.
+             Valores da coluna "cafeteria" são ordens de grandeza de mercado
+             (estimativas), rotulados como tal na legenda. -->
+        <div class="comparativo revelar">
+          <div class="comparativo__scroll">
+            <table class="comparativo__tabela">
+              <caption class="visualmente-oculto">Comparação entre o quiosque Mov Coffee e uma cafeteria tradicional</caption>
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="comparativo__mov">Quiosque Mov Coffee</th>
+                  <th scope="col">Cafeteria tradicional</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Investimento inicial</th>
+                  <td class="comparativo__mov">R$ 72 mil (quiosque completo)</td>
+                  <td>R$ 300 mil ou mais, com obra e ponto</td>
+                </tr>
+                <tr>
+                  <th scope="row">Obra civil</th>
+                  <td class="comparativo__mov">Nenhuma — módulo pré-fabricado</td>
+                  <td>Meses de reforma e alvarás</td>
+                </tr>
+                <tr>
+                  <th scope="row">Equipe</th>
+                  <td class="comparativo__mov">1 pessoa por turno</td>
+                  <td>Baristas, caixa e cozinha</td>
+                </tr>
+                <tr>
+                  <th scope="row">Tempo até abrir</th>
+                  <td class="comparativo__mov">30–45 dias após o contrato do ponto</td>
+                  <td>4 a 8 meses, em média</td>
+                </tr>
+                <tr>
+                  <th scope="row">Se o ponto não performar</th>
+                  <td class="comparativo__mov">O quiosque é realocado</td>
+                  <td>A obra fica no imóvel — prejuízo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="comparativo__nota">
+            Valores da coluna "cafeteria tradicional" são estimativas de mercado
+            para fins de comparação de formato, não cotações.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- ============================================================
-         3. COMO FUNCIONA (passos com animação de entrada)
+         4. COMO FUNCIONA (passos com animação de entrada)
+         Objetivo comercial: mostrar ao candidato por que a operação é
+         simples de tocar, replicar e multioperar — a jornada do cliente
+         existe aqui como prova de simplicidade, não como vitrine B2C.
          ============================================================ -->
-    <section class="secao secao--alternada" id="como-funciona">
+    <section class="secao" id="como-funciona">
       <div class="container">
         <p class="secao__rotulo revelar">Operação</p>
-        <h2 class="revelar">Como funciona no dia a dia</h2>
-        <p class="secao__sub revelar">Autoatendimento de ponta a ponta — o operador cuida da experiência, não da fila.</p>
+        <h2 class="revelar">Uma operação que você aprende em uma semana</h2>
+        <p class="secao__sub revelar">
+          A máquina prepara, o totem cobra, o cliente se serve. Sobra para o
+          operador o que nenhuma máquina faz: repor, higienizar e bem receber.
+          É essa simplicidade que permite operar com uma pessoa por turno — e
+          administrar mais de um quiosque com a mesma estrutura.
+        </p>
 
         <ol class="passos">
           <li class="passo revelar">
             <span class="passo__numero" aria-hidden="true">01</span>
             <svg class="passo__icone" viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="6" width="20" height="36" rx="3" fill="none" stroke="currentColor" stroke-width="2.5"/><rect x="19" y="12" width="10" height="14" rx="1.5" fill="currentColor" opacity=".35"/><circle cx="24" cy="35" r="2.4" fill="currentColor"/></svg>
-            <h3>Escolhe no Display da Máquina o Café</h3>
-            <p>Cardápio digital com expresso, cappuccino, latte e cold brew. Sem fila no balcão.</p>
+            <h3>O cliente escolhe no display</h3>
+            <p>Cardápio digital com expresso, cappuccino, latte e cold brew. Sem fila, sem balcão, sem atendente anotando pedido.</p>
           </li>
           <li class="passo revelar">
             <span class="passo__numero" aria-hidden="true">02</span>
@@ -201,29 +319,51 @@
     </section>
 
     <!-- ============================================================
-         4. NÚMEROS DO MODELO (cards glassmorphism)
+         5. INVESTIMENTO E CONDIÇÕES (cards glassmorphism)
+         Objetivo comercial: âncora de preço transparente + quebra da
+         objeção de custo. Rótulos: R$ 72.000 = valor oficial do pacote;
+         aporte total = ESTIMATIVA (frete + abertura de empresa + capital
+         de giro variam por praça).
          ============================================================ -->
-    <section class="secao secao--numeros" id="numeros">
+    <section class="secao secao--numeros" id="investimento">
       <div class="container">
         <p class="secao__rotulo revelar">Investimento</p>
-        <h2 class="revelar">Os números do modelo</h2>
-        <p class="aviso-exemplo revelar" role="note">
-          <strong>⚠️ Valor de referência</strong>, sujeito a confirmação.
+        <h2 class="revelar">Quanto custa, sem letra miúda</h2>
+        <p class="secao__sub revelar">
+          Um único pacote, sem taxa de franquia escondida: você sabe exatamente
+          o que está comprando e o que ainda precisa reservar.
         </p>
 
-        <div class="grade-numeros grade-numeros--unico">
-          <!-- DADO REAL NECESSÁRIO: confirmar o valor oficial -->
+        <div class="grade-numeros grade-numeros--investimento">
           <div class="card-vidro revelar">
-            <p class="card-vidro__rotulo">Investimento do quiosque completo</p>
+            <p class="card-vidro__rotulo">Quiosque completo — valor oficial</p>
             <p class="card-vidro__valor">R$ 72.000</p>
-            <p class="card-vidro__nota">Máquina, mobiliário e estoque do 1º mês</p>
-            <p class="card-vidro__obs">*Valores de frete não inclusos.</p>
+            <p class="card-vidro__nota">
+              <strong>Inclui:</strong> máquina profissional automatizada, totem de
+              pagamento, mobiliário do quiosque e estoque do 1º mês.
+            </p>
+            <p class="card-vidro__obs">
+              <strong>Não inclui:</strong> frete, abertura de empresa e capital de giro
+              (ao lado).
+            </p>
+          </div>
+          <div class="card-vidro revelar">
+            <p class="card-vidro__rotulo">Aporte total recomendado — estimativa</p>
+            <p class="card-vidro__valor">R$ 82–91 mil</p>
+            <p class="card-vidro__nota">
+              Quiosque + frete + abertura de empresa (~R$ 0,5–1,5 mil) + capital de
+              giro de <strong>3 meses de custos fixos</strong> até a maturação do ponto.
+            </p>
+            <p class="card-vidro__obs">
+              Estimativa: frete e custos fixos variam conforme a praça e o ponto.
+            </p>
           </div>
         </div>
 
         <p class="secao__sub secao__sub--centro revelar">
-          Quer ver o retorno na sua realidade? Simule payback e lucro mensal ajustando
-          cafés/dia, ticket e ocupação.
+          Faz sentido para o seu bolso? Veja payback e lucro mensal na sua
+          realidade, ajustando cafés/dia, ticket e ocupação — <strong>sem
+          cadastro para simular</strong>.
         </p>
         <div class="cta-simulador revelar">
           <span class="seta-incentivo" aria-hidden="true">
@@ -233,20 +373,27 @@
           </span>
           <a href="simulador.html" class="botao botao--grande">Abrir Simulador Financeiro</a>
         </div>
+        <p class="disclaimer-legal revelar" role="note">
+          Simulação ilustrativa. Não constitui promessa de rentabilidade nem
+          oferta de franquia. Resultados variam conforme ponto, operação e mercado.
+        </p>
       </div>
     </section>
 
     <!-- ============================================================
-         5. VANTAGEM OPERACIONAL (bullets com ícones)
+         6. POR QUE MOV — DIFERENCIAIS (bullets com ícones)
+         Objetivo comercial: fechar a preferência derrubando o "e se
+         não der certo?" — realocável, suporte, padrão e gestão simples.
          ============================================================ -->
     <section class="secao secao--alternada" id="vantagens">
       <div class="container container--duas-colunas">
         <div class="revelar">
-          <p class="secao__rotulo">Vantagens</p>
+          <p class="secao__rotulo">Por que Mov</p>
           <h2>Feito para operar leve</h2>
           <p class="secao__sub">
             O Mov Coffee ataca as três maiores dores de quem empreende em
-            alimentação: gente, desperdício e complexidade.
+            alimentação: gente, desperdício e complexidade — e reduz o custo
+            de errar.
           </p>
         </div>
         <ul class="lista-vantagens">
@@ -283,13 +430,64 @@
     </section>
 
     <!-- ============================================================
-         6. PERFIL DO PONTO IDEAL
+         7. SUPORTE, TREINAMENTO E ONBOARDING
+         Objetivo comercial: desriscar a decisão — derrubar o "não vou
+         saber operar / vou ficar sozinho". Rede de segurança explícita.
          ============================================================ -->
-    <section class="secao" id="ponto-ideal">
+    <section class="secao" id="suporte">
+      <div class="container">
+        <p class="secao__rotulo revelar">Suporte</p>
+        <h2 class="revelar">Você abre com a rede, não sozinho</h2>
+        <p class="secao__sub revelar">
+          Nenhum licenciado Mov Coffee precisa ter experiência com café ou
+          varejo. O que você precisa saber, a franqueadora ensina — e o que a
+          máquina precisa, a franqueadora resolve.
+        </p>
+
+        <ol class="passos">
+          <li class="passo revelar">
+            <span class="passo__numero" aria-hidden="true">01</span>
+            <svg class="passo__icone" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 12h32v22H8z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 40h16M24 34v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M15 27l5-6 4 4 6-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>1 semana de treinamento presencial</h3>
+            <p>Você e seu operador aprendem na unidade-modelo: máquina, insumos, higienização e atendimento — na prática, não em apostila.</p>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__numero" aria-hidden="true">02</span>
+            <svg class="passo__icone" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M24 14v10l7 4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <h3>90 dias de acompanhamento remoto</h3>
+            <p>Nos primeiros meses — quando mais importa — a equipe da franqueadora acompanha seus números e sua rotina de perto.</p>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__numero" aria-hidden="true">03</span>
+            <svg class="passo__icone" viewBox="0 0 48 48" aria-hidden="true"><path d="M30 8l10 10-6 6-10-10zM26 12L8 30v10h10l18-18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            <h3>Assistência técnica coordenada</h3>
+            <p>Manutenção preventiva agendada e atendimento prioritário da fabricante, coordenados pela franqueadora. Máquina parada é prioridade de todos.</p>
+          </li>
+          <li class="passo revelar">
+            <span class="passo__numero" aria-hidden="true">04</span>
+            <svg class="passo__icone" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 16h24v18a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M18 16v-3a6 6 0 0 1 12 0v3M24 26v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <h3>Receitas calibradas remotamente</h3>
+            <p>O blend é exclusivo e as receitas são monitoradas e ajustadas à distância: o padrão da bebida não depende de você virar barista.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         8. PERFIL DO PONTO IDEAL
+         Objetivo comercial: o candidato se enxergar operando num ponto
+         concreto + educar que o ponto define o resultado, conectando ao
+         suporte de análise de ponto da franqueadora.
+         ============================================================ -->
+    <section class="secao secao--alternada" id="ponto-ideal">
       <div class="container">
         <p class="secao__rotulo revelar">Localização</p>
         <h2 class="revelar">Onde um Mov Coffee funciona</h2>
-        <p class="secao__sub revelar">Qualquer lugar com fluxo alto e gente de passagem querendo uma pausa rápida.</p>
+        <p class="secao__sub revelar">
+          No varejo de conveniência, <strong>o ponto define o resultado</strong>.
+          Por isso a franqueadora analisa fluxo, perfil de público e custo de
+          ocupação de cada ponto com você, antes de qualquer contrato.
+        </p>
 
         <div class="grade-pontos">
           <div class="chip-ponto revelar"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 28V14l12-8 12 8v14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M2 28h28" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Corredores de alto fluxo</div>
@@ -299,14 +497,22 @@
           <div class="chip-ponto revelar"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 12v8M26 12v8M10 16h12M6 16H3M29 16h-3M10 11v10M22 11v10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Academias</div>
           <div class="chip-ponto revelar"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="8" width="22" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M5 14h22M9 24v3M23 24v3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Terminais e ruas de fluxo</div>
         </div>
+
+        <div class="cta-secao revelar">
+          <a href="mapa-potencial.html" class="botao botao--fantasma">Ver o potencial da minha região no mapa ›</a>
+        </div>
       </div>
     </section>
 
     <!-- ============================================================
-         7. MODELOS DE QUIOSQUE (fotos ilustrando os modelos em operação)
-         As fotos ilustram os modelos em diferentes ambientes.
+         9. MODELOS DE QUIOSQUE + ENQUADRAMENTO DE FUNDADOR
+         Objetivo comercial: credibilidade. Rede em implantação — sem
+         depoimentos forjados: fotos rotuladas como ilustrativas e
+         enquadramento honesto de "fundador da rede".
+         DADO REAL NECESSÁRIO: quando houver unidades operando, substituir
+         este bloco por números reais, fotos de pontos e depoimentos.
          ============================================================ -->
-    <section class="secao secao--alternada" id="prova">
+    <section class="secao" id="prova">
       <div class="container">
         <p class="secao__rotulo revelar">Modelos de quiosque</p>
         <h2 class="revelar">Nosso Modelo de Quiosque Mov Coffee</h2>
@@ -352,13 +558,32 @@
         <div class="faixa-logos revelar" aria-label="Tipos de ponto onde o Mov Coffee opera">
           <span>Shoppings</span><span>Aeroportos</span><span>Academias</span><span>Praças de alimentação</span><span>Terminais</span>
         </div>
+
+        <!-- Enquadramento honesto de rede em implantação: virar vantagem
+             ("fundador") em vez de esconder a ausência de prova social.
+             DECISÃO PENDENTE: condições comerciais de fundador (o que,
+             exatamente, a primeira turma leva) — definir antes do go-live. -->
+        <div class="card-vidro card-fundador revelar">
+          <p class="card-vidro__rotulo">Rede em implantação</p>
+          <h3>Seja um dos fundadores da rede Mov Coffee</h3>
+          <p class="card-fundador__texto">
+            A Mov Coffee está formando sua primeira turma de licenciados. Isso
+            significa duas coisas: você não verá aqui depoimentos inventados —
+            e significa também que <strong>os melhores pontos do Brasil ainda
+            estão disponíveis</strong>. Quem entra agora escolhe praça primeiro
+            e cresce junto com a marca.
+          </p>
+          <a href="#cadastro" class="botao">Quero ser da primeira turma</a>
+        </div>
       </div>
     </section>
 
     <!-- ============================================================
-         8. FAQ (accordion)
+         10. FAQ (accordion)
+         Objetivo comercial: derrubar as objeções finais — custo, prazo,
+         risco técnico, contrato (COF), rentabilidade e suporte.
          ============================================================ -->
-    <section class="secao" id="faq">
+    <section class="secao secao--alternada" id="faq">
       <div class="container container--estreito">
         <p class="secao__rotulo revelar">Dúvidas frequentes</p>
         <h2 class="revelar">Perguntas que todo candidato faz</h2>
@@ -366,7 +591,7 @@
         <div class="faq">
           <details class="faq__item revelar">
             <summary>Qual é o investimento total para abrir um Mov Coffee?</summary>
-            <p>O investimento do quiosque completo é de R$ 72.000 (valor de referência, sujeito a confirmação) e inclui a máquina, o mobiliário e o estoque do 1º mês. Os valores de frete não estão inclusos e não há capital de giro incluído.</p>
+            <p>O quiosque completo custa R$ 72.000: máquina, totem, mobiliário e estoque do 1º mês. Recomendamos um aporte total de R$ 82–91 mil (estimativa), somando frete, abertura de empresa e capital de giro de 3 meses de custos fixos. Todos os valores são detalhados por escrito antes de qualquer assinatura.</p>
           </details>
           <details class="faq__item revelar">
             <summary>Quanto tempo leva para instalar o quiosque?</summary>
@@ -395,6 +620,22 @@
           <details class="faq__item revelar">
             <summary>Posso ter mais de uma unidade?</summary>
             <p>Sim — o modelo enxuto favorece multioperação: um mesmo licenciado pode administrar quiosques em pontos diferentes com uma estrutura leve de supervisão.</p>
+          </details>
+          <details class="faq__item revelar">
+            <summary>Quanto dá para ganhar com um quiosque?</summary>
+            <p>Depende do ponto, do fluxo e de quem opera — por isso não prometemos rentabilidade. O que fazemos é abrir as contas: no <a href="simulador.html">simulador</a> você ajusta cafés/dia, ticket e custos e vê payback e lucro estimados na sua realidade. Simulação ilustrativa, não é promessa de resultado.</p>
+          </details>
+          <details class="faq__item revelar">
+            <summary>Como funciona o contrato? Vou receber uma COF?</summary>
+            <p>Sim. Antes de qualquer assinatura ou pagamento, você recebe a Circular de Oferta de Franquia (COF) com todas as condições — investimento, taxas, obrigações e território — com no mínimo 10 dias para analisar, como determina a Lei de Franquias (Lei nº 13.966/2019). Recomendamos que você a revise com um advogado ou contador de confiança.</p>
+          </details>
+          <details class="faq__item revelar">
+            <summary>E se o ponto não performar? Posso mudar o quiosque de lugar?</summary>
+            <p>Essa é uma das maiores vantagens do formato: o quiosque é um módulo realocável, não uma obra. Se o ponto não entregar o fluxo esperado, a franqueadora apoia a busca e a negociação de um novo local, conforme as condições do contrato.</p>
+          </details>
+          <details class="faq__item revelar">
+            <summary>O que exatamente a franqueadora entrega no suporte?</summary>
+            <p>Treinamento presencial de 1 semana, acompanhamento remoto de 90 dias, assistência técnica coordenada com a fabricante da máquina, calibragem remota das receitas, blend exclusivo, análise do ponto antes da assinatura e playbook de operação. Você opera; a rede sustenta.</p>
           </details>
         </div>
       </div>
@@ -457,11 +698,19 @@
             </fieldset>
           </div>
 
-          <p class="formulario__lgpd">
-            Ao enviar, você concorda com o uso dos seus dados exclusivamente para
-            contato sobre a franquia Mov Coffee, conforme nossa
-            <a href="politica-de-privacidade.html">Política de Privacidade</a> (LGPD).
-          </p>
+          <!-- Consentimento LGPD explícito (obrigatório) — registrado no payload do lead -->
+          <div class="campo campo--consentimento">
+            <label class="consentimento">
+              <input type="checkbox" id="consentimento" name="consentimento" required />
+              <span>
+                Autorizo o uso dos meus dados exclusivamente para contato sobre a
+                franquia Mov Coffee, conforme a
+                <a href="politica-de-privacidade.html">Política de Privacidade</a> (LGPD).
+                <span aria-hidden="true">*</span>
+              </span>
+            </label>
+            <p class="campo__erro" id="erro-consentimento" role="alert" hidden>Para enviar, é preciso autorizar o contato.</p>
+          </div>
 
           <button type="submit" class="botao botao--grande botao--largura-total">Enviar cadastro</button>
         </form>
@@ -489,8 +738,10 @@
         <p class="rodape__slogan">Café automatizado. Operação enxuta.</p>
       </div>
       <div class="rodape__info">
-        <!-- DADO REAL NECESSÁRIO: CNPJ e razão social da franqueadora -->
-        <p>Mov Coffee Franchising Ltda. · CNPJ 00.000.000/0001-00</p>
+        <!-- DADO REAL NECESSÁRIO (bloqueia o go-live): razão social e CNPJ reais.
+             Não publicar CNPJ placeholder — sem entidade real o site não sustenta
+             o discurso de franqueadora séria nem a COF. -->
+        <p>Mov Coffee · Franqueadora em constituição — razão social e CNPJ serão publicados nesta página.</p>
         <p><a href="politica-de-privacidade.html">Política de Privacidade</a></p>
         <p class="rodape__lgpd">
           Os dados enviados pelo formulário são utilizados exclusivamente para contato

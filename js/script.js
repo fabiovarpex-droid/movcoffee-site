@@ -152,6 +152,10 @@ function validarFormulario() {
   document.getElementById("erro-experiencia").hidden = !!experiencia;
   valido = !!experiencia && valido;
 
+  // Consentimento LGPD explícito: sem o aceite, o lead não é enviado
+  const consentimento = document.getElementById("consentimento");
+  valido = marcarErro("consentimento", !consentimento.checked) && valido;
+
   return valido;
 }
 
@@ -176,6 +180,10 @@ form.addEventListener("submit", async (evento) => {
     // propriedade `perfil_ponto` no CRM/HubSpot e no evento de analytics do lead.
     perfil_ponto: document.querySelector(".simulador")?.dataset.perfil || "premium",
     origem: "site-franquia",
+    // Registro do consentimento LGPD (base legal: consentimento, Lei 13.709/2018)
+    consentimentoLgpd: true,
+    consentimentoTexto:
+      "Autorizo o uso dos meus dados exclusivamente para contato sobre a franquia Mov Coffee, conforme a Política de Privacidade (LGPD).",
     dataEnvio: new Date().toISOString(),
   };
 
@@ -224,7 +232,7 @@ const perguntasRapidas = [
   {
     pergunta: "Qual o investimento?",
     resposta:
-      "O investimento do quiosque completo é de R$ 72.000 (valor de referência, sujeito a confirmação): máquina, mobiliário e estoque do 1º mês. Frete não incluso.",
+      "O quiosque completo custa R$ 72.000: máquina, totem, mobiliário e estoque do 1º mês. Com frete, abertura de empresa e capital de giro, recomendamos um aporte total de R$ 82–91 mil (estimativa).",
   },
   {
     pergunta: "Prazo de instalação?",
