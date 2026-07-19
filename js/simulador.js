@@ -22,7 +22,55 @@
   const el = (id) => document.getElementById(id);
   const reduzMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ============================================================
+     PERFIS DE PONTO — fonte única de calibragem da rede
+     ------------------------------------------------------------
+     O perfil é um "cenário-base": ao trocar, sobrescreve ticket
+     (valor + faixa do slider), cafés/dia e o bloco de CMV (blend).
+     O CMV é função do PERFIL (blend abastecido no ponto), NÃO do
+     ticket — mover o slider de ticket não altera o custo do insumo.
+
+     A franqueadora recalibra a rede editando SÓ este objeto, sem
+     tocar na lógica de cálculo.
+     ============================================================ */
+  const PERFIS = {
+    premium: {
+      label: "Premium",
+      pontos: "Shopping · Aeroporto · Academia",
+      ticket: { default: 12, min: 9, max: 18 },
+      coposDia: { default: 40 },
+      // Blend specialty (grão torrado ~R$85/kg)
+      cmv: { cafe: 0.90, leite: 0.45, descartaveis: 0.30, outros: 0.15 },
+      mixNota:
+        "~15% do ticket, ponderado pelo mix (37,5% expresso / 62,5% bebidas de R$15). Grão torrado ~R$85/kg; leite ~R$6,50/L.",
+      premissaExtra: "",
+    },
+    altoGiro: {
+      label: "Alto Giro",
+      pontos: "Supermercado · Terminais · Interior",
+      ticket: { default: 7.5, min: 6, max: 9 },
+      coposDia: { default: 60 },
+      // ⚠️ CONFIRMAR: cmv.cafe = 0,54 é PREMISSA DE SOURCING (blend tradicional
+      // arábica+conilon comprado TORRADO direto de cooperativa/torrefação, private
+      // label). Estratégia definida; sourcing ainda não contratado. Se a cotação real
+      // vier diferente, ajustar APENAS este valor — nada mais depende dele.
+      cmv: { cafe: 0.54, leite: 0.45, descartaveis: 0.30, outros: 0.15 },
+      mixNota:
+        "~19% do ticket · mix puxado para café preto e bebidas P, com blend tradicional mais barato.",
+      premissaExtra:
+        "Blend tradicional fornecido pela rede — custo de insumo menor pareado ao ticket do ponto.",
+    },
+  };
+
+  // Premissas comuns aos dois perfis (não mudam com o perfil).
+  const COMUNS = {
+    royalties: 800, energia: 200, conectividade: 70, manutencao: 150,
+    contabilidade: 400, seguroHigiene: 160, aliquotaImposto: 6, taxaPagamento: 2.5,
+    ocupacaoDefault: 1500, capex: { default: 72000, min: 69000, max: 75000 },
+  };
+
   /* ============ Estado da interface ============ */
+  let perfil = "premium"; // 'premium' | 'altoGiro'
   let cmvMode = "det";    // 'det' (detalhado) | 'simp' (% simples)
   let laborMode = "self"; // 'self' (licenciado) | 'hire' (colaborador)
   let horizonte = 36;     // meses no gráfico (12 | 36 | 60)
@@ -176,6 +224,69 @@
     input.style.setProperty("--pct", (max > min ? ((val - min) / (max - min)) * 100 : 50) + "%");
   }
 
+  /* ============ Aplicação do perfil de ponto ============
+     Sobrescreve ticket (valor + faixa), cafés/dia e o bloco de CMV com o
+     preset do perfil. Ocupação, dias, nº de quiosques e operação são
+     preservados (o usuário pode tê-los ajustado). */
+  function aplicarPerfil(novo, primeira) {
+    perfil = novo;
+    const p = PERFIS[perfil];
+
+    // ticket: faixa antes do valor (para não clampar)
+    const inpTicket = el("ticket");
+    inpTicket.min = p.ticket.min;
+    inpTicket.max = p.ticket.max;
+    inpTicket.value = p.ticket.default;
+
+    // cafés/dia (faixa inalterada; só o default do perfil)
+    el("copos").value = p.coposDia.default;
+
+    // CMV detalhado (blend do perfil)
+    el("cafe").value = p.cmv.cafe;
+    el("leite").value = p.cmv.leite;
+    el("desc").value = p.cmv.descartaveis;
+    el("outros").value = p.cmv.outros;
+
+    // CMV % simples: equivalente coerente do blend sobre o ticket-base do perfil
+    const totalCmv = p.cmv.cafe + p.cmv.leite + p.cmv.descartaveis + p.cmv.outros;
+    el("cmvpct").value = (totalCmv / p.ticket.default * 100).toFixed(1);
+
+    // estado visual + acessível dos botões
+    const bP = el("perfil-premium"), bA = el("perfil-altogiro");
+    bP.classList.toggle("on", perfil === "premium");
+    bA.classList.toggle("on", perfil === "altoGiro");
+    bP.setAttribute("aria-pressed", String(perfil === "premium"));
+    bA.setAttribute("aria-pressed", String(perfil === "altoGiro"));
+
+    // expõe o perfil para o formulário de lead (script.js) — premium | alto_giro
+    raiz.dataset.perfil = perfil === "altoGiro" ? "alto_giro" : "premium";
+
+    renderPremissas();
+    if (!primeira) render();
+  }
+
+  /* ============ Painel read-only "Premissas da rede" ============ */
+  function renderPremissas() {
+    const p = PERFIS[perfil];
+    const tituloEl = el("premissas-titulo");
+    if (tituloEl) tituloEl.textContent = `Premissas da rede — perfil ${p.label}`;
+    const corpo = el("premissas-corpo");
+    if (!corpo) return;
+    const totalCmv = p.cmv.cafe + p.cmv.leite + p.cmv.descartaveis + p.cmv.outros;
+    const linha = (l, v) => `<div class="sim-prem-row"><span>${l}</span><span>${v}</span></div>`;
+    corpo.innerHTML =
+      linha("Pontos-alvo", p.pontos) +
+      linha("Ticket médio (base)", BRL2.format(p.ticket.default) + ` · faixa ${BRL.format(p.ticket.min)}–${BRL.format(p.ticket.max)}`) +
+      linha("Cafés/dia (base)", String(p.coposDia.default)) +
+      linha("CMV por café", BRL2.format(totalCmv) + ` (café ${BRL2.format(p.cmv.cafe)} · leite ${BRL2.format(p.cmv.leite)} · descart. ${BRL2.format(p.cmv.descartaveis)} · outros ${BRL2.format(p.cmv.outros)})`) +
+      linha("Royalties", BRL.format(COMUNS.royalties) + " / mês") +
+      linha("Impostos (Simples)", COMUNS.aliquotaImposto.toFixed(1).replace(".", ",") + "%") +
+      linha("Taxa de pagamento", COMUNS.taxaPagamento.toFixed(1).replace(".", ",") + "%") +
+      linha("Ocupação (base)", BRL.format(COMUNS.ocupacaoDefault) + " / mês") +
+      linha("Investimento", BRL.format(COMUNS.capex.default) + ` · faixa ${BRL.format(COMUNS.capex.min)}–${BRL.format(COMUNS.capex.max)}`) +
+      (p.premissaExtra ? `<p class="sim-prem-nota">${p.premissaExtra}</p>` : "");
+  }
+
   /* ============ Render principal ============ */
   function render() {
     const i = readInputs();
@@ -230,8 +341,26 @@
     animateNum(lucroNode, r.lucro, (v) => BRL.format(v));
 
     el("r-margem").textContent = (r.receita ? r.lucro / r.receita * 100 : 0).toFixed(0) + "%";
-    el("r-be").textContent = be.viavel ? Math.ceil(be.coposDia) : "—";
+    const beCopos = be.viavel ? Math.ceil(be.coposDia) : null;
+    el("r-be").textContent = beCopos !== null ? beCopos : "—";
     el("r-receita").textContent = "R$ " + (r.receita / 1000).toFixed(1).replace(".", ",") + "k";
+
+    // nota do mix/blend do perfil ativo (mantém o CMV honesto por perfil)
+    const notaEl = el("cmv-mixnota");
+    if (notaEl) notaEl.textContent = PERFIS[perfil].mixNota;
+
+    // Aviso de honestidade comercial: Alto Giro + colaborador exige fluxo alto.
+    // Usa o MESMO valor exibido no KPI de break-even (Math.ceil) para não divergir.
+    const aviso = el("be-aviso");
+    if (aviso) {
+      const mostrar = perfil === "altoGiro" && laborMode === "hire" && beCopos !== null;
+      aviso.hidden = !mostrar;
+      if (mostrar) {
+        aviso.innerHTML =
+          `No perfil <strong>Alto Giro</strong> com colaborador, o ponto exige fluxo alto ` +
+          `(break-even ≈ <strong>${beCopos} cafés/dia</strong>). A seleção do ponto é o fator nº 1 do resultado.`;
+      }
+    }
 
     renderDRE(r);
     renderScen(i);
@@ -247,6 +376,10 @@
   document.querySelectorAll(".simulador input[type=range]").forEach((inp) => {
     inp.addEventListener("input", render);
   });
+
+  // seletor de PERFIL DO PONTO (troca ticket + CMV + volume do perfil)
+  el("perfil-premium").addEventListener("click", () => { if (perfil !== "premium") aplicarPerfil("premium"); });
+  el("perfil-altogiro").addEventListener("click", () => { if (perfil !== "altoGiro") aplicarPerfil("altoGiro"); });
 
   // toggle CMV
   el("cmv-det").addEventListener("click", () => {
@@ -280,5 +413,9 @@
     });
   });
 
+  // Estado inicial: perfil Premium (preserva a experiência atual do site).
+  // 'primeira=true' aplica os presets sem disparar render duplicado; o render
+  // abaixo cuida da primeira pintura.
+  aplicarPerfil("premium", true);
   render();
 })();

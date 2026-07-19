@@ -134,6 +134,56 @@
 .sim-toggle.toggle-wide button { padding: 9px 10px; font-size: 12.5px; }
 .sim-labor { border-top: 1px solid var(--sim-divider); margin-top: 6px; padding-top: 16px; }
 
+/* ---------- Perfil do ponto (toggle com 2 linhas) ---------- */
+.sim-toggle.sim-perfil button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 11px 8px;
+  line-height: 1.2;
+}
+.sim-perfil .pf-t { font-size: 13.5px; font-weight: 700; }
+.sim-perfil .pf-s { font-size: 10.5px; font-weight: 500; color: var(--sim-text-low); }
+.sim-perfil button.on .pf-s { color: rgba(26, 18, 6, .72); }
+
+/* ---------- Painel read-only "Premissas da rede" ---------- */
+details.sim-premissas { margin-top: 14px; }
+.sim-prem-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding: 7px 0;
+  font-size: 12px;
+  border-bottom: 1px solid var(--sim-divider);
+}
+.sim-prem-row:last-of-type { border-bottom: none; }
+.sim-prem-row span:first-child { color: var(--sim-text-mid); flex-shrink: 0; }
+.sim-prem-row span:last-child { color: var(--sim-text-high); text-align: right; font-weight: 500; }
+.sim-prem-nota {
+  margin-top: 10px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--sim-text-mid);
+  border-left: 2px solid var(--sim-primary);
+  padding-left: 10px;
+}
+
+/* ---------- Aviso de break-even (Alto Giro + colaborador) ---------- */
+.sim-be-aviso {
+  margin-top: 16px;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--sim-text-mid);
+  background: rgba(255, 122, 61, .08);
+  border: 1px solid rgba(255, 122, 61, .28);
+  border-radius: 10px;
+}
+.sim-be-aviso strong { color: var(--sim-text-high); }
+.sim-be-aviso[hidden] { display: none; }
+
 /* ---------- Collapsible "Demais custos fixos" ---------- */
 details.sim-adv { border-top: 1px solid var(--sim-divider); margin-top: 4px; padding-top: 14px; }
 details.sim-adv summary {

@@ -47,6 +47,7 @@
         <li><a href="index.html#como-funciona">Como funciona</a></li>
         <li><a href="index.html#numeros">Números</a></li>
         <li><a href="simulador.html" aria-current="page">Simulador</a></li>
+        <li><a href="mapa-potencial.html">Mapa de potencial</a></li>
         <li><a href="index.html#faq">Dúvidas</a></li>
         <li><a href="index.html#cadastro" class="botao botao--pequeno">Quero ser licenciado</a></li>
       </ul>
@@ -76,6 +77,27 @@
           <!-- ---------- COLUNA DE CONTROLES ---------- -->
           <div class="sim-controls">
 
+            <!-- Perfil do ponto (ajusta ticket + CMV + volume) -->
+            <div class="sim-card">
+              <div class="sim-card-title"><span class="dot"></span>Perfil do ponto</div>
+              <div class="sim-toggle toggle-wide sim-perfil" role="group" aria-label="Perfil do ponto">
+                <button type="button" id="perfil-premium" class="on" aria-pressed="true">
+                  <span class="pf-t">🏬 Premium</span>
+                  <span class="pf-s">Shopping · Aeroporto · Academia</span>
+                </button>
+                <button type="button" id="perfil-altogiro" aria-pressed="false">
+                  <span class="pf-t">🛒 Alto Giro</span>
+                  <span class="pf-s">Supermercado · Terminais · Interior</span>
+                </button>
+              </div>
+              <div class="sim-hint">O perfil ajusta ticket, custo de insumo (blend) e volume típicos do tipo de ponto. Você pode refinar cada número depois.</div>
+
+              <details class="sim-adv sim-premissas">
+                <summary><span class="chev">▶</span><span id="premissas-titulo">Premissas da rede — perfil Premium</span></summary>
+                <div class="body" id="premissas-corpo"><!-- preenchido pelo simulador.js --></div>
+              </details>
+            </div>
+
             <!-- Investimento -->
             <div class="sim-card">
               <div class="sim-card-title"><span class="dot"></span>Investimento</div>
@@ -99,7 +121,7 @@
               <div class="sim-grid2">
                 <div class="sim-field">
                   <div class="sim-field-head"><span class="sim-field-label">Ticket médio</span><span class="sim-field-val accent" id="v-ticket">R$ 12</span></div>
-                  <input type="range" id="ticket" min="8" max="18" step="0.5" value="12" aria-label="Ticket médio" />
+                  <input type="range" id="ticket" min="9" max="18" step="0.5" value="12" aria-label="Ticket médio" />
                 </div>
                 <div class="sim-field">
                   <div class="sim-field-head"><span class="sim-field-label">Cafés / dia</span><span class="sim-field-val accent" id="v-copos">40</span></div>
@@ -140,7 +162,7 @@
                     <input type="range" id="outros" min="0" max="0.50" step="0.01" value="0.15" aria-label="Outros insumos por copo" />
                   </div>
                 </div>
-                <div class="sim-hint">Total por café: <strong id="v-cmvcopo">R$ 1,80</strong> · ~15% do ticket, ponderado pelo mix (37,5% expresso / 62,5% bebidas de R$15). Grão torrado ~R$85/kg; leite ~R$6,50/L.</div>
+                <div class="sim-hint">Total por café: <strong id="v-cmvcopo">R$ 1,80</strong> · <span id="cmv-mixnota">~15% do ticket, ponderado pelo mix (37,5% expresso / 62,5% bebidas de R$15). Grão torrado ~R$85/kg; leite ~R$6,50/L.</span></div>
               </div>
               <div id="cmv-simple" style="display:none">
                 <div class="sim-field" style="margin-bottom:0">
@@ -245,6 +267,7 @@
                 <div class="sim-kpi"><div class="kv" id="r-be">12</div><div class="kl">Break-even (cafés/dia)</div></div>
                 <div class="sim-kpi"><div class="kv" id="r-receita">R$ 14,4k</div><div class="kl">Receita / mês</div></div>
               </div>
+              <div class="sim-be-aviso" id="be-aviso" role="note" hidden></div>
               <p class="sim-cta-lead">Preencha o formulário para se tornar um franqueado e agendar uma reunião com nossos consultores.</p>
               <a class="sim-cta" href="#cadastro">Quero me tornar franqueado</a>
               <div class="sim-disclaimer">Simulação ilustrativa. Não constitui promessa de rentabilidade nem oferta de franquia. Resultados variam conforme ponto, operação e mercado.</div>

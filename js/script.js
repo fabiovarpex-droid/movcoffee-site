@@ -171,6 +171,10 @@ form.addEventListener("submit", async (evento) => {
     cidade: document.getElementById("cidade").value.trim(),
     capital: document.getElementById("capital").value,
     experiencia: form.querySelector('input[name="experiencia"]:checked').value,
+    // Perfil de ponto simulado (premium | alto_giro). Preenchido quando o lead vem
+    // da página do simulador; 'premium' como padrão nas demais páginas. Vira a
+    // propriedade `perfil_ponto` no CRM/HubSpot e no evento de analytics do lead.
+    perfil_ponto: document.querySelector(".simulador")?.dataset.perfil || "premium",
     origem: "site-franquia",
     dataEnvio: new Date().toISOString(),
   };
