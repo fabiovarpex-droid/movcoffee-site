@@ -912,6 +912,37 @@ select:focus-visible, summary:focus-visible {
   white-space: nowrap;
 }
 
+/* Foto do quiosque completo: intro da seção "A oportunidade" */
+.oportunidade__intro { margin-bottom: 2.8rem; }
+.oportunidade__imagem {
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  background: var(--grafite-800);
+}
+.oportunidade__imagem img { width: 100%; height: auto; display: block; }
+@media (min-width: 800px) {
+  .oportunidade__imagem { order: 2; }
+  .oportunidade__texto { order: 1; }
+}
+
+/* Foto do quiosque completo: destaque do pacote em "Investimento" */
+.investimento__destaque {
+  max-width: 480px;
+  margin: 2.4rem auto 0;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--borda-clara);
+  background: rgba(36, 39, 34, .55);
+}
+.investimento__destaque img { width: 100%; height: auto; display: block; }
+.investimento__destaque figcaption {
+  padding: .9rem 1.2rem;
+  font-size: .85rem;
+  color: var(--texto-suave);
+  border-top: 1px solid var(--borda);
+}
+
 /* Investimento: dois cards lado a lado no desktop */
 .grade-numeros--investimento { max-width: 960px; margin-inline: auto; }
 @media (min-width: 800px) {
