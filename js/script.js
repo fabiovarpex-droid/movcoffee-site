@@ -70,7 +70,7 @@ if (heroVideo) {
 
   // Playlist do hero: os vídeos tocam em sequência e recomeçam do início (loop).
   // Para adicionar/trocar vídeos, edite esta lista.
-  const playlistHero = ["assets/hero-coffee.mp4", "assets/hero-coffee-2.mp4"];
+  const playlistHero = ["assets/hero-coffee-1.mp4", "assets/hero-coffee.mp4", "assets/hero-coffee-3.mp4"];
   let indiceVideo = 0;
 
   function tocarVideoHero(indice) {
