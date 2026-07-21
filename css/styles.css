@@ -310,6 +310,16 @@ select:focus-visible, summary:focus-visible {
   font-size: 1.6rem;
   color: var(--texto);
 }
+.hero__provas strong.hero__provas-valor {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+.hero__provas-icone {
+  width: 1.6rem;
+  height: 1.6rem;
+  flex-shrink: 0;
+}
 .hero__rolar {
   position: absolute;
   bottom: 1.6rem; left: 50%;
