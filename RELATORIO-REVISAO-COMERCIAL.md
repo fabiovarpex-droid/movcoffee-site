@@ -1,4 +1,4 @@
-# Relatório — Revisão Comercial B2B do Site Mov Coffee
+# Relatório — Revisão Comercial B2B do Site Been On Coffee
 
 > Data: 19/07/2026 · Escopo: todas as rotas e menus do repositório.
 > Objetivo: transformar o site de peça institucional em máquina de conversão de
@@ -14,7 +14,7 @@
 | `simulador.html` | Simulador de plano de negócio + formulário | Motor **intocado**; menu, consentimento e rodapé revisados |
 | `mapa-potencial.html` | Mapa de potencial por município | **Mantida**; menu e rodapé revisados; agora linkada contextualmente de "Onde funciona" |
 | `politica-de-privacidade.html` | Política LGPD | **Mantida**; entidade "em constituição" no lugar do CNPJ falso |
-| `brandbook-movcoffee.html`, `brandbook-movcoffee-artifact.html`, `ebook-movcoffee.html/.pdf`, `modelo-licenciadora-movcoffee.html` | Documentos internos **não linkados** pelo site | **Não publicar** — se o deploy sobe a pasta inteira, essas URLs ficam acessíveis a quem adivinhar o nome. Recomendo movê-los para fora do repositório do site (ou pasta excluída do deploy) |
+| `brandbook-been-on-coffee.html`, `brandbook-been-on-coffee-artifact.html`, `ebook-been-on-coffee.html/.pdf`, `modelo-licenciadora-been-on-coffee.html` | Documentos internos **não linkados** pelo site | **Não publicar** — se o deploy sobe a pasta inteira, essas URLs ficam acessíveis a quem adivinhar o nome. Recomendo movê-los para fora do repositório do site (ou pasta excluída do deploy) |
 
 ### Menu (header) — antes → depois
 
@@ -35,7 +35,7 @@ Depois (eixo da jornada de decisão): **A oportunidade · Como funciona · Inves
 | 3 | O modelo (quiosque × loja) | **Reescrever** | Cards mantidos + **comparativo visual quiosque × cafeteria tradicional** (investimento, obra, equipe, prazo, risco), com nota de estimativa na coluna da cafeteria. |
 | 4 | Como funciona | **Reescrever** | Reenquadrada sob a ótica do franqueado: "operação que você aprende em uma semana", jornada do cliente como prova de simplicidade e multioperação. Corrigido título do passo 1. |
 | 5 | Investimento (ex-"Números") | **Reescrever** | Âncora dupla: R$ 72.000 (valor oficial, com "inclui/não inclui") + aporte total R$ 82–91 mil (**rotulado estimativa**: frete, abertura de empresa, capital de giro 3 meses). CTA → simulador ("sem cadastro para simular"). Disclaimer fixo de não-promessa. |
-| 6 | Por que Mov (ex-"Vantagens") | **Manter/ajustar** | Bullets mantidos (realocável, suporte técnico, gestão simples, padrão centralizado); rótulo e fechamento reposicionados como quebra do "e se não der certo?". |
+| 6 | Por que Been On (ex-"Vantagens") | **Manter/ajustar** | Bullets mantidos (realocável, suporte técnico, gestão simples, padrão centralizado); rótulo e fechamento reposicionados como quebra do "e se não der certo?". |
 | 7 | Suporte e onboarding | **Adicionar** (nova) | "Você abre com a rede, não sozinho": 1 semana presencial + 90 dias remoto + assistência coordenada + calibragem remota. Desrisco explícito. |
 | 8 | Onde funciona | **Reescrever** | Educar sem assustar: "o ponto define o resultado" + análise de ponto pela franqueadora + link para o Mapa de potencial. |
 | 9 | Modelos de quiosque / prova | **Reescrever** | Fotos mantidas como ilustrativas (honesto). **Novo bloco "Seja fundador da rede"**: enquadramento transparente de rede em implantação que converte a ausência de prova social em vantagem de pioneiro. |
@@ -72,4 +72,4 @@ Depois (eixo da jornada de decisão): **A oportunidade · Como funciona · Inves
 6. **Fontes de dados de mercado** — a seção "A oportunidade" está qualitativa de propósito. Se quiser números (consumo fora do lar, crescimento do setor), validar fonte (ABIC, Euromonitor) e eu insiro com rótulo.
 7. **Integração do lead (HubSpot/CRM)** — o `fetch` continua comentado em `js/script.js` aguardando o endpoint. Hoje o lead só aparece no console do navegador — **não é salvo em lugar nenhum**. Também bloqueia o go-live.
 8. **E-mail do DPO** na política de privacidade ainda é exemplo.
-9. **Terminologia "licenciado" × "franquia/COF"** — o site mistura os dois regimes (e existe um `modelo-licenciadora-movcoffee.html` no repositório). Licenciamento e franquia têm obrigações legais diferentes; o FAQ hoje assume o regime de franquia (COF). Alinhar com o jurídico qual é o regime real e padronizar.
+9. **Terminologia "licenciado" × "franquia/COF"** — o site mistura os dois regimes (e existe um `modelo-licenciadora-been-on-coffee.html` no repositório). Licenciamento e franquia têm obrigações legais diferentes; o FAQ hoje assume o regime de franquia (COF). Alinhar com o jurídico qual é o regime real e padronizar.

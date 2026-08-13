@@ -1,7 +1,7 @@
-# Mov Coffee — Site de vendas de franquia
+# Been On Coffee — Site de vendas de franquia
 
 Site de página única (single-page) para captação de candidatos a licenciado dos
-quiosques de autoatendimento de café **Mov Coffee**.
+quiosques de autoatendimento de café **Been On Coffee**.
 
 Identidade visual: **grafite escuro + laranja neon (#FF7A3D)**, tipografia
 Space Grotesk, tom tech-forward. Hero com vídeo em background, animações de

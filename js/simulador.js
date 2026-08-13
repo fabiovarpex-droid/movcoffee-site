@@ -1,5 +1,5 @@
 /* ============================================================
-   Mov Coffee — Simulador de Plano de Negócio
+   Been On Coffee — Simulador de Plano de Negócio
    Motor determinístico + interface. Port fiel do protótipo validado.
 
    Sem rampa de maturação: volume pleno desde o mês 1.

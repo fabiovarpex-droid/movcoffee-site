@@ -24,6 +24,7 @@
     <path d="M80 -120 c0 -30 40 -30 40 -70" stroke-width="6" opacity=".6"/>
   </g>
   <rect x="1120" y="380" width="120" height="200" fill="url(#vapor)" opacity=".5"/>
-  <text x="150" y="560" font-family="'Space Grotesk', sans-serif" font-size="70" font-weight="700" fill="#f2f0ec" opacity=".9">Mov <tspan fill="#ff7a3d">Coffee</tspan></text>
-  <text x="152" y="620" font-family="Inter, sans-serif" font-size="30" fill="#a8a89f">poster placeholder — troque pelo frame real do vídeo</text>
+  <text x="150" y="510" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="600" letter-spacing="4" fill="#f2f0ec" opacity=".9">BEEN <tspan fill="#ff7a3d">ON</tspan></text>
+  <text x="148" y="600" font-family="'Space Grotesk', sans-serif" font-size="84" font-weight="800" fill="#f2f0ec" opacity=".95">COFFEE</text>
+  <text x="152" y="660" font-family="Inter, sans-serif" font-size="30" fill="#a8a89f">poster placeholder — troque pelo frame real do vídeo</text>
 </svg>

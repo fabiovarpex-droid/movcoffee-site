@@ -1,5 +1,5 @@
 /* ============================================================
-   Mov Coffee — Mapa de Potencial de Mercado
+   Been On Coffee — Mapa de Potencial de Mercado
    Nenhum número de negócio está hardcoded aqui: tudo vem de
    data/base_pontos.csv (potencial por município/canal/tier) e de
    data/malha-municipios-br.json (contorno geográfico). Ver spec
@@ -860,7 +860,7 @@ function montarFormularioCTA(container, contexto) {
       </div>
       <label class="mp-cta-lgpd">
         <input type="checkbox" id="cta-lgpd" required />
-        Concordo em ser contatado sobre a oportunidade Mov Coffee na minha região, conforme a
+        Concordo em ser contatado sobre a oportunidade Been On Coffee na minha região, conforme a
         <a href="politica-de-privacidade.html" target="_blank">Política de Privacidade</a> (LGPD).
       </label>
       <button type="submit" class="botao botao--grande botao--largura-total">Enviar</button>
@@ -963,7 +963,7 @@ function montarConteudoDrawer() {
 
     <h3 id="drawer-secao-confianca">Como funciona a confiança</h3>
     <p>A confiança sobe quando já existe operação própria em campo naquela região (captura de
-    dado real). Hoje, sem nenhuma unidade Mov Coffee em operação, o teto é <strong>Médio</strong> —
+    dado real). Hoje, sem nenhuma unidade Been On Coffee em operação, o teto é <strong>Médio</strong> —
     o nível <strong>Alto</strong> só passa a aparecer quando o primeiro piloto local fechar um
     ciclo completo de operação. Linhas agregadas ("Interior de UF") começam sempre um
     nível abaixo, porque a distribuição dentro do estado é menos certa que num município

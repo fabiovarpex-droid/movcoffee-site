@@ -1,5 +1,5 @@
 /* ============================================================
-   Mov Coffee — interações do site
+   Been On Coffee — interações do site
    1. Header sticky com blur ao rolar (glassmorphism)
    2. Menu mobile (hamburguer)
    3. Animações de entrada no scroll (Intersection Observer)
@@ -183,7 +183,7 @@ form.addEventListener("submit", async (evento) => {
     // Registro do consentimento LGPD (base legal: consentimento, Lei 13.709/2018)
     consentimentoLgpd: true,
     consentimentoTexto:
-      "Autorizo o uso dos meus dados exclusivamente para contato sobre a franquia Mov Coffee, conforme a Política de Privacidade (LGPD).",
+      "Autorizo o uso dos meus dados exclusivamente para contato sobre a franquia Been On Coffee, conforme a Política de Privacidade (LGPD).",
     dataEnvio: new Date().toISOString(),
   };
 

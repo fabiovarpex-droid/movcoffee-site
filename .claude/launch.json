@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Been On Coffee site local",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["servidor-local.js"],
+      "port": 4173
+    },
+    {
+      "name": "Moov Fit dev",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": [
+        "/c",
+        "cd /d C:\\Users\\maria\\OneDrive\\READET~1\\APPTHE~1 && npm run dev"
+      ],
+      "port": 3000
+    }
+  ]
+}

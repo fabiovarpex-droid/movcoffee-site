@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mov Coffee — Brand Book B2C (PDV)</title>
+<title>Been On Coffee — Brand Book B2C (PDV)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   MOV COFFEE — BRAND BOOK B2C
+   BEEN ON COFFEE — BRAND BOOK B2C
    Aplica o próprio design system da marca ao documento.
    Tema único (grafite) por decisão de marca. Print = tinta em papel.
    ============================================================ */
@@ -80,13 +80,9 @@ p{margin:0}
   background:linear-gradient(180deg,#15171C,#131519);
 }
 .brandmark{display:flex;align-items:center;gap:11px}
-.brandmark .glyph{
-  width:38px;height:38px;border-radius:10px;flex:0 0 38px;
-  background:var(--primary);color:#141414;
-  display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:22px;
-  box-shadow:0 0 22px rgba(255,122,61,.45);
-}
+.brandmark .glyph{width:44px;height:24px;flex:0 0 44px}
 .brandmark .wm{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1}
+.brandmark .wm .accent{color:var(--primary)}
 .brandmark .wm span{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.14em;display:block;margin-top:3px}
 
 .toc{display:flex;flex-direction:column;gap:1px;overflow-y:auto;margin:-4px -6px 0;padding:4px 6px}
@@ -316,7 +312,7 @@ p+p{margin-top:14px}
     padding:10px 14px;z-index:60;
     background:rgba(20,22,27,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
   }
-  .brandmark .glyph{width:32px;height:32px;flex-basis:32px;font-size:18px}
+  .brandmark .glyph{width:38px;height:21px;flex-basis:38px}
   .brandmark .wm{font-size:16px}
   .brandmark .wm span{font-size:9.5px;letter-spacing:.12em;margin-top:2px}
   .toc{
@@ -372,8 +368,16 @@ p+p{margin-top:14px}
   <!-- ============ SIDEBAR / TOC ============ -->
   <aside class="rail">
     <div class="brandmark">
-      <div class="glyph">M</div>
-      <div class="wm">MOV COFFEE<span>BRAND BOOK · B2C / PDV</span></div>
+      <svg class="glyph" viewBox="0 0 58 32" aria-hidden="true">
+        <rect x="1" y="18" width="4.5" height="11" rx="1.3" fill="#FF7A3D"/>
+        <rect x="8" y="11" width="4.5" height="18" rx="1.3" fill="#FF7A3D"/>
+        <rect x="15" y="4" width="4.5" height="25" rx="1.3" fill="#FF7A3D"/>
+        <rect x="26" y="3" width="26" height="5" rx="2.5" fill="#F2F3F5"/>
+        <rect x="36" y="1" width="6" height="3" rx="1.5" fill="#14161A"/>
+        <path d="M28 9 h22 l-3 19 a3 3 0 0 1 -3 2.6 h-10 a3 3 0 0 1 -3 -2.6 z" fill="#FF7A3D"/>
+        <rect x="27.4" y="15" width="23.2" height="5.5" fill="#14161A" opacity=".22"/>
+      </svg>
+      <div class="wm">BEEN <span class="accent">ON</span> COFFEE<span>BRAND BOOK · B2C / PDV</span></div>
     </div>
     <nav class="toc" id="toc">
       <a href="#manifesto"><span class="num">00</span>Manifesto</a>
@@ -424,7 +428,7 @@ p+p{margin-top:14px}
     <section id="fronteira">
       <div class="eyebrow"><span class="cnum">01</span> Fronteira B2B × B2C</div>
       <h2 class="title">Duas marcas que nunca se misturam.</h2>
-      <p class="lede">A Mov fala com dois públicos com objetivos opostos. Este brand book cobre <b style="color:var(--text)">apenas a camada B2C</b> — a marca que o consumidor encontra no quiosque. A camada B2B (captação de franqueado) vive em outro lugar e não empresta seus argumentos ao PDV.</p>
+      <p class="lede">A Been On fala com dois públicos com objetivos opostos. Este brand book cobre <b style="color:var(--text)">apenas a camada B2C</b> — a marca que o consumidor encontra no quiosque. A camada B2B (captação de franqueado) vive em outro lugar e não empresta seus argumentos ao PDV.</p>
       <div class="boundary" style="margin-top:26px">
         <div class="b2c">
           <h4>Cobre — B2C · consumidor no PDV</h4>
@@ -454,11 +458,11 @@ p+p{margin-top:14px}
     <section id="posicionamento">
       <div class="eyebrow"><span class="cnum">02</span> Posicionamento</div>
       <h2 class="title">Uma terceira categoria.</h2>
-      <p class="lede">A Mov não disputa a cafeteria (que vende pausa) nem a vending (que vende desespero). Ela reivindica o quadrante que a vending ocupa mal — automação + movimento — e o faz com qualidade. Isso cria a categoria: <b style="color:var(--text)">o café que acompanha o ritmo de quem não para.</b></p>
+      <p class="lede">A Been On não disputa a cafeteria (que vende pausa) nem a vending (que vende desespero). Ela reivindica o quadrante que a vending ocupa mal — automação + movimento — e o faz com qualidade. Isso cria a categoria: <b style="color:var(--text)">o café que acompanha o ritmo de quem não para.</b></p>
 
       <!-- Diagrama de território -->
       <div class="card terr-wrap" style="margin-top:26px;padding:14px">
-        <svg viewBox="0 0 680 540" role="img" aria-label="Diagrama de território: eixo movimento-pausa por artesanal-automação, posicionando Mov, cafeterias, vending e The Coffee.">
+        <svg viewBox="0 0 680 540" role="img" aria-label="Diagrama de território: eixo movimento-pausa por artesanal-automação, posicionando Been On, cafeterias, vending e The Coffee.">
           <defs>
             <radialGradient id="movglow" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#FF7A3D" stop-opacity=".55"/>
@@ -476,7 +480,7 @@ p+p{margin-top:14px}
           <text x="350" y="490" text-anchor="middle" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="2">PAUSA ↓</text>
           <text x="52" y="254" text-anchor="end" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="1">ARTESANAL</text>
           <text x="648" y="254" text-anchor="start" fill="#8B919C" font-family="Manrope,sans-serif" font-weight="700" font-size="13" letter-spacing="1">AUTOMAÇÃO</text>
-          <text x="628" y="60" text-anchor="end" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="700" font-size="11" letter-spacing="1" opacity=".8">QUADRANTE MOV</text>
+          <text x="628" y="60" text-anchor="end" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="700" font-size="11" letter-spacing="1" opacity=".8">QUADRANTE BEEN ON</text>
 
           <!-- Cafeteria tradicional: x15 y85 -->
           <circle cx="147" cy="397" r="8" fill="#5E646E"/>
@@ -493,22 +497,22 @@ p+p{margin-top:14px}
           <text x="512" y="150" text-anchor="end" fill="#8B919C" font-family="Inter,sans-serif" font-size="13" font-weight="600">Vending</text>
           <text x="512" y="167" text-anchor="end" fill="#5E646E" font-family="Inter,sans-serif" font-size="11">automação sem qualidade</text>
 
-          <!-- Mov: x92 y12 -->
+          <!-- Been On: x92 y12 -->
           <circle cx="594" cy="90" r="46" fill="url(#movglow)"/>
           <circle cx="594" cy="90" r="12" fill="#FF7A3D"/>
           <circle cx="594" cy="90" r="12" fill="none" stroke="#14161A" stroke-width="2"/>
-          <text x="594" y="52" text-anchor="middle" fill="#F2F3F5" font-family="Manrope,sans-serif" font-size="17" font-weight="800" letter-spacing="-.5">MOV COFFEE</text>
+          <text x="594" y="52" text-anchor="middle" fill="#F2F3F5" font-family="Manrope,sans-serif" font-size="17" font-weight="800" letter-spacing="-.5">BEEN ON COFFEE</text>
           <text x="594" y="128" text-anchor="middle" fill="#FF7A3D" font-family="Inter,sans-serif" font-size="11.5" font-weight="600">precisão premium + movimento</text>
         </svg>
       </div>
-      <p style="color:var(--muted-2);font-size:12.5px;margin-top:10px">Vending e Mov ocupam o mesmo quadrante nos dois eixos — a diferença é qualidade. A estratégia da Mov é <b style="color:var(--text)">fazer bem o que a vending faz mal</b>, e assim tomar o quadrante.</p>
+      <p style="color:var(--muted-2);font-size:12.5px;margin-top:10px">Vending e Been On ocupam o mesmo quadrante nos dois eixos — a diferença é qualidade. A estratégia da Been On é <b style="color:var(--text)">fazer bem o que a vending faz mal</b>, e assim tomar o quadrante.</p>
 
       <h3 class="sub">Inimigo declarado</h3>
       <div class="callout">A fila e o café ruim de máquina. A marca quebra a equação brasileira "rápido = ruim".</div>
 
       <h3 class="sub">Frase de posicionamento <span class="tag locked" style="vertical-align:middle">interna</span></h3>
       <div class="card" style="border-left:3px solid var(--primary);font-family:var(--font-display);font-weight:600;font-size:17px;line-height:1.45">
-        Para pessoas em movimento que não aceitam café ruim, a Mov Coffee é o quiosque autônomo que entrega café de especialidade em menos de um minuto, <span style="color:var(--primary)">porque máquina calibrada não tem dia ruim.</span>
+        Para pessoas em movimento que não aceitam café ruim, a Been On Coffee é o quiosque autônomo que entrega café de especialidade em menos de um minuto, <span style="color:var(--primary)">porque máquina calibrada não tem dia ruim.</span>
       </div>
 
       <h3 class="sub">Atributos-chave</h3>
@@ -516,7 +520,7 @@ p+p{margin-top:14px}
         <div class="attr"><div class="an">Velocidade com qualidade</div><div class="ad">Moído na hora, entregue em menos de 1 min. Rápido não é sinônimo de ruim.</div></div>
         <div class="attr"><div class="an">Autonomia</div><div class="ad">Você opera — e isso é bom. Controle total, sem intermediário, sem espera.</div></div>
         <div class="attr"><div class="an">Precisão</div><div class="ad">Calibragem remota. Sempre igual, do primeiro ao último café do dia.</div></div>
-        <div class="attr"><div class="an">Presença no trajeto</div><div class="ad">Interceptação, não destino. A Mov está no seu caminho — você não desvia.</div></div>
+        <div class="attr"><div class="an">Presença no trajeto</div><div class="ad">Interceptação, não destino. A Been On está no seu caminho — você não desvia.</div></div>
       </div>
     </section>
 
@@ -612,7 +616,7 @@ p+p{margin-top:14px}
       <h3 class="sub">Anti-público</h3>
       <div class="never">
         <div class="x">✕</div>
-        <p><b>O contemplativo do café.</b> Quem quer sentar, conversar com o barista e transformar o café em ritual. A Mov não briga por ele — e não deve tentar. Toda comunicação que sugere aconchego, pausa ou romance de café mira o público errado.</p>
+        <p><b>O contemplativo do café.</b> Quem quer sentar, conversar com o barista e transformar o café em ritual. A Been On não briga por ele — e não deve tentar. Toda comunicação que sugere aconchego, pausa ou romance de café mira o público errado.</p>
       </div>
 
       <h3 class="sub">Um comportamento, todos os pontos</h3>
@@ -727,7 +731,7 @@ p+p{margin-top:14px}
       <h3 class="sub">Tipografia — placar esportivo</h3>
       <p style="color:var(--muted);font-size:14px;margin-bottom:8px">Sans-serif geométrica pesada. Números grandes como elemento gráfico: tempo, cafeína, preço. Sistema: <b style="color:var(--text)">Manrope</b> (display/números 600–800) + <b style="color:var(--text)">Inter</b> (corpo). Amostras na escala de leitura por distância:</p>
       <div class="tscale">
-        <div class="tsr"><span class="dist">15 m</span><span class="samp" style="font-size:52px;color:var(--primary)">MOV</span><span class="note">Cor, luz e logo. Reconhecível do fim do corredor.</span></div>
+        <div class="tsr"><span class="dist">15 m</span><span class="samp" style="font-size:38px;color:var(--primary)">BEEN ON</span><span class="note">Cor, luz e logo. Reconhecível do fim do corredor.</span></div>
         <div class="tsr"><span class="dist">5 m</span><span class="samp" style="font-size:30px">Café em &lt;1 min</span><span class="note">Uma promessa. Nada além dela.</span></div>
         <div class="tsr"><span class="dist">1 m</span><span class="samp" style="font-size:20px">Ignição · R$ 7,90 · 00:43</span><span class="note">Cardápio, preço, cronômetro. Zona de decisão.</span></div>
       </div>
@@ -756,7 +760,7 @@ p+p{margin-top:14px}
             <rect x="30" y="20" width="200" height="360" rx="12" fill="#1B1E24" stroke="#363B45"/>
             <!-- topo iluminado / logo -->
             <rect x="30" y="20" width="200" height="52" rx="12" fill="#0F1013"/>
-            <text x="130" y="53" text-anchor="middle" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="800" font-size="26" letter-spacing="-1" style="filter:drop-shadow(0 0 8px rgba(255,122,61,.7))">MOV</text>
+            <text x="130" y="53" text-anchor="middle" fill="#FF7A3D" font-family="Manrope,sans-serif" font-weight="800" font-size="18" letter-spacing="-1" style="filter:drop-shadow(0 0 8px rgba(255,122,61,.7))">BEEN ON</text>
             <!-- cardápio -->
             <rect x="46" y="86" width="168" height="60" rx="6" fill="#0C0D10" stroke="#2A2E36"/>
             <text x="56" y="106" fill="#F2F3F5" font-family="Manrope,sans-serif" font-weight="700" font-size="10">IGNIÇÃO · R$ 7,90</text>
@@ -825,7 +829,7 @@ p+p{margin-top:14px}
       <p style="color:var(--muted);font-size:14px;margin-bottom:16px">A promessa da marca, ao vivo. Toque em <b style="color:var(--text)">Preparar meu café</b> e veja a contagem — a espera vira prova de velocidade. <span style="color:var(--muted-2)">Simulação acelerada para demonstração.</span></p>
       <div class="proto proto-scan" id="proto" data-state="idle">
         <div class="proto-head">
-          <span>MOV · TOTEM</span>
+          <span>BEEN ON · TOTEM</span>
           <span class="proto-live"><i></i> AO VIVO</span>
         </div>
         <div class="proto-body">
@@ -1067,7 +1071,7 @@ p+p{margin-top:14px}
     </section>
 
     <div class="footer">
-      <b style="color:var(--muted)">Mov Coffee — Brand Book B2C (PDV) · v1.0</b><br>
+      <b style="color:var(--muted)">Been On Coffee — Brand Book B2C (PDV) · v1.0</b><br>
       Este guia cobre a marca no ponto de venda. O material B2B de captação de franqueados segue o posicionamento do site institucional e não herda os ganchos de PDV.<br>
       Revisar com: (a) fabricante do módulo — cap. 06 vira input de produção; (b) jurídico — cap. 07, gancho de cafeína; (c) registrar decisões e pendências no módulo 06 do projeto de expansão.
     </div>

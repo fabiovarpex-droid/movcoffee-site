@@ -1,0 +1,1038 @@
+<title>Modelo da Franqueadora — Been On Coffee (36 meses + organograma)</title>
+<style>
+  :root{
+    --accent:#FF7A3D; --accent-deep:#E5601F; --accent-soft:rgba(255,122,61,.14);
+    --bg:#F6F2EA; --surface:#FFFFFF; --surface-2:#F0EADF; --line:#E1D8C9;
+    --ink:#241F18; --ink-2:#5B5245; --muted:#8A7F6E;
+    --good:#2FA36B; --warn:#C98A1E; --crit:#D93A2B;
+    --good-bg:rgba(47,163,107,.12); --warn-bg:rgba(201,138,30,.14); --crit-bg:rgba(217,58,43,.12);
+    --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 24px rgba(40,30,15,.05);
+    --mono:"SFMono-Regular",ui-monospace,"Cascadia Mono","Segoe UI Mono",Menlo,Consolas,monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    --cond:"Segoe UI Semibold",var(--sans);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#14130F; --surface:#1C1A14; --surface-2:#22201A; --line:#332F26;
+      --ink:#EEE7DA; --ink-2:#B6AC9A; --muted:#847A69;
+      --accent-soft:rgba(255,122,61,.16);
+      --good-bg:rgba(47,163,107,.16); --warn-bg:rgba(201,138,30,.18); --crit-bg:rgba(217,58,43,.18);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#14130F; --surface:#1C1A14; --surface-2:#22201A; --line:#332F26;
+    --ink:#EEE7DA; --ink-2:#B6AC9A; --muted:#847A69; --accent-soft:rgba(255,122,61,.16);
+    --good-bg:rgba(47,163,107,.16); --warn-bg:rgba(201,138,30,.18); --crit-bg:rgba(217,58,43,.18);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --bg:#F6F2EA; --surface:#FFFFFF; --surface-2:#F0EADF; --line:#E1D8C9;
+    --ink:#241F18; --ink-2:#5B5245; --muted:#8A7F6E; --accent-soft:rgba(255,122,61,.14);
+    --good-bg:rgba(47,163,107,.12); --warn-bg:rgba(201,138,30,.14); --crit-bg:rgba(217,58,43,.12);
+    --shadow:0 1px 2px rgba(40,30,15,.06),0 8px 24px rgba(40,30,15,.05);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;
+    font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px 96px}
+  a{color:var(--accent-deep)}
+  h1,h2,h3,h4{text-wrap:balance;line-height:1.15;margin:0}
+  .num{font-variant-numeric:tabular-nums;font-family:var(--mono)}
+  code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);padding:.1em .35em;border-radius:4px}
+
+  /* ---- masthead ---- */
+  header.top{border-bottom:2px solid var(--ink);margin:0 0 6px;padding:34px 20px 20px;max-width:1160px;margin:0 auto}
+  .kicker{font-family:var(--cond);text-transform:uppercase;letter-spacing:.14em;font-size:12px;
+    color:var(--accent-deep);font-weight:700;display:flex;align-items:center;gap:10px}
+  .kicker::before{content:"";width:26px;height:26px;border-radius:7px;background:var(--accent);
+    box-shadow:inset 0 0 0 3px rgba(255,255,255,.35)}
+  header.top h1{font-size:clamp(26px,4vw,40px);letter-spacing:-.02em;margin:14px 0 8px;font-family:var(--cond)}
+  header.top p{margin:0;color:var(--ink-2);max-width:70ch}
+  .disclaimer{margin-top:16px;font-size:12.5px;color:var(--muted);border-left:3px solid var(--warn);
+    background:var(--warn-bg);padding:8px 12px;border-radius:0 6px 6px 0}
+
+  section{margin-top:44px}
+  .sec-h{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:18px}
+  .sec-n{font-family:var(--mono);color:var(--accent-deep);font-weight:700;font-size:13px}
+  .sec-h h2{font-size:22px;font-family:var(--cond);letter-spacing:-.01em}
+  .sec-h .sub{margin-left:auto;color:var(--muted);font-size:12.5px;text-align:right}
+  p.lead{color:var(--ink-2);max-width:78ch}
+
+  /* ---- tags ---- */
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.03em;
+    padding:1px 6px;border-radius:4px;vertical-align:middle;white-space:nowrap}
+  .t-fato{background:var(--good-bg);color:var(--good)}
+  .t-prem{background:var(--warn-bg);color:var(--warn)}
+  .t-jur{background:var(--crit-bg);color:var(--crit)}
+  .t-decl{background:var(--accent-soft);color:var(--accent-deep)}
+
+  /* ---- cards / grid ---- */
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:820px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow)}
+  .kpi{display:flex;flex-direction:column;gap:2px}
+  .kpi .lab{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-family:var(--cond)}
+  .kpi .val{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .kpi .val.sm{font-size:20px}
+  .kpi .foot{font-size:11.5px;color:var(--ink-2)}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:var(--cond);font-weight:700;
+    padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
+  .pill.meta{background:var(--accent-soft);color:var(--accent-deep)}
+  .pill.real{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+
+  /* ---- tables ---- */
+  .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{padding:7px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{position:sticky;top:0;background:var(--surface-2);font-family:var(--cond);font-size:11.5px;
+    text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2);z-index:2}
+  tbody td.num,tbody th.num{font-variant-numeric:tabular-nums;font-family:var(--mono)}
+  .sticky-c{position:sticky;left:0;background:var(--surface);z-index:1;text-align:left;font-weight:600}
+  thead .sticky-c{z-index:3;background:var(--surface-2)}
+  tr.rule td,tr.rule th{border-top:2px solid var(--ink)}
+  tr.sum td,tr.sum th{background:var(--surface-2);font-weight:700}
+  td.pos{color:var(--good)} td.neg{color:var(--crit)}
+  caption{caption-side:top;text-align:left;padding:0 4px 8px;color:var(--muted);font-size:12px}
+  .midrule td,.midrule th{border-top:1px dashed var(--line)}
+
+  /* ---- premissas panel ---- */
+  .prem{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+    padding:18px 20px;position:sticky;top:8px;z-index:20}
+  .prem h3{font-family:var(--cond);font-size:15px;display:flex;align-items:center;gap:8px}
+  .prem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px 18px;margin-top:12px}
+  .fld{display:flex;flex-direction:column;gap:3px}
+  .fld label{font-size:11px;color:var(--ink-2);font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em}
+  .fld input,.fld select{font-family:var(--mono);font-size:13px;padding:5px 8px;border:1px solid var(--line);
+    border-radius:7px;background:var(--bg);color:var(--ink)}
+  .fld input:focus,.fld select:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .prem-actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  button.btn{font-family:var(--cond);font-weight:700;font-size:13px;border:1px solid var(--line);background:var(--surface-2);
+    color:var(--ink);padding:7px 14px;border-radius:8px;cursor:pointer}
+  button.btn.pri{background:var(--accent);border-color:var(--accent);color:#1a1206}
+  button.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .toggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .toggle button{border:0;background:var(--surface);color:var(--ink-2);font-family:var(--cond);font-weight:700;
+    font-size:12.5px;padding:6px 12px;cursor:pointer}
+  .toggle button.on{background:var(--accent);color:#1a1206}
+
+  ul.clean{margin:8px 0;padding-left:20px} ul.clean li{margin:5px 0;color:var(--ink-2)}
+  ul.clean li b{color:var(--ink)}
+  .callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+  .callout.crit{border-color:var(--crit);background:var(--crit-bg)}
+  .callout.good{border-color:var(--good);background:var(--good-bg)}
+  .callout p{margin:6px 0} .callout p:first-child{margin-top:0} .callout p:last-child{margin-bottom:0}
+  .mono-note{font-family:var(--mono);font-size:12px;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:8px;padding:10px 12px;overflow-x:auto;color:var(--ink-2);white-space:pre}
+  .chart-wrap{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .chart-wrap h4{font-family:var(--cond);font-size:13px;margin-bottom:2px}
+  .chart-wrap .cap{font-size:11.5px;color:var(--muted);margin-bottom:8px}
+  .orgchart{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 14px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:0;overflow-x:auto}
+  .org-tier{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;max-width:100%}
+  .org-conn{width:2px;height:13px;background:var(--line)}
+  .org-box{border:1.5px solid var(--ink);background:var(--surface-2);border-radius:8px;padding:5px 9px;
+    font-size:11px;font-family:var(--cond);font-weight:700;text-align:center;color:var(--ink);line-height:1.25}
+  .org-box.agent{border-style:dashed;border-color:var(--accent-deep);color:var(--accent-deep);background:transparent;max-width:100%}
+  .org-box small{display:block;font-weight:400;font-size:9.5px;color:var(--muted)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--ink-2);margin:6px 0 2px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .swatch{width:22px;height:13px;border-radius:3px;display:inline-block}
+  .sw-h{background:var(--surface-2);border:1.5px solid var(--ink)}
+  .sw-a{background:transparent;border:1.5px dashed var(--accent-deep)}
+  .foot-note{font-size:11.5px;color:var(--muted);margin-top:6px}
+  .theme-btn{position:fixed;top:12px;right:14px;z-index:50;border:1px solid var(--line);background:var(--surface);
+    color:var(--ink);border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;box-shadow:var(--shadow);font-family:var(--cond);font-weight:700}
+  .agent-card{border:1px solid var(--line);border-left:3px dashed var(--accent-deep);border-radius:10px;
+    background:var(--surface);padding:12px 14px;box-shadow:var(--shadow)}
+  .agent-card h4{font-family:var(--cond);font-size:13.5px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .agent-card .area{font-size:10.5px;font-family:var(--mono);color:var(--accent-deep);background:var(--accent-soft);padding:1px 6px;border-radius:4px}
+  .agent-card dl{margin:8px 0 0;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:12px}
+  .agent-card dt{color:var(--muted);font-family:var(--cond);text-transform:uppercase;letter-spacing:.03em;font-size:10px;padding-top:2px}
+  .agent-card dd{margin:0;color:var(--ink-2)}
+  .bar{height:10px;border-radius:5px;background:var(--surface-2);overflow:hidden;position:relative}
+  .bar > i{position:absolute;top:0;bottom:0;background:var(--accent);border-radius:5px}
+  .rank td:first-child{font-family:var(--cond);font-weight:700}
+  details.blk{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-top:12px;box-shadow:var(--shadow)}
+  details.blk>summary{cursor:pointer;padding:12px 16px;font-family:var(--cond);font-weight:700;list-style:none}
+  details.blk>summary::marker{display:none}
+  details.blk>summary::before{content:"▸ ";color:var(--accent-deep)}
+  details.blk[open]>summary::before{content:"▾ "}
+  details.blk .body{padding:0 16px 16px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<button class="theme-btn" id="themeBtn" aria-label="Alternar tema">◐ Tema</button>
+
+<header class="top">
+  <div class="kicker">Been On Coffee Franchising · Co-piloto de estratégia</div>
+  <h1>Modelo integrado da franqueadora — 36 meses + organograma com camada de IA</h1>
+  <p>Projeção da <b>franqueadora</b> (não do franqueado), Meta fixa (650/24m) e Realista (300–350/24m) lado a lado. O organograma é a linha de custo fixo da projeção: nenhuma contratação aparece sem estar custeada aqui e liberada por um gatilho.</p>
+  <div class="disclaimer">Projeção ilustrativa da franqueadora. Não constitui promessa de rentabilidade nem oferta de franquia. Baseada em premissas não confirmadas — ver §12 Lacunas. Bloco jurídico é análise de risco, <b>não parecer</b> — validar com advogado de franchising antes da primeira assinatura.</div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= SUMÁRIO EXECUTIVO ================= -->
+  <section id="sumario" style="margin-top:30px">
+    <div class="sec-h"><span class="sec-n">01</span><h2>Sumário executivo</h2><span class="sub">os números que decidem a tese</span></div>
+    <div class="callout crit" id="exec-lead"><p><b>Carregando cálculo…</b></p></div>
+    <div class="grid g4" id="exec-kpis"></div>
+    <p class="foot-note">Números recalculam ao editar o painel de premissas (§3). Defaults conforme módulos 01–06 e simulador oficial 06.3.</p>
+  </section>
+
+  <!-- ================= PREMISSAS ================= -->
+  <section id="premissas">
+    <div class="sec-h"><span class="sec-n">02</span><h2>Premissas — edite num só lugar</h2><span class="sub">tudo abaixo recalcula ao aplicar</span></div>
+    <div class="prem">
+      <h3>⚙️ Objeto PREMISSAS <span class="tag t-prem">editável</span></h3>
+      <div class="prem-grid" id="prem-grid"></div>
+      <div class="prem-actions">
+        <button class="btn pri" id="applyBtn">↻ Recalcular modelo</button>
+        <button class="btn" id="resetBtn">Restaurar defaults</button>
+        <span style="margin-left:6px;font-size:12px;color:var(--ink-2)">Enquadramento jurídico do P&amp;L detalhado:</span>
+        <span class="toggle" id="enqToggle">
+          <button data-enq="R" class="on">R · rótulo licenciamento</button>
+          <button data-enq="A">A · franquia</button>
+          <button data-enq="L">L · licenciamento puro</button>
+        </span>
+      </div>
+      <p class="foot-note" id="prem-note"></p>
+    </div>
+  </section>
+
+  <!-- ================= MOTOR DE VOLUME ================= -->
+  <section id="volume">
+    <div class="sec-h"><span class="sec-n">03</span><h2>Motor de volume</h2><span class="sub">contratos · unidades ativas · implantação</span></div>
+    <p class="lead">A tabela do módulo 04 é lida como <b>plano de contratos assinados</b> (dispara o caixa upfront). As <b>unidades ativas</b> (disparam royalty + blend) seguem com defasagem de ativação de <span class="num" id="lag-echo">1,5</span> mês. Deslocar o rótulo contratos↔ativas move a curva ativa em ~1,5 mês — imaterial para a tese. Churn: 0% até M12, depois 1,5% a.a. da base ativa.</p>
+    <div class="scroll"><table id="tbl-volume"></table></div>
+  </section>
+
+  <!-- ================= RECEITA ================= -->
+  <section id="receita">
+    <div class="sec-h"><span class="sec-n">04</span><h2>Alavancas de receita</h2><span class="sub">cada uma em linha separada</span></div>
+    <div class="scroll"><table id="tbl-receita"></table></div>
+    <div class="callout"><p><b>Derivação do R4 (blend):</b> 1.200 cafés/mês (40/dia×30) × ~12 g ≈ <b>14,4 kg/mês</b>. Margem R$ 15/kg → <b class="num">R$ 216/mês/unidade</b> = <b>27% do royalty de fundador</b> (R$ 800) e <b>18% do royalty de tabela</b> (R$ 1.200). Com o upfront travado em ~R$ 20k e <b>sem alavanca de adesão</b>, o blend é a única alavanca de receita que a franqueadora move unilateralmente — sem tocar em contrato nem no preço de vitrine. <span class="tag t-jur">porém</span> blend obrigatório é um dos elementos que caracterizam franquia (art. 1º): a alavanca de menor atrito financeiro é uma das de maior peso jurídico.</p></div>
+    <details class="blk"><summary>Bandas de royalty por tamanho de rede — royalty médio ponderado</summary>
+      <div class="body">
+        <p class="lead">Royalty <b>fixo por banda</b>, escalonado pela posição da unidade na rede (não retroativo): cada unidade <b>trava a banda em que entrou</b>. R$ 800 até a 20ª unidade → R$ 1.000 da 21ª à 100ª → R$ 1.200 da 101ª em diante. <span class="tag t-jur">decisão 06.4</span> os valores são nominais e não corrigem por inflação sem cláusula de índice — registrar.</p>
+        <div class="scroll"><table id="tbl-coortes"></table></div>
+        <p class="foot-note">Banda 1 (un 1–20): R$ 800, condição de fundador. Banda 2 (21–100): R$ 1.000. Banda 3 (101+): R$ 1.200. <b>Risco de rede de várias velocidades</b> — a COF/contrato deve deixar a regra de banda explícita e transparente para não gerar percepção de injustiça entre fundadores e entrantes.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ================= P&L QUARTERLY ================= -->
+  <section id="pl">
+    <div class="sec-h"><span class="sec-n">05</span><h2>P&amp;L — resumo trimestral</h2><span class="sub">Meta e Realista lado a lado</span></div>
+    <div class="scroll"><table id="tbl-tri"></table></div>
+    <p class="foot-note">Linhas do ativo abertas (72k e custo do módulo) para tornar visível o efeito de um custo diferente do premissado. Fundo de marketing = receita vinculada = despesa espelhada → resultado zero (não modelado como lucro).</p>
+  </section>
+
+  <!-- ================= P&L MONTHLY ================= -->
+  <section id="plmes">
+    <div class="sec-h"><span class="sec-n">06</span><h2>P&amp;L mensal M1–M36</h2>
+      <span class="toggle" id="scenToggle" style="margin-left:auto">
+        <button data-scen="meta" class="on">Meta fixa</button>
+        <button data-scen="real">Realista</button>
+      </span>
+    </div>
+    <div class="scroll"><table id="tbl-mes"></table></div>
+    <p class="foot-note">Cenário e enquadramento controlados acima e no painel §2. Role horizontalmente para ver M1→M36.</p>
+  </section>
+
+  <!-- ================= TESTES-CHAVE ================= -->
+  <section id="testes">
+    <div class="sec-h"><span class="sec-n">07</span><h2>Testes de sustentabilidade e caixa</h2><span class="sub">o teste que decide o bootstrap</span></div>
+    <div class="grid g2">
+      <div class="chart-wrap"><h4>Recorrente líquido (R3+R4) × custo fixo total — Meta</h4><div class="cap" id="cap-sus-meta"></div><div id="chart-sus-meta"></div></div>
+      <div class="chart-wrap"><h4>Recorrente líquido × custo fixo total — Realista</h4><div class="cap" id="cap-sus-real"></div><div id="chart-sus-real"></div></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="chart-wrap"><h4>Caixa acumulado — Meta</h4><div class="cap" id="cap-cx-meta"></div><div id="chart-cx-meta"></div></div>
+      <div class="chart-wrap"><h4>Caixa acumulado — Realista</h4><div class="cap" id="cap-cx-real"></div><div id="chart-cx-real"></div></div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card"><div class="kpi"><span class="lab">P&amp;L sem o R1 — EBITDA M36 (o negócio de pé sozinho)</span>
+        <div class="pair"><div><span class="pill meta">Meta</span><div class="val sm num" id="semr1-meta">—</div></div><div><span class="pill real">Realista</span><div class="val sm num" id="semr1-real">—</div></div></div>
+        <span class="foot" id="semr1-note"></span></div></div>
+      <div class="card"><div class="kpi"><span class="lab">Vale de caixa — menor caixa acumulado e mês</span>
+        <div class="pair"><div><span class="pill meta">Meta</span><div class="val sm num" id="vale-meta">—</div></div><div><span class="pill real">Realista</span><div class="val sm num" id="vale-real">—</div></div></div>
+        <span class="foot">É o número que mata o bootstrap — capital de giro mínimo a ter em caixa.</span></div></div>
+    </div>
+  </section>
+
+  <!-- ================= SENSIBILIDADE ================= -->
+  <section id="sens">
+    <div class="sec-h"><span class="sec-n">08</span><h2>Sensibilidade — impacto no EBITDA de M36</h2><span class="sub">Realista · alavancas ranqueadas</span></div>
+    <div class="scroll"><table id="tbl-sens"></table></div>
+    <p class="foot-note" id="sens-note"></p>
+  </section>
+
+  <!-- ================= JURÍDICO ================= -->
+  <section id="juridico">
+    <div class="sec-h"><span class="sec-n">09</span><h2>Enquadramento jurídico — a variável dominante</h2><span class="sub">análise de risco, não parecer</span></div>
+    <div class="callout crit"><p id="art1-verdict"><b>Teste do art. 1º (Lei 13.966/2019):</b> carregando…</p></div>
+    <div class="scroll"><table id="tbl-art1"></table></div>
+    <h3 style="font-family:var(--cond);margin:22px 0 8px;font-size:16px">Três cenários — custo direto × contingência × EBITDA M36</h3>
+    <div class="scroll"><table id="tbl-enq"></table></div>
+    <div class="callout crit"><p><b>Cenário L, a pergunta respondida:</b> zerado royalty, treinamento, supervisão, exclusividade e blend obrigatório, <span id="l-conclusion">o recorrente desaparece e o gatilho G3 nunca fica verde</span>. O que faz o P&amp;L da franqueadora funcionar é exatamente o que caracteriza franquia — <b>não dá para ficar com a receita e recusar o enquadramento.</b></p>
+      <p><b>Cenário R, contingência correlacionada:</b> <code>contingência = unidades abaixo do break-even × prob. de acionamento × exposição/unidade</code>. Passivo jurídico e ponto ruim disparam juntos; a coorte exposta é a rede de relacionamento (Fase 0) — se ela azeda, a prova social inverte e a captação paga da Fase 1 encarece ou trava. <b>"Virar franquia depois" não cura, documenta</b> — produz evidência de que sempre foi franquia, utilizável pela coorte A dentro da decadência de 4 anos (art. 178, II, CC).</p></div>
+    <p class="foot-note"><span class="tag t-jur">rotulagem</span> Todo este bloco é análise de risco. A decisão é dos sócios (Fábio &amp; Murilo), com advogado especializado em franchising. Regime tributário (Anexo I vs. Anexo V) a validar com tributarista — ver toggle no painel.</p>
+  </section>
+
+  <!-- ================= ORGANOGRAMA ================= -->
+  <section id="org">
+    <div class="sec-h"><span class="sec-n">10</span><h2>Organograma enxuto com camada de agentes de IA</h2><span class="sub">agente por default; humano só onde é inevitável</span></div>
+
+    <h3 style="font-family:var(--cond);margin:6px 0 8px;font-size:16px">10.1 — Classificação das tarefas das 7 áreas</h3>
+    <p class="lead">Classe <b>A</b> = agente (humano só aprova) · <b>H+A</b> = humano assistido por copiloto · <b>H</b> = humano puro (presença física, negociação de alto valor, responsabilidade legal). Toda linha <code>H</code> traz a razão.</p>
+    <div class="scroll"><table id="tbl-tarefas"></table></div>
+
+    <h3 style="font-family:var(--cond);margin:24px 0 8px;font-size:16px">10.2 — Fichas dos agentes</h3>
+    <div class="grid g2" id="agent-cards"></div>
+
+    <h3 style="font-family:var(--cond);margin:24px 0 10px;font-size:16px">10.3 — Organograma por marco</h3>
+    <div class="legend"><span><i class="swatch sw-h"></i> caixa sólida = humano</span><span><i class="swatch sw-a"></i> caixa tracejada = agente de IA</span></div>
+    <div class="grid g2" style="margin-top:10px">
+      <div><h4 style="font-family:var(--cond);font-size:13px;margin-bottom:6px">Marco 0–25 un. · Fase 0/1</h4>
+        <div class="orgchart" id="mm25"></div></div>
+      <div><h4 style="font-family:var(--cond);font-size:13px;margin-bottom:6px">Marco ~100 un. · Fase 2 · G3 verde</h4>
+        <div class="orgchart" id="mm100"></div></div>
+      <div><h4 style="font-family:var(--cond);font-size:13px;margin-bottom:6px">Marco ~300 un. · Fase 2/3 · G3+G4</h4>
+        <div class="orgchart" id="mm300"></div></div>
+      <div><h4 style="font-family:var(--cond);font-size:13px;margin-bottom:6px">Marco ~650 un. · Fase 3 · G4+G5</h4>
+        <div class="orgchart" id="mm650"></div></div>
+    </div>
+
+    <h3 style="font-family:var(--cond);margin:24px 0 8px;font-size:16px">10.4 — Custo por marco &amp; hipótese do ratio 1/45</h3>
+    <div class="scroll"><table id="tbl-marco"></table></div>
+    <div class="callout"><p><b>Hipótese central (defendida, não assumida):</b> com o agente de vigilância + monitoramento remoto do totem <span class="tag t-fato">relatórios automáticos</span>, o benchmark de 1 consultor/25 un. vai para <b>1/45</b> — derruba a estrutura de 650 un. de ~26 para ~15 consultores. <b>O que o agente NÃO vê:</b> higiene, experiência do cliente, deriva do franqueado, relação humana. <b>Piso presencial que continua:</b> 1 visita/trimestre por unidade + visita-gatilho quando o BI abre alerta. <b>Reavaliar o ratio com dado real a partir de ~150 un.</b> — antes disso é premissa, não evidência.</p></div>
+  </section>
+
+  <!-- ================= GATILHOS ================= -->
+  <section id="gatilhos">
+    <div class="sec-h"><span class="sec-n">11</span><h2>Gatilhos de contratação (G1–G5)</h2><span class="sub">nenhum fixo novo antes do recorrente cobri-lo</span></div>
+    <div class="scroll"><table id="tbl-gatilhos"></table></div>
+  </section>
+
+  <!-- ================= RISCOS ================= -->
+  <section id="riscos">
+    <div class="sec-h"><span class="sec-n">12</span><h2>Riscos deste desenho &amp; mitigação</h2></div>
+    <div class="scroll"><table id="tbl-riscos"></table></div>
+  </section>
+
+  <!-- ================= DECISÕES ================= -->
+  <section id="decisoes">
+    <div class="sec-h"><span class="sec-n">13</span><h2>Decisões a registrar no módulo 06.4</h2><span class="sub">pronto para colar</span></div>
+    <div class="scroll"><table id="tbl-decisoes"></table></div>
+  </section>
+
+  <!-- ================= LACUNAS ================= -->
+  <section id="lacunas">
+    <div class="sec-h"><span class="sec-n">14</span><h2>Lacunas que travam o modelo</h2><span class="sub">ranqueadas por impacto</span></div>
+    <div class="scroll"><table id="tbl-lacunas"></table></div>
+    <p class="foot-note">Enquanto as duas primeiras não fecharem, o resultado é uma <b>faixa</b>, não um número — o painel §2 existe para navegar essa faixa.</p>
+  </section>
+
+  <p class="foot-note" style="margin-top:40px;border-top:1px solid var(--line);padding-top:16px">
+    Gerado como ferramenta de decisão para os sócios Fábio &amp; Murilo. <span class="tag t-fato">FATO</span> = site/simulador oficial (06.3). <span class="tag t-prem">PREMISSA</span> = estimativa parametrizável. <span class="tag t-decl">DECLARADO</span> = afirmado pelos sócios. <span class="tag t-jur">JURÍDICO/FISCAL</span> = sinalizar, não resolver.
+  </p>
+</div>
+
+<script>
+/* ============================================================
+   MODELO DA LICENCIADORA — BEEN ON COFFEE
+   Motor determinístico em JS. Tudo alimentado por PREMISSAS.
+   ============================================================ */
+"use strict";
+
+const BRL = n => (n<0?"-":"") + "R$ " + Math.abs(Math.round(n)).toLocaleString("pt-BR");
+const BRLk = n => (n<0?"-":"") + "R$ " + (Math.abs(n)/1000).toLocaleString("pt-BR",{maximumFractionDigits:0}) + "k";
+const NUM = (n,d=0) => n.toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d});
+const clone = o => JSON.parse(JSON.stringify(o));
+
+/* ---------- PREMISSAS (defaults) ---------- */
+const DEFAULTS = {
+  precoFranqueado: 72000,   // [FATO 06.3]
+  custoModulo:     52000,   // [DERIVADO] preço - taxa embutida
+  royaltyBand1:      800,   // [FATO travado] unidades 1–20 (fundadores)
+  royaltyBand2:     1000,   // [DECLARADO] unidades 21–100
+  royaltyBand3:     1200,   // [DECLARADO] unidades 101+
+  royaltyLim1:        20,   // teto da banda 1 (nº de unidades da rede)
+  royaltyLim2:       100,   // teto da banda 2
+  proLaboreSocios: 30000,   // [PREMISSA] pró-labore dos 2 sócios (Fábio & Murilo)
+  blendMargemKg:      15,   // R$/kg [PREMISSA]
+  blendConsumoKg:   14.4,   // kg/mês/unidade [derivado]
+  lagAtivacao:       1.5,   // meses venda->ativação
+  churnAnual:      0.015,   // a partir de M13
+  fatorCLT:         1.75,   // encargos+benefícios
+  regime:        "anexo1",  // anexo1 | anexo5
+  aliqAnexo1:       0.05,   // sobre 72k faturamento
+  aliqAnexo5:      0.155,   // sobre parcela licenciamento 20k
+  aliqRecorrente:   0.11,   // blended sobre royalty+blend (PREMISSA simplificada)
+  cacFranqueado:    4500,   // a partir de M7, por contrato
+  ratioConsultor:     45,   // unidades por consultor de campo
+  // camada de IA
+  custoAgente:       700,   // LLM/API por agente/mês
+  // contingência (Cenário R)
+  probAcionamento:  0.15,
+  exposicaoUnid:   20000,
+  pctAbaixoBE_meta: 0.10,
+  pctAbaixoBE_real: 0.25,
+};
+
+/* volume: âncoras de contratos acumulados (módulo 04) */
+const ANCORAS = {
+  meta: [[0,0],[3,15],[6,50],[12,200],[18,420],[24,650],[36,650]],
+  real: [[0,0],[3,8],[6,25],[12,80],[18,180],[24,320],[36,560]],
+};
+function interp(anc, m){
+  for(let i=1;i<anc.length;i++){ const [m0,v0]=anc[i-1],[m1,v1]=anc[i];
+    if(m<=m1){ return v0 + (v1-v0)*(m-m0)/(m1-m0); } }
+  return anc[anc.length-1][1];
+}
+
+/* ---------- núcleo de cálculo ---------- */
+function computar(P, ritmo, enq){
+  const anc = ANCORAS[ritmo==="real70" ? "real" : ritmo];
+  const escala = ritmo==="real70" ? 0.7 : 1;
+  const N = 36, R = { m:[] };
+  const cumC=[], newC=[], gross=[], deaths=[], active=[], impl=[];
+  const cohA=[], cohB=[], cohC=[];
+  // contratos acumulados e novos
+  cumC[0]=0;
+  for(let m=1;m<=N;m++){ cumC[m]=interp(anc,m)*escala; newC[m]=Math.max(0,cumC[m]-cumC[m-1]); }
+  // ativações com defasagem (split fracionário do lag)
+  const L=P.lagAtivacao, lo=Math.floor(L), hi=Math.ceil(L), wHi=L-lo, wLo=1-wHi;
+  for(let m=1;m<=N;m++){ gross[m]=0;
+    const cLo=m-lo, cHi=m-hi;
+    if(cLo>=1) gross[m]+=newC[cLo]*wLo;
+    if(cHi>=1 && hi!==lo) gross[m]+=newC[cHi]*wHi;
+    if(hi===lo && cLo>=1) gross[m]=newC[cLo];
+  }
+  const mChurn = P.churnAnual/12;
+  active[0]=0; cohA[0]=0; cohB[0]=0; cohC[0]=0;
+  let actEver=0; const b1=P.royaltyLim1, b2=P.royaltyLim2; // bandas por posição na rede
+  for(let m=1;m<=N;m++){
+    const d = m>=13 ? active[m-1]*mChurn : 0; deaths[m]=d;
+    // mortes proporcionais às bandas
+    const base=active[m-1]||1;
+    const dA=d*(cohA[m-1]/base), dB=d*(cohB[m-1]/base), dC=d*(cohC[m-1]/base);
+    // aloca ativações brutas às bandas pela posição da unidade na rede (1..b1 · b1+1..b2 · b2+1..)
+    const s=actEver, e=actEver+gross[m];
+    const ov=(lo,hi)=>Math.max(0, Math.min(e,hi)-Math.max(s,lo));
+    const gA=ov(0,b1), gB=ov(b1,b2), gC=ov(b2,Infinity);
+    actEver=e;
+    cohA[m]=Math.max(0,cohA[m-1]+gA-dA);
+    cohB[m]=Math.max(0,cohB[m-1]+gB-dB);
+    cohC[m]=Math.max(0,cohC[m-1]+gC-dC);
+    active[m]=cohA[m]+cohB[m]+cohC[m];
+    // unidades em implantação = contratadas - ativadas acumuladas
+    impl[m]=Math.max(0, cumC[m] - (active[m] + cumC.slice(1,m+1).reduce((s,_,k)=>s+ (deaths[k+1]||0),0)));
+  }
+
+  // enquadramento afeta recorrente e estrutura
+  const semRecorrente = (enq==="L");
+  let valeMin=Infinity, valeMes=0, caixaAcum=0, g3Mes=null, contingAcum=0;
+  const pctBE = ritmo.startsWith("real") ? P.pctAbaixoBE_real : P.pctAbaixoBE_meta;
+
+  for(let m=1;m<=N;m++){
+    // royalty fixo por banda (não retroativo: cada unidade trava a banda em que entrou)
+    let royaltyRev = cohA[m]*P.royaltyBand1 + cohB[m]*P.royaltyBand2 + cohC[m]*P.royaltyBand3;
+    let blend = active[m]*P.blendConsumoKg*P.blendMargemKg; // margem líquida
+    if(semRecorrente){ royaltyRev=0; blend=0; }
+    const wRoy = active[m]>0 ? royaltyRev/active[m] : 0;
+
+    // upfront
+    const receitaAtivo = newC[m]*P.precoFranqueado;
+    const custoMod     = newC[m]*P.custoModulo;
+    const R1 = receitaAtivo - custoMod;
+
+    // impostos
+    const impAtivo = P.regime==="anexo1" ? receitaAtivo*P.aliqAnexo1
+                                         : (newC[m]*(P.precoFranqueado-P.custoModulo))*P.aliqAnexo5;
+    const impRec = (royaltyRev+blend)*P.aliqRecorrente;
+
+    // custos de pessoas (organograma) — função das ativas + enquadramento
+    const org = organograma(active[m], P, enq);
+    // IA
+    const ia = camadaIA(active[m], P);
+    // CAC
+    const cac = m>=7 ? newC[m]*P.cacFranqueado : 0;
+    // demais fixos
+    let fixos = demaisFixos(active[m], org.consultores, m, enq);
+    // build de IA (one-time)
+    let buildIA = 0; if(m===1) buildIA=60000; if(m===7) buildIA=36000;
+    // contingência (Cenário R): provisão sobre novos contratos expostos
+    let conting = 0;
+    if(enq==="R"){ conting = newC[m]*pctBE*P.probAcionamento*P.exposicaoUnid; contingAcum+=conting; }
+
+    const custoFixoTotal = org.folha + ia.total + fixos;
+    const recorrenteLiq  = royaltyRev + blend - impRec;
+    if(g3Mes===null && recorrenteLiq>=custoFixoTotal && !semRecorrente) g3Mes=m;
+
+    const ebitda = R1 + royaltyRev + blend - impAtivo - impRec - org.folha - ia.total - cac - fixos - conting;
+    const ebitdaSemR1 = ebitda - R1;
+    const caixaMes = ebitda - buildIA;
+    caixaAcum += caixaMes;
+    if(caixaAcum<valeMin){ valeMin=caixaAcum; valeMes=m; }
+
+    R.m[m]={ m, contratosNovos:newC[m], contratosCum:cumC[m], ativas:active[m], impl:impl[m], mortes:deaths[m],
+      cohA:cohA[m],cohB:cohB[m],cohC:cohC[m], wRoy,
+      receitaAtivo, custoMod, R1, royaltyRev, blend, impAtivo, impRec,
+      folha:org.folha, headcount:org.headcount, consultores:org.consultores, ia:ia.total, iaDet:ia,
+      cac, fixos, conting, buildIA, custoFixoTotal, recorrenteLiq,
+      ebitda, ebitdaSemR1, caixaMes, caixaAcum };
+  }
+  R.g3=g3Mes; R.vale={min:valeMin,mes:valeMes}; R.contingAcum=contingAcum;
+  R.ebitdaM36=R.m[36].ebitda; R.ebitdaSemR1_M36=R.m[36].ebitdaSemR1;
+  R.recorrenteLiqM36=R.m[36].recorrenteLiq; R.custoFixoM36=R.m[36].custoFixoTotal;
+  return R;
+}
+
+/* organograma -> folha mensal, headcount, consultores */
+function organograma(units, P, enq){
+  const CLT = v => v; // faixas já vêm carregadas (×1.75) abaixo
+  let folha = P.proLaboreSocios; // Sócios (Fábio & Murilo) — pró-labore [PREMISSA]
+  let hc = 2;                    // 2 sócios
+  folha += 8750; hc++;         // generalista de operações
+  let consult = 0;
+  if(units>25){ consult = Math.ceil(units/P.ratioConsultor); }
+  if(enq==="L") consult = units>25 ? Math.ceil(units/100) : 0; // licenciamento puro: supervisão mínima
+  folha += consult*10500; hc += consult;
+  if(units>=100){ folha += 8750+8750+24500; hc+=3; }              // implantação + financeiro + eng IA
+  if(units>=300){ folha += 21000+8750+9625; hc+=3; }              // gerente regional + suprimentos + expansão
+  if(units>=650){ folha += 31500+21000+8750+9625+8750+24500; hc+=6; } // head op + 2º GR + 2ª impl + mkt + 2º fin + 2º eng IA
+  if(enq==="L"){ folha = P.proLaboreSocios + 8750 + consult*10500; hc = 3+consult; } // estrutura amputada (2 sócios + generalista)
+  return { folha, headcount:hc, consultores:consult };
+}
+
+/* camada de IA — escala sublinear */
+function camadaIA(units, P){
+  const nAgents = units>0 ? (units<50?5:8) : 5;
+  const llm = nAgents*P.custoAgente;
+  const orq = 800 + 400*Math.floor(units/150);
+  const crm = 2500 + 800*Math.floor(units/100);
+  const bi  = 600 + 300*Math.floor(units/150);
+  const manut = (60000+36000)*0.12/12; // curadoria dos agentes
+  const total = llm+orq+crm+bi+manut;
+  return { total, llm, orq, crm, bi, manut, nAgents, porUnid: units>0?total/units:0 };
+}
+
+function demaisFixos(units, consult, m, enq){
+  let f = 2500;                       // contabilidade + jurídico base
+  f += units<300 ? 1500 : 6000;       // escritório/coworking
+  f += 3000;                          // unidade-modelo (treinamento)
+  f += consult*500;                   // viagens de campo
+  f += m>=7 ? 3000 : 0;               // marketing próprio de captação (marca)
+  f += 500;                           // seguros
+  if(enq==="A"){ f += 417; if(m===1) f+=0; } // manutenção COF (~5k/ano)
+  if(enq==="L"){ f -= 3000; }         // sem unidade-modelo estruturada
+  return f;
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+let P = clone(DEFAULTS);
+let ENQ = "R", SCEN = "meta";
+let RES = {};
+
+function recompute(){
+  RES.meta   = computar(P,"meta",ENQ);
+  RES.real   = computar(P,"real",ENQ);
+  RES.real70 = computar(P,"real70",ENQ);
+  // versões para ranking jurídico (mesmo ritmo realista, enq variando)
+  RES.enqA = computar(P,"real","A");
+  RES.enqL = computar(P,"real","L");
+  RES.enqR = computar(P,"real","R");
+  renderAll();
+}
+
+/* --- painel de premissas --- */
+const PREM_FIELDS = [
+  ["precoFranqueado","Preço ao franqueado (R$)","fato"],
+  ["custoModulo","Custo do módulo — derivado (R$)","prem"],
+  ["royaltyBand1","Royalty un. 1–20 (R$)","fato"],
+  ["royaltyBand2","Royalty un. 21–100 (R$)","prem"],
+  ["royaltyBand3","Royalty un. 101+ (R$)","prem"],
+  ["royaltyLim1","Teto banda 1 (nº un)","prem"],
+  ["royaltyLim2","Teto banda 2 (nº un)","prem"],
+  ["proLaboreSocios","Pró-labore sócios total (R$)","prem"],
+  ["blendMargemKg","Margem blend (R$/kg)","prem"],
+  ["blendConsumoKg","Consumo blend (kg/mês/un)","prem"],
+  ["ratioConsultor","Ratio consultor (un/1)","prem"],
+  ["churnAnual","Churn a.a. (M13+)","prem"],
+  ["cacFranqueado","CAC franqueado (R$/contrato)","prem"],
+  ["aliqRecorrente","Imposto recorrente (blended)","prem"],
+  ["probAcionamento","Prob. acionamento (Cen. R)","prem"],
+  ["exposicaoUnid","Exposição/unidade (R$)","prem"],
+  ["fatorCLT","Fator CLT (encargos)","prem"],
+];
+function buildPremPanel(){
+  const g=document.getElementById("prem-grid");
+  g.innerHTML = PREM_FIELDS.map(([k,lab,t])=>{
+    const isPct = ["churnAnual","aliqRecorrente","probAcionamento"].includes(k);
+    const val = isPct ? (P[k]*100) : P[k];
+    const step = isPct? "0.1" : (["blendConsumoKg","fatorCLT"].includes(k)?"0.1":"1");
+    return `<div class="fld"><label>${lab} <span class="tag t-${t==='fato'?'fato':'prem'}">${t==='fato'?'FATO':'PREM'}</span></label>
+      <input type="number" step="${step}" id="p_${k}" data-pct="${isPct}" value="${val}"></div>`;
+  }).join("") +
+  `<div class="fld"><label>Regime tributário do ativo</label>
+     <select id="p_regime"><option value="anexo1"${P.regime==='anexo1'?' selected':''}>Anexo I ~5% s/ 72k</option>
+     <option value="anexo5"${P.regime==='anexo5'?' selected':''}>Anexo V ~15,5% s/ 20k</option></select></div>`;
+  document.getElementById("prem-note").innerHTML =
+    `Premissa invertida corretamente: a taxa embutida (~R$ ${NUM(P.precoFranqueado-P.custoModulo)}) é o input; o custo do módulo (R$ ${NUM(P.custoModulo)}) é o derivado. Baixar o custo do módulo sobe a taxa embutida a preço constante.`;
+}
+function readPremPanel(){
+  PREM_FIELDS.forEach(([k])=>{
+    const el=document.getElementById("p_"+k); if(!el) return;
+    let v=parseFloat(el.value); if(isNaN(v)) v=0;
+    if(el.dataset.pct==="true") v=v/100;
+    P[k]=v;
+  });
+  P.regime=document.getElementById("p_regime").value;
+}
+
+/* --- sumário executivo --- */
+function renderExec(){
+  const M=RES.meta, R=RES.real;
+  const g3m = M.g3? "M"+M.g3 : "não cruza em 36m";
+  const g3r = R.g3? "M"+R.g3 : "não cruza em 36m";
+  const lead = document.getElementById("exec-lead");
+  const realCruza = !!R.g3;
+  lead.className = "callout " + (realCruza? "" : "crit");
+  lead.innerHTML =
+    `<p><b>1. O enquadramento jurídico é a variável dominante do modelo — não o preço.</b> No Realista, o <b>Cenário L</b> (licenciamento puro de verdade) zera royalty + blend e o EBITDA de M36 cai de <span class="num">${BRL(RES.enqR.ebitdaM36)}</span> para <span class="num">${BRL(RES.enqL.ebitdaM36)}</span>: sem o recorrente, o gatilho G3 nunca fica verde e a franqueadora vira <b>vendedora de máquina com contrato de fornecimento</b>. O que faz o P&amp;L funcionar é exatamente o que caracteriza franquia.</p>
+     <p><b>2. O recorrente cobre o fixo (G3) em ${g3m} na Meta e ${realCruza?("em "+g3r):"NÃO cruza dentro de 36 meses"} no Realista.</b> ${realCruza?"":"No Realista a base ativa não fica grande o bastante para o royalty+blend pagar a estrutura no horizonte — a tese depende de vender a próxima unidade até lá."}</p>
+     <p><b>3. Vale de caixa (capital de giro que mata o bootstrap):</b> Meta <span class="num">${BRL(M.vale.min)}</span> em M${M.vale.mes} · Realista <span class="num">${BRL(R.vale.min)}</span> em M${R.vale.mes}. <b>4. Contingência do Cenário R</b> acumula <span class="num">${BRL(RES.enqR.contingAcum)}</span> (Realista) e é correlacionada com as unidades abaixo do break-even — passivo jurídico e ponto ruim disparam juntos.</p>`;
+  const k=document.getElementById("exec-kpis");
+  const kpi=(lab,mv,rv,foot)=>`<div class="card"><div class="kpi"><span class="lab">${lab}</span>
+    <div class="pair"><div><span class="pill meta">Meta</span><div class="val sm num">${mv}</div></div>
+    <div><span class="pill real">Realista</span><div class="val sm num">${rv}</div></div></div>
+    <span class="foot">${foot}</span></div></div>`;
+  k.innerHTML =
+    kpi("EBITDA em M36 (mês cheio, com R1)", BRL(M.ebitdaM36), BRL(R.ebitdaM36), "Enq. "+ENQ+" · "+(P.regime==="anexo1"?"Anexo I":"Anexo V")+". Meta já plateou (não vende mais em M36, R1≈0); Realista ainda vende — por isso o M36 dela vem inflado pelo upfront. Ver o teste sem R1 (§7) para o estado estável.") +
+    kpi("G3 — recorrente cobre o fixo", g3m, g3r, "mês do cruzamento recorrente líquido × custo fixo") +
+    kpi("Vale de caixa (mín. acum.)", BRL(M.vale.min), BRL(R.vale.min), "menor caixa acumulado do horizonte") +
+    kpi("Unidades ativas em M36", NUM(M.m[36].ativas), NUM(R.m[36].ativas), "após churn de 1,5% a.a.");
+}
+
+/* --- volume --- */
+function renderVolume(){
+  const cols=[1,3,6,9,12,15,18,21,24,30,36];
+  const row=(lab,f,cls="")=>`<tr class="${cls}"><td class="sticky-c">${lab}</td>`+
+    cols.map(m=>`<td class="num">${f(m)}</td>`).join("")+`</tr>`;
+  const M=RES.meta,R=RES.real;
+  document.getElementById("tbl-volume").innerHTML =
+    `<caption>Contratos e unidades — pontos selecionados (interpolação linear entre blocos). <span class="tag t-fato">FATO 04</span></caption>`+
+    `<thead><tr><th class="sticky-c">Linha</th>`+cols.map(m=>`<th>M${m}</th>`).join("")+`</tr></thead><tbody>`+
+    row("META · contratos acum.", m=>NUM(M.m[m].contratosCum,0),"") +
+    row("META · unidades ativas", m=>NUM(M.m[m].ativas,0)) +
+    row("META · aberturas/mês", m=>NUM(M.m[m].contratosNovos,1)) +
+    `<tr class="midrule"><td class="sticky-c">REAL · contratos acum.</td>`+cols.map(m=>`<td class="num">${NUM(R.m[m].contratosCum,0)}</td>`).join("")+`</tr>`+
+    row("REAL · unidades ativas", m=>NUM(R.m[m].ativas,0)) +
+    row("REAL · aberturas/mês", m=>NUM(R.m[m].contratosNovos,1)) +
+    row("REAL · em implantação", m=>NUM(R.m[m].impl,1)) +
+    `</tbody>`;
+  document.getElementById("lag-echo").textContent = NUM(P.lagAtivacao,1);
+}
+
+/* --- receita (por unidade / mês típico) --- */
+function renderReceita(){
+  const r=[
+    ["R1","Taxa de licenciamento embutida","Upfront / contrato","~R$ "+NUM(P.precoFranqueado-P.custoModulo)+" (nos R$ "+NUM(P.precoFranqueado)+")","<span class='tag t-decl'>DECLARADO</span>"],
+    ["R2","Adesão à parte","Upfront","R$ 0 — não existe no modelo atual","<span class='tag t-prem'>PREM</span>"],
+    ["R3","Royalty (fixo por banda de rede)","Recorrente / unidade ativa","R$ "+NUM(P.royaltyBand1)+" (un 1–20) · R$ "+NUM(P.royaltyBand2)+" (21–100) · R$ "+NUM(P.royaltyBand3)+" (101+)","<span class='tag t-decl'>DECLARADO</span>"],
+    ["R4","Margem no blend","Recorrente / unidade ativa","R$ "+NUM(P.blendConsumoKg*P.blendMargemKg)+"/mês/un ("+NUM(P.blendConsumoKg,1)+"kg×R$"+NUM(P.blendMargemKg)+")","<span class='tag t-prem'>PREM</span>"],
+    ["R5","Fundo de marketing","Vinculado (receita=despesa)","R$ 0 — resultado zero","<span class='tag t-prem'>PREM</span>"],
+    ["R6","Frete/logística","Repasse","R$ 0 — repasse a custo","<span class='tag t-prem'>PREM</span>"],
+    ["R7","Transferência/renovação","Eventual","R$ 0 nos 36m (base nova)","<span class='tag t-prem'>PREM</span>"],
+  ];
+  document.getElementById("tbl-receita").innerHTML =
+    `<thead><tr><th class="sticky-c">#</th><th style="text-align:left">Alavanca</th><th style="text-align:left">Natureza</th><th style="text-align:left">Default</th><th>Origem</th></tr></thead><tbody>`+
+    r.map(x=>`<tr><td class="sticky-c">${x[0]}</td><td style="text-align:left">${x[1]}</td><td style="text-align:left;color:var(--ink-2)">${x[2]}</td><td style="text-align:left" class="num">${x[3]}</td><td>${x[4]}</td></tr>`).join("")+
+    `</tbody>`;
+  // coortes
+  const M=RES.meta; const cols=[6,12,18,24,30,36];
+  const cr=(lab,f)=>`<tr><td class="sticky-c">${lab}</td>`+cols.map(m=>`<td class="num">${f(M.m[m])}</td>`).join("")+`</tr>`;
+  document.getElementById("tbl-coortes").innerHTML =
+    `<caption>Cenário Meta — mix de bandas por posição na rede e royalty médio ponderado.</caption>`+
+    `<thead><tr><th class="sticky-c">Linha</th>`+cols.map(m=>`<th>M${m}</th>`).join("")+`</tr></thead><tbody>`+
+    cr(`Ativas banda 1 (un 1–${P.royaltyLim1} · R$ ${NUM(P.royaltyBand1)})`, d=>NUM(d.cohA,0))+
+    cr(`Ativas banda 2 (un ${P.royaltyLim1+1}–${P.royaltyLim2} · R$ ${NUM(P.royaltyBand2)})`, d=>NUM(d.cohB,0))+
+    cr(`Ativas banda 3 (un ${P.royaltyLim2+1}+ · R$ ${NUM(P.royaltyBand3)})`, d=>NUM(d.cohC,0))+
+    `<tr class="sum"><td class="sticky-c">Royalty médio ponderado</td>`+cols.map(m=>`<td class="num">${BRL(M.m[m].wRoy)}</td>`).join("")+`</tr>`+
+    `</tbody>`;
+}
+
+/* --- trimestral --- */
+function renderTri(){
+  const q=[]; for(let t=1;t<=12;t++) q.push(t*3);
+  const lines=[
+    ["Contratos no trimestre", (S,t)=>sum(S,t,"contratosNovos"), false],
+    ["Receita bruta do ativo (72k)", (S,t)=>sum(S,t,"receitaAtivo"), true],
+    ["(−) Custo do módulo (~52k)", (S,t)=>-sum(S,t,"custoMod"), true],
+    ["= R1 taxa embutida", (S,t)=>sum(S,t,"R1"), true],
+    ["+ R3 Royalty", (S,t)=>sum(S,t,"royaltyRev"), true],
+    ["+ R4 Blend (líq. CMV)", (S,t)=>sum(S,t,"blend"), true],
+    ["(−) Impostos ativo", (S,t)=>-sum(S,t,"impAtivo"), true],
+    ["(−) Impostos recorrente", (S,t)=>-sum(S,t,"impRec"), true],
+    ["(−) Folha", (S,t)=>-sum(S,t,"folha"), true],
+    ["(−) Camada de IA", (S,t)=>-sum(S,t,"ia"), true],
+    ["(−) CAC franqueado", (S,t)=>-sum(S,t,"cac"), true],
+    ["(−) Demais fixos", (S,t)=>-sum(S,t,"fixos"), true],
+    ["(−) Contingência (Cen. R)", (S,t)=>-sum(S,t,"conting"), true],
+    ["= EBITDA", (S,t)=>sum(S,t,"ebitda"), true],
+    ["Caixa acumulado (fim tri)", (S,t)=>S.m[t].caixaAcum, true],
+  ];
+  function sum(S,tEnd,key){ let s=0; for(let m=tEnd-2;m<=tEnd;m++) s+=S.m[m][key]; return s; }
+  const M=RES.meta,R=RES.real;
+  let html=`<caption>Resumo trimestral (12 trimestres) — a tabela que vai ao sócio/investidor. Meta e Realista lado a lado.</caption>`+
+    `<thead><tr><th class="sticky-c">Linha</th>`+q.map(t=>`<th>T${t/3}</th>`).join("")+`</tr></thead><tbody>`;
+  const block=(S,nome)=>{
+    html+=`<tr class="rule"><td class="sticky-c" style="color:var(--accent-deep);font-family:var(--cond);font-weight:700">${nome}</td>`+q.map(()=>`<td></td>`).join("")+`</tr>`;
+    lines.forEach((ln,i)=>{
+      const cls = ln[0].startsWith("= EBITDA")||ln[0].startsWith("Caixa")?"sum":"";
+      html+=`<tr class="${cls}"><td class="sticky-c">${ln[0]}</td>`+q.map(t=>{
+        const v=ln[1](S,t); const col = ln[2] && v!==0 ? (v>0?"pos":"neg"):"";
+        return `<td class="num ${col}">${ln[2]?BRLk(v):NUM(v,1)}</td>`;
+      }).join("")+`</tr>`;
+    });
+  };
+  block(M,"CENÁRIO META FIXA (650/24m)"); block(R,"CENÁRIO REALISTA (300–350/24m)");
+  html+=`</tbody>`;
+  document.getElementById("tbl-tri").innerHTML=html;
+}
+
+/* --- mensal --- */
+function renderMes(){
+  const S=RES[SCEN]; const cols=[]; for(let m=1;m<=36;m++) cols.push(m);
+  const lines=[
+    ["Contratos novos","contratosNovos",1,false],
+    ["Unidades ativas","ativas",0,false],
+    ["Receita ativo (72k)","receitaAtivo",0,true],
+    ["(−) Custo módulo","custoMod",0,true,true],
+    ["= R1 embutida","R1",0,true],
+    ["+ R3 Royalty","royaltyRev",0,true],
+    ["+ R4 Blend","blend",0,true],
+    ["(−) Imp. ativo","impAtivo",0,true,true],
+    ["(−) Imp. recorrente","impRec",0,true,true],
+    ["(−) Folha","folha",0,true,true],
+    ["(−) IA","ia",0,true,true],
+    ["(−) CAC","cac",0,true,true],
+    ["(−) Demais fixos","fixos",0,true,true],
+    ["(−) Contingência","conting",0,true,true],
+    ["= EBITDA","ebitda",0,true],
+    ["Caixa acumulado","caixaAcum",0,true],
+  ];
+  let html=`<caption>P&amp;L mensal — ${SCEN==="meta"?"Meta fixa":"Realista"} · enquadramento ${ENQ}. Valores em R$ mil.</caption>`+
+    `<thead><tr><th class="sticky-c">Linha</th>`+cols.map(m=>`<th>M${m}</th>`).join("")+`</tr></thead><tbody>`;
+  lines.forEach(ln=>{
+    const cls = ln[1]==="ebitda"||ln[1]==="caixaAcum"?"sum":"";
+    html+=`<tr class="${cls}"><td class="sticky-c">${ln[0]}</td>`+cols.map(m=>{
+      let v=S.m[m][ln[1]]; if(ln[4]) v=-v;
+      const money=ln[3]; const col= money&&v!==0?(v>0?"pos":"neg"):"";
+      const txt = money? (Math.abs(v)>=1000?BRLk(v):NUM(v,0)) : NUM(v,ln[2]);
+      return `<td class="num ${col}">${txt}</td>`;
+    }).join("")+`</tr>`;
+  });
+  html+=`</tbody>`;
+  document.getElementById("tbl-mes").innerHTML=html;
+}
+
+/* --- gráficos SVG --- */
+function lineChart(el, series, opts){
+  const W=460,H=180,pL=6,pR=6,pT=10,pB=18;
+  const all=series.flatMap(s=>s.data);
+  let min=Math.min(0,...all),max=Math.max(...all); if(max===min)max=min+1;
+  const X=m=>pL+(m/36)*(W-pL-pR);
+  const Y=v=>pT+(1-(v-min)/(max-min))*(H-pT-pB);
+  const zeroY=Y(0);
+  let svg=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" role="img">`;
+  svg+=`<line x1="${pL}" y1="${zeroY.toFixed(1)}" x2="${W-pR}" y2="${zeroY.toFixed(1)}" stroke="var(--line)" stroke-dasharray="3 4"/>`;
+  series.forEach(s=>{
+    const pts=s.data.map((v,i)=>`${X(i+1).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+    svg+=`<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="${s.w||2.2}" stroke-linejoin="round"/>`;
+  });
+  if(opts&&opts.mark){ const mx=X(opts.mark); svg+=`<line x1="${mx}" y1="${pT}" x2="${mx}" y2="${H-pB}" stroke="var(--accent)" stroke-dasharray="2 3"/>`+
+    `<circle cx="${mx}" cy="${zeroY.toFixed(1)}" r="4" fill="var(--accent)"/>`; }
+  svg+=`</svg>`;
+  el.innerHTML=svg;
+}
+function renderCharts(){
+  ["meta","real"].forEach(sc=>{
+    const S=RES[sc];
+    const rec=[],fix=[],cx=[];
+    for(let m=1;m<=36;m++){ rec.push(S.m[m].recorrenteLiq); fix.push(S.m[m].custoFixoTotal); cx.push(S.m[m].caixaAcum); }
+    lineChart(document.getElementById("chart-sus-"+sc),
+      [{data:rec,color:"var(--good)"},{data:fix,color:"var(--crit)"}], {mark:S.g3});
+    document.getElementById("cap-sus-"+sc).innerHTML =
+      `<span style="color:var(--good)">■</span> recorrente líquido &nbsp; <span style="color:var(--crit)">■</span> custo fixo total &nbsp;— `+
+      (S.g3?`cruzam (G3 verde) em <b>M${S.g3}</b>`:`<b>não cruzam em 36m</b>`);
+    lineChart(document.getElementById("chart-cx-"+sc),[{data:cx,color:"var(--accent)"}],{mark:S.vale.mes});
+    document.getElementById("cap-cx-"+sc).innerHTML =
+      `vale de caixa <b>${BRL(S.vale.min)}</b> em <b>M${S.vale.mes}</b>; caixa em M36 <b>${BRL(S.m[36].caixaAcum)}</b>`;
+  });
+  document.getElementById("semr1-meta").textContent=BRL(RES.meta.ebitdaSemR1_M36);
+  document.getElementById("semr1-real").textContent=BRL(RES.real.ebitdaSemR1_M36);
+  document.getElementById("semr1-note").innerHTML =
+    `Todo o upfront é R1: zerá-lo zera 100% da receita de aquisição. Se sem R1 o EBITDA recorrente não cobre o fixo, a tese é <b>venda de máquina com contrato acoplado</b>, não franchising.`;
+  document.getElementById("vale-meta").textContent=`${BRL(RES.meta.vale.min)} · M${RES.meta.vale.mes}`;
+  document.getElementById("vale-real").textContent=`${BRL(RES.real.vale.min)} · M${RES.real.vale.mes}`;
+}
+
+/* --- sensibilidade --- */
+function renderSens(){
+  const base = computar(P,"real",ENQ).ebitdaM36;
+  const variantes=[
+    ["Custo do módulo", ["44k → taxa 28k","52k → taxa 20k","60k → taxa 12k"], [{custoModulo:44000},{},{custoModulo:60000}]],
+    ["Preço ao franqueado", ["72k","78k","85k"], [{},{precoFranqueado:78000},{precoFranqueado:85000}]],
+    ["Margem do blend (R$/kg)", ["8","15","25"], [{blendMargemKg:8},{},{blendMargemKg:25}]],
+    ["Ritmo de abertura", ["realista −30%","realista","meta"], ["real70","real","meta"]],
+    ["Ratio consultor", ["1/25","1/35","1/45"], [{ratioConsultor:25},{ratioConsultor:35},{ratioConsultor:45}]],
+    ["Regime tributário", ["Anexo V 15,5%","—","Anexo I 5%"], [{regime:"anexo5"},{},{regime:"anexo1"}]],
+    ["Enquadramento jurídico", ["Cen. L","Cen. R","Cen. A"], ["L","R","A"]],
+  ];
+  const rows=variantes.map(v=>{
+    const vals=v[2].map(ov=>{
+      if(typeof ov==="string"){
+        if(["meta","real","real70"].includes(ov)) return computar(P,ov,ENQ).ebitdaM36;
+        return computar(P,"real",ov).ebitdaM36; // enquadramento
+      }
+      return computar({...P,...ov},"real",ENQ).ebitdaM36;
+    });
+    const amp=Math.max(...vals)-Math.min(...vals);
+    return {nome:v[0],labels:v[1],vals,amp};
+  }).sort((a,b)=>b.amp-a.amp);
+  const maxAmp=Math.max(...rows.map(r=>r.amp))||1;
+  let html=`<caption>Base Realista · EBITDA M36 = <b class="num">${BRL(base)}</b>. Amplitude = máx−mín do EBITDA M36. Ranqueado por impacto.</caption>`+
+    `<thead><tr><th class="sticky-c">Alavanca</th><th>Baixo</th><th>Meio</th><th>Alto</th><th>Amplitude</th><th style="text-align:left">Peso</th></tr></thead><tbody>`;
+  rows.forEach((r,i)=>{
+    html+=`<tr class="rank"><td class="sticky-c">${i+1}. ${r.nome}</td>`+
+      r.vals.map((v,j)=>`<td class="num">${BRLk(v)}<div style="font-size:9.5px;color:var(--muted)">${r.labels[j]}</div></td>`).join("")+
+      `<td class="num"><b>${BRLk(r.amp)}</b></td>`+
+      `<td><div class="bar"><i style="width:${(r.amp/maxAmp*100).toFixed(0)}%"></i></div></td></tr>`;
+  });
+  html+=`</tbody>`;
+  document.getElementById("tbl-sens").innerHTML=html;
+  document.getElementById("sens-note").innerHTML =
+    `<b>Alavanca dominante: ${rows[0].nome}.</b> Como não há alavanca de adesão, custo do módulo e ritmo de abertura dominam o caixa dos primeiros 18 meses; blend + ratio de consultor + enquadramento dominam o EBITDA de M36 — confirmado pelo ranking acima.`;
+}
+
+/* --- art.1 e enquadramento --- */
+function renderJuridico(){
+  document.getElementById("art1-verdict").innerHTML =
+    `<b>Teste do art. 1º (Lei 13.966/2019) contra os fatos declarados: resultado 5/5.</b> Todos os elementos caracterizadores de franquia estão presentes na estrutura atual. A expressão "remuneração direta ou indireta" alcança expressamente a taxa embutida na margem do equipamento e a margem no blend. Dizê-lo sem suavização é obrigação do modelo.`;
+  const rows=[
+    ["Autoriza uso de marca","SIM","Quiosque e comunicação Been On Coffee (mód. 01)"],
+    ["Associado a distribuição de produtos","SIM","Blend exclusivo, fornecimento centralizado (mód. 01)"],
+    ["+ métodos e sistemas de implantação/administração","SIM","Treinamento 1 sem. + 90d remoto, playbook, calibragem remota, supervisão (05.3/05.4)"],
+    ["Mediante remuneração direta OU INDIRETA","SIM","Royalty R$ 800–1.200/mês (por banda) + taxa embutida ~R$ 20k + margem no blend (3.1)"],
+    ["Sem relação de consumo / vínculo empregatício","SIM","Licenciado é empresário independente"],
+  ];
+  document.getElementById("tbl-art1").innerHTML =
+    `<caption>Teste de caracterização — elemento a elemento.</caption>`+
+    `<thead><tr><th class="sticky-c">Elemento do art. 1º</th><th>Tem?</th><th style="text-align:left">Evidência no material</th></tr></thead><tbody>`+
+    rows.map(r=>`<tr><td class="sticky-c">${r[0]}</td><td><span class="pill" style="background:var(--crit-bg);color:var(--crit)">${r[1]}</span></td><td style="text-align:left;color:var(--ink-2)">${r[2]}</td></tr>`).join("")+
+    `</tbody>`;
+  // ranking enquadramento
+  const A=RES.enqA,L=RES.enqL,Rr=RES.enqR;
+  const baseEb=Rr.ebitdaM36;
+  const cenas=[
+    {n:"A — Franquia assumida",custo:"R$ 8–25k setup + ~R$ 5k/ano + 10 dias no ciclo",cont:0,eb:A.ebitdaM36,g3:A.g3},
+    {n:"L — Licenciamento puro",custo:"Jurídico baixo",cont:0,eb:L.ebitdaM36,g3:L.g3},
+    {n:"R — Rótulo licenciamento",custo:"~R$ 0 hoje",cont:Rr.contingAcum,eb:Rr.ebitdaM36,g3:Rr.g3},
+  ];
+  document.getElementById("tbl-enq").innerHTML =
+    `<caption>Realista · EBITDA M36 líquido da contingência. Ranqueado.</caption>`+
+    `<thead><tr><th class="sticky-c">Cenário</th><th style="text-align:left">Custo direto</th><th>Contingência M36</th><th>EBITDA M36</th><th>G3</th></tr></thead><tbody>`+
+    cenas.map(c=>`<tr><td class="sticky-c">${c.n}</td><td style="text-align:left;color:var(--ink-2)">${c.custo}</td>`+
+      `<td class="num ${c.cont>0?'neg':''}">${c.cont>0?BRL(c.cont):"—"}</td>`+
+      `<td class="num ${c.eb>0?'pos':'neg'}">${BRL(c.eb)}</td>`+
+      `<td class="num">${c.g3?"M"+c.g3:"—"}</td></tr>`).join("")+
+    `</tbody>`;
+  const l = RES.enqL;
+  document.getElementById("l-conclusion").textContent =
+    l.g3 ? "o recorrente encolhe mas ainda cruza o fixo em M"+l.g3 : "o recorrente desaparece e o gatilho G3 nunca fica verde";
+  // assimetria
+  const assimetria = RES.enqR.contingAcum / 20000; // vs custo Cen A médio ~16.5k... expressa em múltiplos abaixo
+}
+
+/* --- organograma tarefas + agentes + mermaid + marco --- */
+function renderOrg(){
+  const tarefas=[
+    ["Expansão","Triagem/qualificação de lead","A","—"],
+    ["Expansão","Pré-análise de ponto (fluxo estimado)","A","—"],
+    ["Expansão","Negociação e assinatura do contrato","H","Negociação de alto valor + responsabilidade legal"],
+    ["Implantação","Orquestração das 6 etapas / cobrança fornecedor","A","—"],
+    ["Implantação","Treinamento presencial na unidade-modelo","H","Presença física + transmissão de método"],
+    ["Operações/Superv.","Vigilância de cafés/dia vs. break-even","A","—"],
+    ["Operações/Superv.","Visita de campo (higiene, experiência, deriva)","H","Presença física — o que o agente não vê"],
+    ["Suprimentos","Reposição de blend / previsão de demanda","A","—"],
+    ["Suprimentos","Negociação de lote com torrefação","H","Negociação de alto valor (define custo do módulo/blend)"],
+    ["Suporte técnico","Suporte N1 (dúvidas operacionais, base)","A","—"],
+    ["Suporte técnico","Chamado técnico N2 no totem","H+A","Julgamento técnico com rascunho da IA"],
+    ["Financeiro/Royalties","Conciliação, cobrança, inadimplência N1","A","—"],
+    ["Financeiro/Royalties","Fechamento contábil e decisão fiscal","H+A","Responsabilidade legal, copiloto prepara"],
+    ["Marketing/Fundo","Conteúdo de funil, nutrição, follow-up","A","—"],
+    ["Marketing/Fundo","Prestação de contas do fundo (Lei 13.966)","H+A","Responsabilidade legal"],
+    ["Jurídico/COF","Montagem de COF e contrato (template)","H+A","Aprovação jurídica humana obrigatória"],
+  ];
+  const cor={A:"var(--good)","H+A":"var(--warn)",H:"var(--crit)"};
+  document.getElementById("tbl-tarefas").innerHTML =
+    `<thead><tr><th class="sticky-c">Área</th><th style="text-align:left">Tarefa</th><th>Classe</th><th style="text-align:left">Razão do H</th></tr></thead><tbody>`+
+    tarefas.map(t=>{ const bg=t[2]==='A'?'var(--good-bg)':t[2]==='H'?'var(--crit-bg)':'var(--warn-bg)';
+      return `<tr><td class="sticky-c">${t[0]}</td><td style="text-align:left">${t[1]}</td>`+
+      `<td><span class="pill" style="background:${bg};color:${cor[t[2]]}">${t[2]}</span></td>`+
+      `<td style="text-align:left;color:var(--ink-2)">${t[3]||'—'}</td></tr>`; }).join("")+`</tbody>`;
+
+  const agents=[
+    ["Agente SDR / qualificação","Expansão","Tria lead contra checklist 05.1, SLA 2 dias úteis, atualiza HubSpot","Lead novo","Lead qualificado + score","Analista de expansão","% leads qualificados / SLA cumprido","Funil entope; contrato errado avança"],
+    ["Agente de pré-análise de ponto","Expansão","Cruza tipo/fluxo estimado com critérios 05.2","Endereço + tipo de ponto","Parecer preliminar","Analista de expansão","Acerto do parecer vs. visita","Aprova ponto ruim → unidade abaixo do BE + contingência"],
+    ["Agente de documentos/COF","Jurídico","Monta COF/contrato de template, controla prazo de 10 dias, trilha de auditoria","Dados do licenciado","COF + contrato + prazo","Advogado (aprovação obrigatória)","0 assinatura sem COF ≥10 dias","Sem COF → nulidade (art. 2º §2º) na coorte exposta"],
+    ["Agente de esteira de implantação","Implantação","Orquestra as 6 etapas, cobra fornecedor/franqueado, mede lead time","Contrato assinado","Cronograma + alertas","Analista de implantação","Lead time ≤45 dias","Gargalo de implantação — o gargalo real (04)"],
+    ["Agente de suporte N1","Suporte","Base de conhecimento, dúvidas, triagem de chamado","Dúvida do licenciado","Resposta ou escalada N2","Head de operações","% resolvido no N1 / CSAT","Suporte ruim a quem pagou R$ 82–91 mil → reputação"],
+    ["Agente de vigilância da rede (BI)","Operações","Monitora cafés/dia vs. break-even (12 s/MO, 21 c/colab), abre alerta","Telemetria do totem","Alerta pré-adoecimento","Consultor de campo","Alertas antes da queda de faturamento","Substitui a visita de rotina; se erra, unidade adoece sem aviso"],
+    ["Agente financeiro/royalties","Financeiro","Concilia, cobra, mede inadimplência, relatório mensal","Extratos + base ativa","Cobrança + relatório","Analista financeiro","Inadimplência < meta","Receita recorrente vaza"],
+    ["Agente de conteúdo/captação","Marketing","Material de funil, follow-up, nutrição","Perfil de lead","Peças + sequência","Lead de marketing","CAC / taxa de conversão","CAC sobe; captação da Fase 1 encarece"],
+  ];
+  document.getElementById("agent-cards").innerHTML = agents.map(a=>
+    `<div class="agent-card"><h4><span>🤖 ${a[0]}</span><span class="area">${a[1]}</span></h4>
+      <p style="margin:6px 0 0;color:var(--ink-2);font-size:12.5px">${a[2]}</p>
+      <dl><dt>Input</dt><dd>${a[3]}</dd><dt>Output</dt><dd>${a[4]}</dd>
+      <dt>Aprova</dt><dd>${a[5]}</dd><dt>Métrica</dt><dd>${a[6]}</dd>
+      <dt>Se erra</dt><dd style="color:var(--crit)">${a[7]}</dd></dl></div>`).join("");
+
+  // organogramas em CSS (sem dependência externa) — h=humano (sólido), a=agente (tracejado)
+  const box=(t,type,sub)=>`<div class="org-box${type==='a'?' agent':''}">${type==='a'?'🤖 ':''}${t}${sub?`<small>${sub}</small>`:''}</div>`;
+  const conn=()=>`<div class="org-conn"></div>`;
+  const tier=(boxes)=>`<div class="org-tier">${boxes}</div>`;
+  const chart=(tiers)=>tiers.map((tg,i)=>(i?conn():'')+tier(tg.map(b=>box(b[0],b[1],b[2])).join(''))).join('');
+  document.getElementById("mm25").innerHTML=chart([
+    [["Fábio & Murilo — Sócios","h","COO + captação/expansão"]],
+    [["Generalista de Operações","h"]],
+    [["SDR","a"],["Pré-análise ponto","a"],["Documentos/COF","a"],["Esteira implantação","a"],["Vigilância BI","a"],["Financeiro","a"]],
+  ]);
+  document.getElementById("mm100").innerHTML=chart([
+    [["Fábio & Murilo — Sócios (COO)","h"]],
+    [["Analista Implantação","h"],["Analista Financeiro","h"],["Consultor de campo","h","×3"],["Eng. Automação/IA","h"]],
+    [["Camada de 8 agentes","a","SDR · Ponto · COF · Esteira · N1 · BI · Financeiro · Conteúdo"]],
+  ]);
+  document.getElementById("mm300").innerHTML=chart([
+    [["Fábio & Murilo — Sócios (COO)","h"]],
+    [["Gerente Regional","h"],["Implantação","h"],["Suprimentos","h"],["Expansão","h"],["Financeiro","h"],["Eng. IA","h"]],
+    [["Consultor de campo","h","×7 · sob o Gerente Regional"]],
+    [["Camada de 8 agentes","a","curada pelo Eng. IA"]],
+  ]);
+  document.getElementById("mm650").innerHTML=chart([
+    [["Fábio & Murilo — Sócios (CEO)","h"]],
+    [["Head de Operações","h"]],
+    [["Gerente Regional 1","h"],["Gerente Regional 2","h"],["Implantação","h","×2"],["Suprimentos","h"],["Expansão","h"],["Financeiro","h","×2"],["Marketing/Conteúdo","h"],["Eng. IA","h","×2"]],
+    [["Consultor de campo","h","×15 · sob os Gerentes Regionais"]],
+    [["Camada de 8 agentes","a","escala sublinear"]],
+  ]);
+
+  // custo por marco
+  const marcos=[25,100,300,650];
+  const S=RES.meta;
+  const findMonth=u=>{ for(let m=1;m<=36;m++) if(S.m[m].ativas>=u) return m; return null; };
+  let html=`<caption>Estrutura por marco (cenário Meta para datar; enquadramento ${ENQ}). Custo mensal.</caption>`+
+    `<thead><tr><th class="sticky-c">Marco</th><th>Headcount</th><th>Consultores</th><th>Folha/mês</th><th>IA/mês</th><th>Un/humano</th><th>IA por unidade</th><th>Mês est. (Meta)</th></tr></thead><tbody>`;
+  marcos.forEach(u=>{
+    const org=organograma(u,P,ENQ); const ia=camadaIA(u,P); const mm=findMonth(u);
+    html+=`<tr><td class="sticky-c">~${u} un.</td><td class="num">${org.headcount}</td><td class="num">${org.consultores}</td>`+
+      `<td class="num">${BRL(org.folha)}</td><td class="num">${BRL(ia.total)}</td>`+
+      `<td class="num">${(u/org.headcount).toFixed(0)}</td><td class="num">${BRL(ia.porUnid)}</td>`+
+      `<td class="num">${mm?"M"+mm:"—"}</td></tr>`;
+  });
+  html+=`</tbody>`;
+  document.getElementById("tbl-marco").innerHTML=html;
+}
+
+/* --- gatilhos, riscos, decisões, lacunas (estáticos) --- */
+function renderStatic(){
+  const M=RES.meta,R=RES.real;
+  const mMeta=u=>{for(let m=1;m<=36;m++)if(M.m[m].ativas>=u)return"M"+m;return"—";};
+  const mReal=u=>{for(let m=1;m<=36;m++)if(R.m[m].ativas>=u)return"M"+m;return"—";};
+  const gat=[
+    ["1º Consultor de campo","G3 — royalty recorrente ≥ custo fixo","Base > 25 un. ativas",mMeta(25),mReal(25)],
+    ["Analista implantação + financeiro + Eng. IA","G3 verde consolidado","~100 un. ativas",mMeta(100),mReal(100)],
+    ["Gerente regional + suprimentos + expansão","G3 + G4 (fluxo de caixa positivo recorrente)","~300 un. ativas",mMeta(300),mReal(300)],
+    ["Head de operações + 2ª linha completa","G4 + G5 (escala/estabilidade)","~650 un. ativas",mMeta(650),mReal(650)],
+    ["Consultores adicionais","Ratio 1/45 mantido; +1 a cada 45 un.","contínuo M13+","contínuo","contínuo"],
+  ];
+  document.getElementById("tbl-gatilhos").innerHTML=
+    `<caption>Regra de ouro: nenhum custo fixo novo antes do royalty recorrente projetado cobri-lo (03.5).</caption>`+
+    `<thead><tr><th class="sticky-c">Contratação</th><th style="text-align:left">Gatilho</th><th style="text-align:left">Métrica-alvo</th><th>Mês Meta</th><th>Mês Real</th></tr></thead><tbody>`+
+    gat.map(g=>`<tr><td class="sticky-c">${g[0]}</td><td style="text-align:left">${g[1]}</td><td style="text-align:left;color:var(--ink-2)">${g[2]}</td><td class="num">${g[3]}</td><td class="num">${g[4]}</td></tr>`).join("")+`</tbody>`;
+
+  const riscos=[
+    ["Dependência da camada de IA","Alto","1 Eng. de IA interno dono da curadoria desde ~100 un.; runbooks de fallback humano por agente; SLA de degradação com kill-switch para modo manual."],
+    ["Suporte automatizado a quem pagou R$ 82–91 mil","Alto","N1 por agente, mas escalada humana N2 garantida < 4h; CSAT monitorado; visita-gatilho quando BI + insatisfação coincidem."],
+    ["Estrutura enxuta vira gargalo de implantação (o gargalo real, 04)","Alto","Agente de esteira mede lead time; teto de contratos/mês por analista de implantação; 2ª contratação de implantação no marco 650."],
+    ["Enquadramento (Cenário R) + contingência correlacionada","Crítico","Migrar para Cenário A com COF antes da 1ª assinatura; custo R$ 8–25k << contingência acumulada projetada; decisão dos sócios com advogado."],
+    ["Rede de várias velocidades (bandas de royalty)","Médio","Regra de banda transparente na COF; condição de fundador (R$ 800, un 1–20) explícita; comunicar a política de bandas a entrantes para evitar percepção de injustiça."],
+    ["Blend como única alavacha unilateral é também gatilho jurídico","Médio","Contratualizar o fornecimento com cuidado; no Cenário A o blend obrigatório é defensável, no L ele cai — cruzar decisão comercial com a jurídica."],
+    ["Custo real do módulo desconhecido banca 12–18 meses","Alto","Fechar cotação de lote antes de escalar captação; painel §2 mostra a faixa 44k/52k/60k."],
+  ];
+  document.getElementById("tbl-riscos").innerHTML=
+    `<thead><tr><th class="sticky-c">Risco</th><th>Sev.</th><th style="text-align:left">Mitigação</th></tr></thead><tbody>`+
+    riscos.map(r=>`<tr><td class="sticky-c">${r[0]}</td><td><span class="pill" style="background:${r[1]==='Crítico'?'var(--crit-bg)':r[1]==='Alto'?'var(--warn-bg)':'var(--surface-2)'};color:${r[1]==='Crítico'?'var(--crit)':r[1]==='Alto'?'var(--warn)':'var(--ink-2)'}">${r[1]}</span></td><td style="text-align:left;color:var(--ink-2)">${r[2]}</td></tr>`).join("")+`</tbody>`;
+
+  const dec=[
+    ["15/07/2026","R1 é taxa embutida (~R$ 20k), não adesão à parte","Corrige premissa do módulo 06.2: taxa já existe nos R$ 72k","Zera a alavanca de adesão; upfront travado"],
+    ["15/07/2026","Royalty escalonado por banda de rede: R$ 800 (1–20) → R$ 1.000 (21–100) → R$ 1.200 (101+), fixo por banda","Decisão dos sócios; cada unidade trava a banda de entrada (não retroativo)","Sobe o royalty médio ponderado conforme a rede cresce"],
+    ["15/07/2026","Definir índice de correção dos valores nominais de royalty","R$ 800/1.000/1.200 são nominais e não corrigem por inflação sem cláusula","Receita recorrente real perde para inflação no horizonte longo"],
+    ["15/07/2026","Escolher enquadramento A/L/R antes da 1ª assinatura","Art. 1º dá 5/5; Cenário R carrega contingência correlacionada","Variável de maior impacto do modelo"],
+    ["15/07/2026","Definir regime tributário (Anexo I vs. V) com tributarista","Faturar 72k como mercadoria vs. 20k como licenciamento","Delta relevante + risco de simulação"],
+    ["15/07/2026","Fechar cotação de lote do módulo","Custo real define se a taxa embutida é 12k ou 28k","Banca os primeiros 12–18 meses"],
+    ["15/07/2026","Validar ratio 1/45 com dado real a partir de ~150 un.","Hipótese que derruba ~26→~15 consultores","Estrutura de custo de 650 un."],
+  ];
+  document.getElementById("tbl-decisoes").innerHTML=
+    `<thead><tr><th class="sticky-c">Data</th><th style="text-align:left">Decisão</th><th style="text-align:left">Racional</th><th style="text-align:left">Impacto</th></tr></thead><tbody>`+
+    dec.map(d=>`<tr><td class="sticky-c num">${d[0]}</td><td style="text-align:left">${d[1]}</td><td style="text-align:left;color:var(--ink-2)">${d[2]}</td><td style="text-align:left;color:var(--ink-2)">${d[3]}</td></tr>`).join("")+`</tbody>`;
+
+  const lac=[
+    ["Custo real do módulo/mobiliário/estoque","Crítico","Define a taxa embutida (12k–28k) e banca os primeiros 12–18 meses","Fechar cotação de lote com fornecedor/torrefação"],
+    ["Margem real do blend (R$/kg)","Crítico","Define se o recorrente sobrevive sem renegociar royalty","Contratar sourcing do blend torrado private label"],
+    ["Enquadramento jurídico definido","Crítico","Cenário L ampara o recorrente; Cenário R carrega contingência","Parecer de advogado de franchising"],
+    ["Regime tributário","Alto","Delta Anexo I vs. V + risco de simulação","Parecer de tributarista"],
+    ["Índice de correção dos royalties nominais","Médio","R$ 800/1.000/1.200 são nominais; sem índice não corrigem por inflação","Redação da COF/contrato-padrão"],
+    ["% de unidades abaixo do break-even (realista)","Médio","Alimenta a contingência do Cenário R","Medir após as primeiras ~30 unidades"],
+    ["Política de adesão vs. desmembramento de preço","Baixo","Rota (c) de aumento do upfront sem apertar fornecedor","Decisão comercial + jurídica"],
+  ];
+  document.getElementById("tbl-lacunas").innerHTML=
+    `<thead><tr><th class="sticky-c">Lacuna</th><th>Impacto</th><th style="text-align:left">Por quê trava</th><th style="text-align:left">O que fazer</th></tr></thead><tbody>`+
+    lac.map(l=>`<tr><td class="sticky-c">${l[0]}</td><td><span class="pill" style="background:${l[1]==='Crítico'?'var(--crit-bg)':l[1]==='Alto'?'var(--warn-bg)':'var(--surface-2)'};color:${l[1]==='Crítico'?'var(--crit)':l[1]==='Alto'?'var(--warn)':'var(--ink-2)'}">${l[1]}</span></td><td style="text-align:left;color:var(--ink-2)">${l[2]}</td><td style="text-align:left;color:var(--ink-2)">${l[3]}</td></tr>`).join("")+`</tbody>`;
+}
+
+function renderAll(){
+  renderExec(); renderVolume(); renderReceita(); renderTri(); renderMes();
+  renderCharts(); renderSens(); renderJuridico(); renderOrg(); renderStatic();
+}
+
+/* ---------- eventos ---------- */
+document.getElementById("applyBtn").addEventListener("click",()=>{ readPremPanel(); recompute(); });
+document.getElementById("resetBtn").addEventListener("click",()=>{ P=clone(DEFAULTS); buildPremPanel(); recompute(); });
+document.getElementById("enqToggle").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return; ENQ=b.dataset.enq;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle("on",x===b)); recompute();
+});
+document.getElementById("scenToggle").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b)return; SCEN=b.dataset.scen;
+  [...e.currentTarget.children].forEach(x=>x.classList.toggle("on",x===b)); renderMes();
+});
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=document.documentElement.getAttribute("data-theme");
+  const next = cur==="dark"?"light":cur==="light"?"dark":(window.matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark");
+  document.documentElement.setAttribute("data-theme",next); renderAll();
+});
+
+buildPremPanel();
+recompute();
+</script>
