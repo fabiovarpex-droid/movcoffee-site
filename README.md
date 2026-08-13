@@ -84,7 +84,7 @@ Todos os pontos estão marcados no código com o comentário
 |---|---|
 | `assets/hero-coffee.mp4` | Vídeo real do hero (ver seção acima) |
 | `index.html` (seção Números) | Investimento, payback, royalties e taxa de franquia oficiais da COF |
-| `index.html` (seção Unidades) | ✅ Fotos já colocadas (`assets/unidade-academia.webp`, `unidade-aeroporto.webp`, `unidade-shopping.webp`). Os **textos dos depoimentos** ainda são de exemplo (trocar por frases reais de licenciados quando houver). Para trocar uma foto, basta substituir o arquivo correspondente em `assets/`. |
+| `index.html` (seção Onde funciona) | ✅ Fotos do quiosque por ambiente já colocadas em `assets/pontos/` (`ponto-supermercado.jpg`, `ponto-academia.jpg`, `ponto-shopping.jpg`, `ponto-aeroporto.jpg`, `ponto-corporativo.jpg`). São **renders ilustrativos** — trocar por fotos de unidades reais quando houver. Para trocar uma foto, basta substituir o arquivo correspondente em `assets/pontos/`. |
 | `index.html` (footer) | CNPJ e razão social da franqueadora |
 | `index.html` (meta tags OG) | Domínio final e imagem de compartilhamento (1200×630px) |
 | `js/script.js` (formulário) | Endpoint/webhook do CRM — bloco `fetch` pronto, comentado; basta descomentar e pôr a URL |
