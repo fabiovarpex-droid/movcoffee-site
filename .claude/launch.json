@@ -5,7 +5,8 @@
       "name": "Been On Coffee site local",
       "runtimeExecutable": "node",
       "runtimeArgs": ["servidor-local.js"],
-      "port": 4173
+      "port": 4173,
+      "autoPort": true
     },
     {
       "name": "Moov Fit dev",
