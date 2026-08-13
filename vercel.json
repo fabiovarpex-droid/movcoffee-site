@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "src": "/brandbook-been-on-coffee\\.html", "status": 404 },
+    { "src": "/brandbook-been-on-coffee-artifact\\.html", "status": 404 },
+    { "src": "/ebook-been-on-coffee\\.html", "status": 404 },
+    { "src": "/modelo-licenciadora-been-on-coffee\\.html", "status": 404 },
+    { "handle": "filesystem" }
+  ]
+}
