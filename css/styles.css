@@ -958,10 +958,10 @@ select:focus-visible, summary:focus-visible {
   border-top: 1px solid var(--borda);
 }
 
-/* Investimento: dois cards lado a lado no desktop */
-.grade-numeros--investimento { max-width: 960px; margin-inline: auto; }
+/* Investimento: card único centralizado */
+.grade-numeros--investimento { max-width: 520px; margin-inline: auto; }
 @media (min-width: 800px) {
-  .grade-numeros--investimento { grid-template-columns: 1fr 1fr; }
+  .grade-numeros--investimento { grid-template-columns: 1fr; }
 }
 .grade-numeros--investimento .card-vidro__nota strong,
 .grade-numeros--investimento .card-vidro__obs strong { color: var(--texto); }
@@ -976,8 +976,9 @@ select:focus-visible, summary:focus-visible {
   margin-inline: auto;
 }
 
-/* CTA de fim de seção */
-.cta-secao { margin-top: 2.4rem; display: flex; }
+/* CTA de fim de seção (um ou dois botões, quebra no mobile) */
+.cta-secao { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: .9rem; }
+.cta-secao--centro { justify-content: center; }
 
 /* Card "fundador da rede" (prova social honesta pré-lançamento) */
 .card-fundador {
