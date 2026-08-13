@@ -938,11 +938,12 @@ select:focus-visible, summary:focus-visible {
 @media (min-width: 800px) {
   .oportunidade__imagem { order: 2; }
   .oportunidade__texto { order: 1; }
+  .oportunidade__intro { grid-template-columns: .7fr 1.3fr; }
 }
 
 /* Foto do quiosque completo: destaque do pacote em "Investimento" */
 .investimento__destaque {
-  max-width: 480px;
+  max-width: 720px;
   margin: 2.4rem auto 0;
   border-radius: var(--raio);
   overflow: hidden;
