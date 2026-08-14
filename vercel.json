@@ -1,6 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "beencoffee.com.br" }],
+      "destination": "https://www.beencoffee.com.br/$1",
+      "permanent": true
+    },
     { "source": "/simulador", "destination": "/simulador.html", "permanent": true },
     { "source": "/mapa", "destination": "/mapa-potencial.html", "permanent": true },
     { "source": "/mapa-potencial", "destination": "/mapa-potencial.html", "permanent": true },
