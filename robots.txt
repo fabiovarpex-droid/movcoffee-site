@@ -4,5 +4,4 @@ Allow: /
 # Página sem valor de busca
 Disallow: /politica-de-privacidade.html
 
-# DADO REAL NECESSÁRIO: trocar pelo domínio final quando ele for definido.
 Sitemap: https://www.beencoffee.com.br/sitemap.xml
