@@ -1,17 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-
-  "//": [
-    "Os documentos internos (brandbook, ebook, modelo de licenciadora) NÃO",
-    "sobem mais para o deploy — ver .vercelignore. Por isso as regras de 404",
-    "por rota saíram daqui: o arquivo simplesmente não existe no servidor.",
-    "",
-    "Cache: nomes de arquivo não têm hash de versão. Se você trocar uma imagem",
-    "ou vídeo mantendo o MESMO nome, o navegador de quem já visitou pode ficar",
-    "até 30 dias com a versão antiga. Para forçar a atualização na hora, suba",
-    "com um nome novo (ex.: hero-coffee-novo-3.mp4) e aponte o script.js."
-  ],
-
   "headers": [
     {
       "source": "/assets/(.*)",

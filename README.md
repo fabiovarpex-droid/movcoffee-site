@@ -125,6 +125,27 @@ Os nomes de arquivo não têm hash de versão e o `vercel.json` cacheia
 nome, quem já visitou pode continuar vendo a versão antiga.** Para forçar a
 atualização, suba com um nome novo e aponte o `index.html` / `script.js`.
 
+## ⚠️ Cuidado ao editar o `vercel.json`
+
+O schema da Vercel usa `additionalProperties: false`: **qualquer chave fora da
+lista oficial faz o build inteiro falhar** com "Invalid vercel.json" — e a
+Vercel simplesmente mantém no ar a versão anterior, sem quebrar o site. Ou
+seja: o deploy falha em silêncio, você só descobre olhando o painel.
+
+Não dá para comentar dentro do arquivo (nem com `//`, nem com uma chave `"//"`).
+Anotações sobre a configuração vão neste README.
+
+As regras que bloqueavam os documentos internos por rota saíram do `vercel.json`
+porque agora eles nem sobem — ver `.vercelignore`.
+
+Depois de qualquer alteração ali, confirme que o deploy pegou:
+
+```bash
+curl -sI https://beencoffee.vercel.app/ | grep -i x-content-type-options
+```
+
+Se não retornar nada, o `vercel.json` não está sendo aplicado.
+
 ## Checklist do que já está pronto
 
 - ✅ Identidade grafite + laranja neon, Space Grotesk, tom tech-forward
