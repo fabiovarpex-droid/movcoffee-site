@@ -1,9 +1,44 @@
 {
-  "routes": [
-    { "src": "/brandbook-been-on-coffee\\.html", "status": 404 },
-    { "src": "/brandbook-been-on-coffee-artifact\\.html", "status": 404 },
-    { "src": "/ebook-been-on-coffee\\.html", "status": 404 },
-    { "src": "/modelo-licenciadora-been-on-coffee\\.html", "status": 404 },
-    { "handle": "filesystem" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": [
+    "Os documentos internos (brandbook, ebook, modelo de licenciadora) NÃO",
+    "sobem mais para o deploy — ver .vercelignore. Por isso as regras de 404",
+    "por rota saíram daqui: o arquivo simplesmente não existe no servidor.",
+    "",
+    "Cache: nomes de arquivo não têm hash de versão. Se você trocar uma imagem",
+    "ou vídeo mantendo o MESMO nome, o navegador de quem já visitou pode ficar",
+    "até 30 dias com a versão antiga. Para forçar a atualização na hora, suba",
+    "com um nome novo (ex.: hero-coffee-novo-3.mp4) e aponte o script.js."
+  ],
+
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/data/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
+      ]
+    },
+    {
+      "source": "/(css|js)/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), interest-cohort=()" }
+      ]
+    }
   ]
 }

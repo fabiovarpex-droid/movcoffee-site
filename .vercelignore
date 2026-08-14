@@ -1,0 +1,22 @@
+# Arquivos que NÃO devem ir para o site publicado.
+# Antes eles subiam e eram bloqueados por rota no vercel.json — ou seja,
+# continuavam no servidor. Agora nem chegam lá.
+
+# --- Documentos internos da franqueadora (não são páginas do site) ---
+brandbook-been-on-coffee.html
+brandbook-been-on-coffee-artifact.html
+ebook-been-on-coffee.html
+ebook-movcoffee.pdf
+modelo-licenciadora-been-on-coffee.html
+
+# --- Documentação e ferramentas de desenvolvimento ---
+README.md
+RELATORIO-REVISAO-COMERCIAL.md
+RELATORIO-REVISAO-FINAL.md
+servidor-local.js
+.claude/
+
+# --- Dados brutos do mapa (o mapa consome só os .json e o .csv da raiz de /data) ---
+data/fontes/
+data/pipeline/
+data/README.md

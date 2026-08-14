@@ -31,6 +31,9 @@
 </head>
 <body>
 
+  <!-- Acessibilidade: primeiro tab da página pula o menu inteiro -->
+  <a href="#conteudo" class="pular-conteudo">Pular para o conteúdo</a>
+
   <!-- ============================================================
        CABEÇALHO / NAVEGAÇÃO (mesmo do site)
        ============================================================ -->
@@ -53,7 +56,9 @@
       </a>
 
       <!-- CTA sempre visível no mobile (fora do menu colapsado) -->
-      <a href="index.html#cadastro" class="botao botao--pequeno topo__cta-mobile">Quero ser licenciado</a>
+      <a href="index.html#cadastro" class="botao botao--pequeno topo__cta-mobile">
+        <span class="cta-longo">Quero ser licenciado</span><span class="cta-curto">Ser licenciado</span>
+      </a>
 
       <button class="topo__hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
         <span></span><span></span><span></span>
@@ -71,7 +76,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="conteudo">
     <!-- ============================================================
          MAPA DE POTENCIAL DE MERCADO
          ============================================================ -->

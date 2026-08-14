@@ -8,15 +8,22 @@
   <title>Been On Coffee Franquias — Quiosque de café automatizado</title>
   <meta name="description" content="Seja licenciado Been On Coffee: quiosque de café automatizado em pontos de alto fluxo. R$ 72 mil, 1 pessoa por turno e suporte completo da rede." />
 
+  <link rel="canonical" href="https://www.beencoffee.com.br/" />
+
   <!-- ===== OPEN GRAPH (compartilhamento em redes sociais) =====
-       DADO REAL NECESSÁRIO: trocar og:url pelo domínio final e og:image por uma
-       imagem real do quiosque (1200x630px). O thumbnail atual é um placeholder. -->
+       DADO REAL NECESSÁRIO: trocar og:url pelo domínio final. O og:image aponta
+       para a foto real do quiosque (o antigo /assets/og-image.jpg não existia e
+       o link compartilhado no WhatsApp/LinkedIn saía sem miniatura). O ideal é
+       gerar uma versão 1200x630 com a marca e apontar para ela. -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Been On Coffee Franquias" />
   <meta property="og:title" content="Been On Coffee Franquias — café automatizado em formato de quiosque" />
   <meta property="og:description" content="Baixo investimento, operação simples com 1 pessoa por turno. Conheça o modelo de franquia Been On Coffee." />
   <meta property="og:url" content="https://www.beencoffee.com.br/" />
-  <meta property="og:image" content="https://www.beencoffee.com.br/assets/og-image.jpg" />
+  <meta property="og:image" content="https://www.beencoffee.com.br/assets/quiosque/been-on-coffee-fundo-cinza.jpg" />
+  <meta property="og:image:alt" content="Quiosque de autoatendimento Been On Coffee" />
   <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#0e0f0d" />
 
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -24,8 +31,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Dados estruturados: ajuda o Google a mostrar as perguntas do FAQ direto
+       no resultado de busca (rich snippet) — tráfego qualificado de graça.
+       O conteúdo aqui é o MESMO da seção #faq; ao editar lá, editar aqui. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"Qual é o investimento total para abrir um Been On Coffee?","acceptedAnswer":{"@type":"Answer","text":"R$ 72.000 (valor aproximado) pelo quiosque completo — máquina, totem, mobiliário e estoque do 1º mês. Não inclui capital de giro, frete e abertura de empresa."}},
+      {"@type":"Question","name":"Quanto tempo leva para instalar o quiosque?","acceptedAnswer":{"@type":"Answer","text":"De 30 a 45 dias após o contrato do ponto assinado. O quiosque chega pré-fabricado e é montado no local."}},
+      {"@type":"Question","name":"Preciso ter experiência com café ou varejo?","acceptedAnswer":{"@type":"Answer","text":"Não. São 1 semana de treinamento presencial na unidade-modelo e 90 dias de acompanhamento remoto. A máquina automatizada garante o padrão da bebida sem barista."}},
+      {"@type":"Question","name":"Terei exclusividade territorial?","acceptedAnswer":{"@type":"Answer","text":"Sim, por ponto: cada unidade tem exclusividade no empreendimento em que está instalada. Regras de raio e expansão constam do contrato."}},
+      {"@type":"Question","name":"Como funciona o contrato? Vou receber uma COF?","acceptedAnswer":{"@type":"Answer","text":"Sim. Antes de qualquer assinatura ou pagamento você recebe a Circular de Oferta de Franquia com investimento, taxas, obrigações e território, e no mínimo 10 dias para analisar (Lei nº 13.966/2019)."}}
+    ]
+  }
+  </script>
 </head>
 <body>
+
+  <!-- Acessibilidade: primeiro tab da página pula o menu inteiro -->
+  <a href="#conteudo" class="pular-conteudo">Pular para o conteúdo</a>
 
   <!-- ============================================================
        CABEÇALHO / NAVEGAÇÃO (sticky + glassmorphism ao rolar)
@@ -48,8 +75,11 @@
         </span>
       </a>
 
-      <!-- CTA sempre visível no mobile (fora do menu colapsado) -->
-      <a href="#cadastro" class="botao botao--pequeno topo__cta-mobile">Quero ser licenciado</a>
+      <!-- CTA sempre visível no mobile (fora do menu colapsado).
+           O rótulo encurta abaixo de 380px para não encostar no logo. -->
+      <a href="#cadastro" class="botao botao--pequeno topo__cta-mobile">
+        <span class="cta-longo">Quero ser licenciado</span><span class="cta-curto">Ser licenciado</span>
+      </a>
 
       <button class="topo__hamburguer" id="btn-menu" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-links">
         <span></span><span></span><span></span>
@@ -69,18 +99,21 @@
     </nav>
   </header>
 
-  <main>
+  <main id="conteudo">
 
     <!-- ============================================================
          1. HERO COM VÍDEO EM BACKGROUND
          ============================================================ -->
     <section class="hero" id="hero">
-      <!-- VÍDEO DE FUNDO (dois vídeos em sequência, em loop)
-           O js/script.js toca a "playlist" em ordem e recomeça:
-           assets/hero-coffee-novo-2.mp4 → assets/hero-coffee-novo.mp4 → volta ao início.
-           Para adicionar/trocar vídeos, edite a lista "playlistHero" no script.js.
-           O poster é exibido enquanto carrega e em conexões lentas / prefers-reduced-motion.
-           (Sem 'loop' no elemento: assim o evento 'ended' dispara e avança para o próximo.) -->
+      <!-- VÍDEO DE FUNDO — carregado pelo js/script.js, com peso em mente:
+             • desktop → 2 vídeos em sequência (hero-coffee-novo-2 → hero-coffee-novo);
+             • celular → só o hero-coffee-novo-2 (1,8 MB) em loop nativo, o que
+               corta ~3 MB de download em cada visita pelo telefone;
+             • economia de dados / 2G / 3G / movimento reduzido → nenhum vídeo,
+               fica a animação CSS de vapor (que é o fundo padrão);
+             • começa só depois do 'load' e pausa quando o hero sai da tela.
+           Para trocar os vídeos, edite "playlistDesktop" no script.js.
+           Sem 'src' e sem 'loop' aqui de propósito: quem decide é o script. -->
       <video
         class="hero__video"
         id="hero-video"
@@ -90,9 +123,9 @@
         aria-hidden="true"></video>
 
       <!-- ANIMAÇÃO DE FUNDO (CSS): vapor + brilho em movimento.
-           Fica visível enquanto NÃO houver vídeo real. Quando o hero-coffee.mp4
-           existir e tocar, o JS adiciona a classe .com-video e o vídeo entra por
-           cima. Respeita prefers-reduced-motion (ver styles.css). -->
+           É o fundo padrão do hero — não custa download nenhum. Quando um vídeo
+           realmente começa a tocar, o JS adiciona a classe .com-video e o vídeo
+           entra por cima. Respeita prefers-reduced-motion (ver styles.css). -->
       <div class="hero__animacao" aria-hidden="true">
         <span class="vapor vapor--1"></span>
         <span class="vapor vapor--2"></span>
@@ -273,6 +306,7 @@
               </tbody>
             </table>
           </div>
+          <p class="comparativo__dica">← Arraste para o lado para ver a comparação completa →</p>
           <p class="comparativo__nota">
             Coluna "cafeteria tradicional": estimativas de mercado para comparação
             de formato, não cotações.
@@ -430,6 +464,18 @@
           </li>
         </ol>
 
+        <!-- Lista do que a rede entrega, item a item: o candidato consegue
+             comparar com outras franquias sem ter que ligar para perguntar. -->
+        <p class="vitrine-pontos__complemento revelar">O que a franqueadora entrega</p>
+        <ul class="entregaveis revelar">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Análise do ponto</strong> — fluxo, público e custo de ocupação avaliados antes do contrato.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Quiosque pronto para operar</strong> — máquina, totem, mobiliário e comunicação visual.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Blend exclusivo e cadeia de insumos</strong> — fornecedores homologados e preço de rede.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Manual de operação e treinamento</strong> — do reabastecimento à higienização diária.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Assistência técnica coordenada</strong> — preventiva agendada e prioridade na fabricante.</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Exclusividade do ponto</strong> — nenhum outro licenciado no seu empreendimento.</span></li>
+        </ul>
+
         <div class="cta-secao revelar">
           <a href="#cadastro" class="botao">Quero ser licenciado</a>
         </div>
@@ -577,11 +623,10 @@
          ============================================================ -->
     <section class="secao" id="prova">
       <div class="container">
-        <!-- Faixa de "logos" de pontos — placeholder até ter as marcas/fotos reais -->
-        <p class="prova__legenda revelar">Pontos-alvo da expansão</p>
-        <div class="faixa-logos revelar" aria-label="Tipos de ponto onde o Been On Coffee opera">
-          <span>Shoppings</span><span>Aeroportos</span><span>Academias</span><span>Praças de alimentação</span><span>Terminais</span>
-        </div>
+        <!-- A antiga faixa de "logos" (Shoppings · Aeroportos · Academias…) foi
+             removida: repetia, em texto solto e sem marca nenhuma, exatamente os
+             mesmos canais que a vitrine de pontos logo acima já mostra com foto.
+             Repetição enfraquece — a seção agora é só o pitch de fundador. -->
 
         <!-- Enquadramento honesto de rede em implantação: virar vantagem
              ("fundador") em vez de esconder a ausência de prova social.
@@ -656,13 +701,68 @@
     </section>
 
     <!-- ============================================================
-         9. FORMULÁRIO DE CADASTRO
+         11. PROCESSO DE CANDIDATURA (linha do tempo)
+         Objetivo comercial: tirar o medo do desconhecido logo antes do
+         formulário. O candidato vê que preencher NÃO é assinar nada, que
+         existe uma COF com prazo legal de análise e quanto tempo leva até
+         o quiosque abrir. Reduz o abandono no último clique.
+         DADO REAL NECESSÁRIO: confirmar com a expansão os prazos de cada
+         etapa antes do go-live — os prazos aqui refletem o que já está
+         declarado no FAQ (SLA de 2 dias úteis, 10 dias de COF, 30–45 dias
+         de instalação).
+         ============================================================ -->
+    <section class="secao" id="processo">
+      <div class="container">
+        <p class="secao__rotulo revelar">Próximos passos</p>
+        <h2 class="revelar">Do cadastro à inauguração, em 5 etapas</h2>
+        <p class="secao__sub revelar">
+          <strong>Preencher o formulário não compromete você a nada.</strong> É só
+          o começo de uma conversa — e você recebe todos os números por escrito
+          antes de qualquer assinatura.
+        </p>
+
+        <ol class="processo">
+          <li class="processo__item revelar">
+            <h3>Você se cadastra</h3>
+            <p>Leva 1 minuto. Sem custo e sem compromisso.</p>
+            <span class="processo__prazo">Agora</span>
+          </li>
+          <li class="processo__item revelar">
+            <h3>Conversa com a expansão</h3>
+            <p>Entendemos seu perfil, seu capital e a praça que você quer. Você pergunta o que quiser.</p>
+            <span class="processo__prazo">Até 2 dias úteis</span>
+          </li>
+          <li class="processo__item revelar">
+            <h3>COF e análise</h3>
+            <p>Você recebe a Circular de Oferta de Franquia com investimento, taxas, obrigações e território — e tempo para revisar com seu advogado ou contador.</p>
+            <span class="processo__prazo">Mín. 10 dias (por lei)</span>
+          </li>
+          <li class="processo__item revelar">
+            <h3>Assinatura e escolha do ponto</h3>
+            <p>Com o contrato fechado, a franqueadora analisa e negocia o ponto com você.</p>
+            <span class="processo__prazo">Varia por praça</span>
+          </li>
+          <li class="processo__item revelar">
+            <h3>Instalação e treinamento</h3>
+            <p>Quiosque montado no local, 1 semana de treinamento presencial e 90 dias de acompanhamento.</p>
+            <span class="processo__prazo">30 a 45 dias</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         12. FORMULÁRIO DE CADASTRO
          ============================================================ -->
     <section class="secao secao--cta" id="cadastro">
       <div class="container container--estreito">
         <p class="secao__rotulo revelar">Cadastro</p>
         <h2 class="revelar">Quero ser licenciado Been On Coffee</h2>
-        <p class="secao__sub revelar">Nossa equipe de expansão fala com você em até 2 dias úteis.</p>
+        <p class="secao__sub revelar">
+          Nossa equipe de expansão fala com você em até <strong>2 dias úteis</strong>.
+          Sem custo, sem compromisso — e os melhores pontos da sua praça ainda
+          estão disponíveis.
+        </p>
 
         <form class="formulario revelar" id="form-franqueado" novalidate>
           <div class="campo">

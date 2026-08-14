@@ -35,11 +35,25 @@
   --sombra: 0 10px 40px rgba(0, 0, 0, .5);
   --transicao: .25s ease;
   --largura: 1160px;
+
+  /* Altura real do header fixo — medida pelo script.js a cada resize.
+     Usada em scroll-padding (âncoras), no topo do menu mobile e nos
+     espaçamentos de página. Sem isso, todo clique de menu parava com o
+     título escondido atrás do header. */
+  --altura-topo: 68px;
+  /* Altura da barra de CTA fixa no mobile (0 quando ela está oculta) */
+  --altura-barra-cta: 0px;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* scroll-padding em html E body: o overflow-x do body propaga para a viewport,
+   e o navegador lê o scroll-padding do elemento que propagou. Sem os dois,
+   toda âncora parava com o título escondido atrás do header fixo. */
+html, body {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--altura-topo) + 14px);
+}
 
 body {
   font-family: var(--fonte-texto);
@@ -48,7 +62,14 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  /* Nunca deixa a barra de CTA fixa cobrir o fim do conteúdo */
+  padding-bottom: var(--altura-barra-cta);
 }
+
+/* Trava o scroll do fundo enquanto o menu mobile está aberto —
+   antes a página rolava por baixo do menu, dando a sensação de
+   "navegação flutuando" solta sobre o conteúdo. */
+body.menu-aberto { overflow: hidden; }
 
 img, svg, video { max-width: 100%; display: block; }
 
@@ -71,11 +92,13 @@ select:focus-visible, summary:focus-visible {
 .container--estreito { max-width: 780px; }
 
 /* ============ ANIMAÇÃO DE ENTRADA (scroll reveal) ============ */
+/* Sem will-change aqui de propósito: são ~70 elementos .revelar na home e o
+   will-change permanente cria uma camada de composição para cada um, pesando
+   scroll e memória no celular sem ganho — a transição já é só opacity+transform. */
 .revelar {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
-  will-change: opacity, transform;
 }
 .revelar.visivel { opacity: 1; transform: none; }
 
@@ -115,6 +138,7 @@ select:focus-visible, summary:focus-visible {
   z-index: 50;
   transition: background var(--transicao), border-color var(--transicao), backdrop-filter var(--transicao);
   border-bottom: 1px solid transparent;
+  padding-top: env(safe-area-inset-top, 0px);
 }
 .topo.rolado {
   background: rgba(14, 15, 13, .72);
@@ -122,10 +146,22 @@ select:focus-visible, summary:focus-visible {
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
   border-bottom-color: var(--borda);
 }
+/* No celular o header nunca fica 100% transparente: sobre o vídeo do hero ele
+   parecia "solto"/flutuando, e logo + CTA + hambúrguer ficavam ilegíveis
+   dependendo do frame do vídeo. */
+@media (max-width: 799px) {
+  .topo {
+    background: rgba(14, 15, 13, .78);
+    backdrop-filter: blur(12px) saturate(1.15);
+    -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  }
+  .topo.rolado { background: rgba(14, 15, 13, .93); border-bottom-color: var(--borda); }
+}
 .topo__nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: .5rem;
   padding-block: .85rem;
 }
 .logo {
@@ -176,26 +212,76 @@ select:focus-visible, summary:focus-visible {
 .topo__hamburguer[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .topo__hamburguer[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
+/* Painel do menu mobile: position:fixed (não absolute) ancorado na altura real
+   do header, com rolagem própria e área segura do iPhone. Antes ele era
+   absolute dentro do header e podia estourar a tela em aparelhos baixos. */
 .topo__links {
-  display: none;
   list-style: none;
-  position: absolute;
-  top: 100%; left: 0; right: 0;
-  background: rgba(14, 15, 13, .96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  position: fixed;
+  /* --altura-topo é medida no header inteiro e JÁ inclui o padding de safe-area
+     do iPhone; somar env() de novo empurraria o menu para baixo do notch. */
+  top: var(--altura-topo);
+  left: 0; right: 0;
+  max-height: calc(100dvh - var(--altura-topo));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: rgba(14, 15, 13, .97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--borda);
-  padding: 1rem 1.25rem 1.4rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .45);
+  padding: 1rem 1.25rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .35rem;
+  /* fechado: invisível e fora do fluxo de foco, sem usar display:none
+     (permite transição de entrada/saída) */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  /* visibility com delay explícito: ao ABRIR vira visible na hora (senão o
+     foco do teclado cai num elemento ainda invisível); ao FECHAR só some
+     depois do fade terminar. */
+  transition: opacity .22s ease, transform .22s ease, visibility 0s linear .22s;
 }
-.topo__links.aberto { display: flex; }
+.topo__links.aberto {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .22s ease, transform .22s ease, visibility 0s;
+}
+.topo__links li { display: flex; }
 .topo__links a:not(.botao) {
+  flex: 1;
   color: var(--texto);
   text-decoration: none;
   font-weight: 500;
+  /* alvo de toque confortável (>=44px) em vez de link solto */
+  padding: .8rem .6rem;
+  border-radius: 10px;
+  transition: background var(--transicao), color var(--transicao);
 }
-.topo__links a:not(.botao):hover { color: var(--neon-claro); }
+.topo__links a:not(.botao):hover { color: var(--neon-claro); background: rgba(255, 255, 255, .05); }
+.topo__links .botao { margin-top: .6rem; padding-block: .8rem; }
+/* Seção em que o visitante está agora (scrollspy do script.js) */
+.topo__links a[aria-current="true"],
+.topo__links a[aria-current="page"] { color: var(--neon); }
+
+/* Fundo escuro atrás do menu aberto (criado pelo script.js) */
+.topo__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(6, 7, 6, .55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, visibility 0s linear .22s;
+  border: 0;
+  cursor: pointer;
+}
+.topo__backdrop.aberto { opacity: 1; visibility: visible; transition: opacity .22s ease, visibility 0s; }
 
 /* ============ 1. HERO COM VÍDEO ============ */
 .hero {
@@ -725,7 +811,8 @@ select:focus-visible, summary:focus-visible {
 .confirmacao p { color: var(--texto-suave); }
 
 /* ============ PÁGINA DE POLÍTICA DE PRIVACIDADE ============ */
-.politica { padding-top: 6rem; }
+/* Antes era 6rem fixo, que no celular deixava o título colado no header */
+.politica { padding-top: calc(var(--altura-topo) + 1.5rem); }
 .politica h3 { margin-top: 2rem; margin-bottom: .5rem; font-size: 1.1rem; color: var(--neon-claro); }
 .politica p { color: var(--texto-suave); font-size: .95rem; }
 
@@ -816,17 +903,29 @@ select:focus-visible, summary:focus-visible {
    ============================================================ */
 @media (min-width: 800px) {
   .topo__hamburguer { display: none; }
+  .topo__backdrop { display: none; }
   .topo__links {
     display: flex;
     position: static;
     flex-direction: row;
     align-items: center;
-    gap: 1.8rem;
+    gap: 1.5rem;
+    max-height: none;
+    overflow: visible;
     background: none;
     backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
     border: none;
     padding: 0;
+    /* neutraliza o estado "fechado" do painel mobile */
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
+  .topo__links a:not(.botao) { padding: .35rem .1rem; border-radius: 6px; }
+  .topo__links a:not(.botao):hover { background: none; }
+  .topo__links .botao { margin-top: 0; padding-block: .55rem; }
   .secao { padding-block: 6rem; }
   .grade-cards { grid-template-columns: repeat(4, 1fr); }
   .passos { grid-template-columns: repeat(4, 1fr); }
@@ -857,8 +956,26 @@ select:focus-visible, summary:focus-visible {
    (usa apenas os tokens do design system existente)
    ============================================================ */
 
-/* CTA persistente no mobile (fora do menu colapsado) */
-.topo__cta-mobile { margin-left: auto; margin-right: .9rem; white-space: nowrap; }
+/* CTA persistente no mobile (fora do menu colapsado).
+   A 375px o logo e o CTA ficavam encostados (0px de folga) e em telas de 360px
+   estouravam a linha — daí o texto curto por CSS e o encolhimento progressivo. */
+.topo__cta-mobile { margin-left: auto; white-space: nowrap; }
+@media (max-width: 799px) {
+  .topo__cta-mobile { font-size: .82rem; padding: .55rem .95rem; }
+}
+@media (max-width: 419px) {
+  .topo__cta-mobile { font-size: .78rem; padding: .5rem .75rem; }
+  .logo__icone { height: 24px; }
+  .logo__linha2 { font-size: .98rem; }
+  .topo__hamburguer { padding: .5rem .25rem .5rem .5rem; }
+}
+/* Só em telas muito estreitas (iPhone SE e similares, <=349px) o CTA encurta:
+   "Quero ser licenciado" → "Ser licenciado". Acima disso o rótulo completo cabe. */
+.topo__cta-mobile .cta-curto { display: none; }
+@media (max-width: 349px) {
+  .topo__cta-mobile .cta-longo { display: none; }
+  .topo__cta-mobile .cta-curto { display: inline; }
+}
 @media (min-width: 800px) {
   .topo__cta-mobile { display: none; }
 }
@@ -1150,3 +1267,195 @@ select:focus-visible, summary:focus-visible {
    classe (ex.: .formulario { display: grid } mantinha o formulário visível
    após o envio, junto com a confirmação). */
 [hidden] { display: none !important; }
+
+/* ============================================================
+   REVISÃO FINAL — MOBILE, CONVERSÃO E ACESSIBILIDADE
+   ============================================================ */
+
+/* ---- Link "pular para o conteúdo" (acessibilidade / teclado) ---- */
+.pular-conteudo {
+  position: absolute;
+  left: 50%;
+  top: .5rem;
+  transform: translate(-50%, -160%);
+  z-index: 200;
+  background: var(--neon);
+  color: #17110b;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  text-decoration: none;
+  padding: .7rem 1.2rem;
+  border-radius: 10px;
+  transition: transform .2s ease;
+}
+.pular-conteudo:focus { transform: translate(-50%, 0); }
+
+/* ---- Hero no celular: números em grade de 2 colunas ----
+   Em flex com gap 2rem os 4 números quebravam de forma irregular
+   (3 em cima, 1 sozinho embaixo) em telas de 360–390px. */
+@media (max-width: 599px) {
+  .hero__conteudo { padding-block: 6rem 4.5rem; }
+  .hero__provas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem 1rem;
+    margin-top: 2rem;
+  }
+  .hero__provas strong { font-size: 1.35rem; }
+  .hero__acoes .botao { flex: 1 1 100%; }
+  .hero__rolar { display: none; }
+}
+
+/* ---- Barra de CTA fixa no rodapé do celular ----
+   Aparece depois do hero e some quando o formulário de cadastro está na tela:
+   o candidato nunca fica a mais de um toque de distância do cadastro. */
+.barra-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 90;
+  display: flex;
+  gap: .6rem;
+  padding: .7rem 1rem calc(.7rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(11, 12, 10, .93);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-top: 1px solid var(--borda);
+  transform: translateY(110%);
+  transition: transform .28s cubic-bezier(.2, .7, .2, 1);
+}
+.barra-cta.visivel { transform: none; }
+.barra-cta .botao { flex: 1; padding: .8rem .6rem; font-size: .92rem; }
+.barra-cta .botao--fantasma { flex: 0 1 auto; padding-inline: 1rem; }
+@media (min-width: 800px) { .barra-cta { display: none; } }
+
+/* O botão do chat sobe quando a barra de CTA está visível, para não empilhar */
+.chat { transition: bottom var(--transicao); bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px)); }
+body.com-barra-cta .chat { bottom: calc(4.9rem + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 799px) {
+  .chat__botao { width: 50px; height: 50px; }
+  .chat__botao svg { width: 22px; height: 22px; }
+  .chat__painel { max-height: min(70dvh, 460px); }
+  .chat__mensagens { max-height: 40dvh; }
+}
+
+/* ---- Processo de candidatura (linha do tempo) ----
+   Tira o medo do desconhecido: o candidato vê exatamente o que acontece
+   entre preencher o formulário e abrir o quiosque. */
+.processo {
+  list-style: none;
+  margin-top: 2.6rem;
+  display: grid;
+  gap: 0;
+  counter-reset: etapa;
+}
+.processo__item {
+  position: relative;
+  padding: 0 0 1.9rem 3.2rem;
+}
+.processo__item::before {
+  counter-increment: etapa;
+  content: counter(etapa);
+  position: absolute;
+  left: 0; top: 0;
+  width: 2.1rem; height: 2.1rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 122, 61, .12);
+  border: 1px solid var(--neon-brilho);
+  color: var(--neon);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: .9rem;
+}
+/* Linha vertical ligando as etapas */
+.processo__item::after {
+  content: "";
+  position: absolute;
+  left: calc(1.05rem - 1px);
+  top: 2.4rem; bottom: .3rem;
+  width: 2px;
+  background: linear-gradient(180deg, var(--neon-brilho), var(--borda));
+}
+.processo__item:last-child { padding-bottom: 0; }
+.processo__item:last-child::after { display: none; }
+.processo__item h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+.processo__item p { font-size: .92rem; color: var(--texto-suave); }
+.processo__prazo {
+  display: inline-block;
+  margin-top: .45rem;
+  font-family: var(--fonte-titulo);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--neon-claro);
+  background: rgba(255, 122, 61, .1);
+  border: 1px solid var(--neon-brilho);
+  border-radius: 999px;
+  padding: .22rem .7rem;
+}
+@media (min-width: 800px) {
+  .processo { grid-template-columns: repeat(5, 1fr); gap: 1.2rem; margin-top: 3rem; }
+  .processo__item { padding: 3.2rem 0 0; }
+  .processo__item::after {
+    left: 2.4rem; right: -1.2rem;
+    top: calc(1.05rem - 1px); bottom: auto;
+    width: auto; height: 2px;
+    background: linear-gradient(90deg, var(--neon-brilho), var(--borda));
+  }
+  .processo__item:last-child { padding-bottom: 0; }
+}
+
+/* ---- Faixa de reforço do que a rede entrega ---- */
+.entregaveis {
+  list-style: none;
+  margin-top: 2.2rem;
+  display: grid;
+  gap: .7rem;
+}
+.entregaveis li {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  font-size: .95rem;
+  color: var(--texto-suave);
+}
+.entregaveis li strong { color: var(--texto); }
+.entregaveis svg { flex-shrink: 0; width: 20px; height: 20px; color: var(--neon); margin-top: .2rem; }
+@media (min-width: 700px) { .entregaveis { grid-template-columns: repeat(2, 1fr); gap: .8rem 2rem; } }
+
+/* ---- Estado de envio do formulário ---- */
+.botao[aria-busy="true"] { opacity: .75; pointer-events: none; }
+.formulario__resumo-erro {
+  background: rgba(255, 107, 61, .1);
+  border: 1px solid #ff6b3d;
+  border-radius: var(--raio);
+  padding: .9rem 1.1rem;
+  font-size: .9rem;
+  color: #ffb495;
+}
+.formulario__resumo-erro strong { color: #ffd0bd; }
+
+/* ---- Ajustes finos de leitura no celular ---- */
+@media (max-width: 599px) {
+  .secao { padding-block: 3.6rem; }
+  .container { width: min(var(--largura), 100% - 2rem); }
+  .secao h2 { font-size: clamp(1.55rem, 6.4vw, 2rem); }
+  .cta-secao .botao { flex: 1 1 100%; }
+  /* alvo de toque maior no acordeão do FAQ */
+  .faq__item summary { padding-block: 1.15rem; }
+  .comparativo__tabela { min-width: 480px; font-size: .88rem; }
+  .comparativo__tabela th, .comparativo__tabela td { padding: .75rem .85rem; }
+}
+
+/* Dica visual de que a tabela comparativa rola na horizontal */
+.comparativo__scroll {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.comparativo__dica {
+  margin-top: .5rem;
+  font-size: .78rem;
+  color: var(--texto-fraco);
+}
+@media (min-width: 700px) { .comparativo__dica { display: none; } }

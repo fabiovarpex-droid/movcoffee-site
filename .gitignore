@@ -8,3 +8,7 @@ node_modules/
 
 # Servidor de teste local (não é necessário para o deploy)
 servidor-local.js
+
+# E-book em PDF (4 MB) — material comercial, não é página do site.
+# Se um dia virar isca de captura, entra por link no formulário, não solto na raiz.
+ebook-movcoffee.pdf

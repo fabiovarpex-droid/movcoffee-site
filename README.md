@@ -9,18 +9,35 @@ entrada no scroll e cards em glassmorphism.
 
 Feito em **HTML, CSS e JavaScript puros** — sem frameworks, sem build, sem
 dependências externas (as animações usam a API nativa Intersection Observer).
+A única biblioteca de terceiros do projeto é o Leaflet, e só na página do mapa.
 
 ## Estrutura dos arquivos
 
 ```
-index.html                    → página principal (todas as seções)
-politica-de-privacidade.html  → página da política de privacidade (LGPD)
-css/styles.css                → todos os estilos (mobile-first)
-js/script.js                  → header, menu, animações, formulário e chat
+index.html                    → página principal (hero → cadastro)
+simulador.html                → simulador de plano de negócio
+mapa-potencial.html           → mapa de potencial por município (Leaflet)
+politica-de-privacidade.html  → política de privacidade (LGPD)
+404.html                      → página de erro
+robots.txt / sitemap.xml      → SEO
+
+css/styles.css                → estilos do site (mobile-first)
+css/simulador.css             → estilos do simulador
+css/mapa.css                  → estilos do mapa
+js/script.js                  → header, menu, barra de CTA, animações, formulário e chat
+js/simulador.js               → motor de cálculo do simulador
+js/mapa.js                    → mapa de potencial
+
 assets/favicon.svg            → ícone do site
-assets/hero-poster.svg        → poster placeholder do vídeo do hero
-assets/hero-coffee.mp4        → (NÃO INCLUÍDO) vídeo do hero — ver abaixo
-servidor-local.js             → mini-servidor para testar localmente (não vai para o deploy)
+assets/hero-poster.svg        → poster do vídeo do hero
+assets/hero-coffee-novo-2.mp4 → vídeo 1 do hero (usado sozinho no celular)
+assets/hero-coffee-novo.mp4   → vídeo 2 do hero (só no desktop)
+assets/quiosque/              → foto do quiosque completo
+assets/pontos/                → fotos do quiosque por ambiente (renders)
+
+vercel.json                   → cache e cabeçalhos de segurança do deploy
+.vercelignore                 → o que NÃO sobe para o site publicado
+servidor-local.js             → mini-servidor para testar localmente
 ```
 
 ## Como rodar localmente
@@ -29,8 +46,7 @@ servidor-local.js             → mini-servidor para testar localmente (não vai
 
 **Jeito recomendado** (com servidor local, igual ao ambiente de produção):
 
-```powershell
-# dentro da pasta do projeto:
+```bash
 node servidor-local.js
 ```
 
@@ -49,64 +65,88 @@ Depois abra http://localhost:4173 no navegador.
 Também dá para conectar um repositório do GitHub na Vercel: todo `git push`
 vira deploy automático.
 
+O `.vercelignore` garante que brandbook, e-book, modelo de licenciadora e a
+documentação interna **não subam** para o site publicado.
+
 ### Opção B — Cloudflare Pages
 
 1. Crie uma conta em https://pages.cloudflare.com
 2. "Create a project" → "Upload assets" → arraste a pasta inteira
-3. Pronto.
+3. Atenção: o Cloudflare Pages não lê `.vercelignore` — remova os documentos
+   internos da pasta antes de subir, ou configure o ignore equivalente.
 
 ## 🎬 O vídeo do hero
 
-O hero foi feito para exibir um vídeo em loop (café sendo preparado, vapor,
-retirada no totem). O arquivo **ainda não está incluído**.
+O hero exibe vídeo em background, mas **com peso sob controle** — é o item mais
+caro da página, e a maior parte do tráfego de franquia chega pelo celular:
 
-1. Grave/consiga o vídeo e **comprima para web** (recomendado: 1080p, H.264,
-   sem áudio, poucos MB — quanto menor, mais rápido carrega).
-2. Salve como **`assets/hero-coffee.mp4`** (o `index.html` já aponta para esse caminho).
-3. Gere um frame estático como **poster** (`assets/hero-poster.jpg`, ~1920×1080)
-   e troque o `poster="assets/hero-poster.svg"` no `index.html` por ele.
+| Situação | O que carrega |
+|---|---|
+| Desktop | `hero-coffee-novo-2.mp4` → `hero-coffee-novo.mp4`, em sequência |
+| Celular (< 800px) | só `hero-coffee-novo-2.mp4` (1,8 MB), em **loop nativo** |
+| Economia de dados, 2G/3G ou "reduzir movimento" | **nenhum vídeo** — fica a animação CSS de vapor |
 
-Enquanto o vídeo `.mp4` não existir, o hero mostra uma **animação de fundo em
-CSS** (vapor subindo + brilho quente em movimento) — então ele já parece "vivo",
-não fica estático. Quando você colocar o `hero-coffee.mp4`, o JavaScript detecta
-que ele tocou e substitui a animação pelo vídeo automaticamente.
+O carregamento começa só depois do `load` da página (não disputa banda com o
+texto e o CSS) e o vídeo **pausa quando o hero sai da tela**.
 
-O vídeo **não** toca (e a animação é desligada) quando o usuário ativa "reduzir
-movimento" no sistema ou está em conexão lenta / economia de dados — nesse caso
-aparece o fundo estático, respeitando a acessibilidade.
+Para trocar ou acrescentar vídeos, edite a lista `playlistDesktop` em
+`js/script.js`. O primeiro item da lista é o único usado no celular — então ele
+deve ser sempre o mais leve.
+
+**Recomendação de compressão** (o vídeo atual é 1920×1080 para uma tela de
+375px — dá para cortar ~70% do peso sem perda perceptível no celular):
+
+```bash
+ffmpeg -i assets/hero-coffee-novo-2.mp4 -vf "scale=1280:-2" -c:v libx264 -crf 30 -preset slow -an -movflags +faststart assets/hero-coffee-novo-2.mp4
+```
 
 ## ⚠️ O que falta preencher com dados reais
 
 Todos os pontos estão marcados no código com o comentário
 **`DADO REAL NECESSÁRIO`** (busque por esse texto nos arquivos):
 
-| Onde | O que falta |
-|---|---|
-| `assets/hero-coffee.mp4` | Vídeo real do hero (ver seção acima) |
-| `index.html` (seção Números) | Investimento, payback, royalties e taxa de franquia oficiais da COF |
-| `index.html` (seção Onde funciona) | ✅ Fotos do quiosque por ambiente já colocadas em `assets/pontos/` (`ponto-supermercado.jpg`, `ponto-academia.jpg`, `ponto-shopping.jpg`, `ponto-aeroporto.jpg`, `ponto-corporativo.jpg`). São **renders ilustrativos** — trocar por fotos de unidades reais quando houver. Para trocar uma foto, basta substituir o arquivo correspondente em `assets/pontos/`. |
-| `index.html` (footer) | CNPJ e razão social da franqueadora |
-| `index.html` (meta tags OG) | Domínio final e imagem de compartilhamento (1200×630px) |
-| `js/script.js` (formulário) | Endpoint/webhook do CRM — bloco `fetch` pronto, comentado; basta descomentar e pôr a URL |
-| `js/script.js` (chat) | Integração com chat ao vivo (Tawk.to, Crisp, WhatsApp Business etc.) |
-| `politica-de-privacidade.html` | Revisão jurídica, CNPJ e e-mail do encarregado (DPO) |
+| Onde | O que falta | Bloqueia o go-live? |
+|---|---|---|
+| `js/script.js` → `CONFIG.endpointLead` | Endpoint/webhook do CRM. **Enquanto estiver vazio, o lead não chega em ninguém** — fica só no navegador do candidato | **Sim** |
+| `index.html` (footer) e `politica-de-privacidade.html` | CNPJ e razão social da franqueadora | **Sim** |
+| `politica-de-privacidade.html` | Revisão jurídica e e-mail real do encarregado (DPO) | **Sim** |
+| `index.html`, `robots.txt`, `sitemap.xml` | Domínio final (hoje `www.beencoffee.com.br`) | Sim |
+| `index.html` (meta OG) | Imagem de compartilhamento 1200×630 com a marca. Hoje aponta para a foto real do quiosque — funciona, mas não é o corte ideal | Não |
+| `index.html` (seção Investimento) | Investimento, payback, royalties e taxa de franquia oficiais da COF | Não |
+| `index.html` (seção Próximos passos) | Confirmar com a expansão os prazos de cada etapa | Não |
+| `assets/pontos/` | São **renders ilustrativos** — trocar por fotos de unidades reais quando houver (basta substituir o arquivo de mesmo nome) | Não |
+| `js/script.js` → `CONFIG.whatsapp` | WhatsApp comercial. Vazio = nenhum botão é criado (melhor que link quebrado) | Não |
+| `js/script.js` (chat) | Integração com chat ao vivo (Tawk.to, Crisp, WhatsApp Business etc.) | Não |
 
-Enquanto o webhook do CRM não é configurado, os cadastros enviados aparecem
-apenas no console do navegador (F12 → Console) — **não são salvos em lugar
-nenhum**. Configure a integração antes de divulgar o site.
+## Cache do deploy
+
+Os nomes de arquivo não têm hash de versão e o `vercel.json` cacheia
+`/assets/` por 30 dias. **Se você trocar uma imagem ou vídeo mantendo o mesmo
+nome, quem já visitou pode continuar vendo a versão antiga.** Para forçar a
+atualização, suba com um nome novo e aponte o `index.html` / `script.js`.
 
 ## Checklist do que já está pronto
 
 - ✅ Identidade grafite + laranja neon, Space Grotesk, tom tech-forward
-- ✅ Header fixo com blur (glassmorphism) ao rolar
-- ✅ Hero com vídeo em background + overlay em gradiente + poster de fallback
+- ✅ Header fixo com blur, opaco no celular (não "flutua" sobre o vídeo)
+- ✅ Âncoras do menu param abaixo do header (`scroll-padding` medido por JS)
+- ✅ Menu mobile em painel com trava de rolagem, backdrop, Esc e foco de teclado
+- ✅ Barra de CTA fixa no rodapé do celular (some quando o cadastro está na tela)
+- ✅ Hero com vídeo consciente de peso (ver acima) + poster de fallback
 - ✅ Animações de entrada no scroll (Intersection Observer, sem biblioteca)
-- ✅ Cards de números em glassmorphism
-- ✅ Seção de prova social (depoimentos + faixa de pontos)
-- ✅ Responsivo (testado em 375px e 1440px)
-- ✅ SEO básico: meta title, description e tags Open Graph
-- ✅ Acessibilidade: labels em todos os campos, contraste adequado, foco visível, `prefers-reduced-motion` respeitado
-- ✅ Validação client-side do formulário (nome, telefone com máscara, e-mail, cidade, capital, experiência)
-- ✅ FAQ em accordion (8 perguntas)
+- ✅ Comparativo quiosque × cafeteria, vitrine de pontos por ambiente
+- ✅ Linha do tempo "do cadastro à inauguração, em 5 etapas"
+- ✅ Lista do que a franqueadora entrega
+- ✅ Simulador financeiro e mapa de potencial
+- ✅ Responsivo (verificado em 375px, 768px e 1280px, sem estouro horizontal)
+- ✅ SEO: title, description, canonical, Open Graph, Twitter Card, dados
+  estruturados de FAQ (rich snippet), `robots.txt` e `sitemap.xml`
+- ✅ Acessibilidade: link "pular para o conteúdo", labels em todos os campos,
+  foco visível, alvos de toque ≥ 44px, `aria-invalid` nos erros,
+  `prefers-reduced-motion` respeitado
+- ✅ Validação do formulário com correção ao sair do campo e máscara de telefone
+- ✅ FAQ em accordion (9 perguntas)
 - ✅ Widget de chat com respostas rápidas do FAQ
-- ✅ Aviso LGPD no formulário e no footer + página de política de privacidade
+- ✅ LGPD: consentimento explícito obrigatório, registrado no payload do lead
+- ✅ Cabeçalhos de segurança e cache no `vercel.json`
+- ✅ Página 404 na identidade do site
