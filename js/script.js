@@ -65,17 +65,15 @@ if (heroVideo) {
   const conexaoLenta = /2g/.test(conexao.effectiveType || "");
 
   const hero = heroVideo.closest(".hero");
-  // Quando um vídeo começar a tocar, troca a animação de fundo pelo vídeo
+  // Quando o vídeo começar a tocar, troca a animação de fundo pelo vídeo
   heroVideo.addEventListener("playing", () => hero.classList.add("com-video"));
 
-  // Playlist do hero: os vídeos tocam em sequência e recomeçam do início (loop).
-  // Para adicionar/trocar vídeos, edite esta lista.
-  const playlistHero = ["assets/hero-coffee-1.mp4", "assets/hero-coffee.mp4", "assets/hero-coffee-3.mp4"];
-  let indiceVideo = 0;
+  // Vídeo único do hero, em loop. Para trocar, edite este caminho.
+  const videoHero = "assets/hero-coffee-novo.mp4";
+  heroVideo.loop = true;
 
-  function tocarVideoHero(indice) {
-    indiceVideo = indice;
-    heroVideo.src = playlistHero[indice];
+  function tocarVideoHero() {
+    heroVideo.src = videoHero;
     heroVideo.load();
     const tentativa = heroVideo.play();
     if (tentativa && typeof tentativa.catch === "function") {
@@ -83,20 +81,15 @@ if (heroVideo) {
     }
   }
 
-  // Ao terminar um vídeo, avança para o próximo (após o último, volta ao primeiro)
-  heroVideo.addEventListener("ended", () => {
-    tocarVideoHero((indiceVideo + 1) % playlistHero.length);
-  });
-
   if (prefereMenosMovimento || economiaDados || conexaoLenta) {
     // Não carrega/reproduz vídeo — a animação de fundo (ou o poster) permanece
     heroVideo.removeAttribute("autoplay");
     heroVideo.preload = "none";
   } else {
-    // Começa pelo primeiro vídeo da playlist. Se o arquivo não existir, o play()
-    // falha silenciosamente e a animação de fundo CSS continua visível.
+    // Se o arquivo não existir, o play() falha silenciosamente e a
+    // animação de fundo CSS continua visível.
     heroVideo.preload = "auto";
-    tocarVideoHero(0);
+    tocarVideoHero();
   }
 }
 

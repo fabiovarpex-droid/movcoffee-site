@@ -75,12 +75,10 @@
          1. HERO COM VÍDEO EM BACKGROUND
          ============================================================ -->
     <section class="hero" id="hero">
-      <!-- VÍDEO DE FUNDO (três vídeos em sequência, em loop)
-           O js/script.js toca a "playlist" em ordem e recomeça:
-           assets/hero-coffee-1.mp4 → assets/hero-coffee.mp4 (xícara) → assets/hero-coffee-3.mp4 → volta ao início.
-           Para adicionar/trocar vídeos, edite a lista "playlistHero" no script.js.
-           O poster é exibido enquanto carrega e em conexões lentas / prefers-reduced-motion.
-           (Sem 'loop' no elemento: assim o evento 'ended' dispara e avança para o próximo.) -->
+      <!-- VÍDEO DE FUNDO (um único vídeo, em loop)
+           O js/script.js define o src (assets/hero-coffee-novo.mp4) e toca em loop.
+           Para trocar o vídeo, edite a constante "videoHero" no script.js.
+           O poster é exibido enquanto carrega e em conexões lentas / prefers-reduced-motion. -->
       <video
         class="hero__video"
         id="hero-video"
