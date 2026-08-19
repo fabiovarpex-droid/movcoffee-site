@@ -171,27 +171,7 @@ select:focus-visible, summary:focus-visible {
   text-decoration: none;
   color: var(--texto);
 }
-.logo__icone { width: auto; height: 27px; }
-.logo__texto {
-  font-family: var(--fonte-titulo);
-  display: flex;
-  flex-direction: column;
-  line-height: 1.08;
-}
-.logo__linha1 {
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .09em;
-  text-transform: uppercase;
-  color: var(--texto);
-}
-.logo__linha1 strong { color: var(--neon); font-weight: 700; }
-.logo__linha2 {
-  font-size: 1.08rem;
-  font-weight: 800;
-  letter-spacing: .01em;
-  text-transform: uppercase;
-}
+.logo__imagem { width: auto; height: 32px; display: block; }
 
 .topo__hamburguer {
   display: flex;
@@ -965,8 +945,7 @@ select:focus-visible, summary:focus-visible {
 }
 @media (max-width: 419px) {
   .topo__cta-mobile { font-size: .78rem; padding: .5rem .75rem; }
-  .logo__icone { height: 24px; }
-  .logo__linha2 { font-size: .98rem; }
+  .logo__imagem { height: 28px; }
   .topo__hamburguer { padding: .5rem .25rem .5rem .5rem; }
 }
 /* Só em telas muito estreitas (iPhone SE e similares, <=349px) o CTA encurta:
