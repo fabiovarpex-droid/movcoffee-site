@@ -1106,7 +1106,11 @@ select:focus-visible, summary:focus-visible {
 .diferencial__link:hover { transform: translateX(3px); text-decoration: underline; }
 @media (min-width: 800px) {
   .diferenciais__intro { grid-template-columns: .8fr 1.2fr; }
-  .diferenciais__imagem { max-width: 100%; }
+  /* Sem isso o copo esticava até preencher a coluna inteira (~440px de
+     largura por ~550px de altura) e ficava desproporcional ao lado do
+     texto — mantém o mesmo tamanho contido do mobile, só centralizado
+     na coluna mais larga do desktop. */
+  .diferenciais__imagem { max-width: 300px; margin-inline: 0; }
 }
 
 /* Foto do quiosque completo: destaque do pacote em "Investimento" */
