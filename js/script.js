@@ -486,12 +486,12 @@ const perguntasRapidas = [
   {
     pergunta: "Quais são os próximos passos?",
     resposta:
-      "São 5 etapas: cadastro → conversa com a expansão → COF e análise (mínimo 10 dias por lei) → assinatura e escolha do ponto → instalação e treinamento.",
+      "São 4 etapas: cadastro → conversa com a expansão → assinatura e escolha do ponto → instalação e treinamento.",
   },
   {
     pergunta: "Falar com a equipe",
     resposta:
-      "Preencha o formulário de cadastro aqui do site que nossa equipe de expansão retorna em até 2 dias úteis! 👇",
+      "Preencha o formulário de cadastro aqui do site que nossa equipe de expansão retorna logo na sequência! 👇",
   },
 ];
 

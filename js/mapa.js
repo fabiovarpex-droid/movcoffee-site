@@ -785,7 +785,7 @@ function abrirPainel(tipo, chave) {
       <button type="button" class="botao botao--grande botao--largura-total mp-cta-abrir" id="mp-cta-abrir">
         Tenho interesse nesta região →
       </button>
-      <p class="mp-cta-micro">Sem compromisso — nossa equipe de expansão retorna em até 2 dias úteis.</p>
+      <p class="mp-cta-micro">Sem compromisso — nossa equipe de expansão retorna logo na sequência.</p>
       <div id="mp-cta-container"></div>
     `;
 
@@ -929,7 +929,7 @@ function montarFormularioCTA(container, contexto) {
     container.innerHTML = `
       <div class="mp-cta-confirmacao">
         <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <p><strong>Recebido!</strong> Nossa equipe de expansão entra em contato em até 2 dias úteis.</p>
+        <p><strong>Recebido!</strong> Nossa equipe de expansão entra em contato logo na sequência.</p>
       </div>`;
   });
 }
@@ -984,7 +984,7 @@ function montarConteudoDrawer() {
       lista real de endereços. Migrar para as listas nominais das fontes setoriais (ANAC, CNES,
       INEP, RAIS) está no roadmap.</li>` : ""}
       <li>Split entre tiers (premium/convencional) e coeficientes de captura são premissas da
-      franqueadora, não medições diretas.</li>
+      nossa equipe, não medições diretas.</li>
     </ul>
 
     <p class="mp-card-disclaimer">
