@@ -1060,6 +1060,55 @@ select:focus-visible, summary:focus-visible {
   .oportunidade__cta { width: auto; }
 }
 
+/* Foto do copo Been On Coffee: seção "Nossos diferenciais" */
+.diferenciais__imagem {
+  max-width: 300px;
+  margin-inline: auto;
+  border-radius: var(--raio);
+  overflow: hidden;
+  border: 1px solid var(--borda);
+  background: var(--grafite-800);
+}
+.diferenciais__imagem img { width: 100%; height: auto; display: block; }
+.diferenciais__lista {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+.diferencial { display: flex; gap: 1rem; align-items: flex-start; }
+.diferencial__numero {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--neon-brilho);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: .85rem;
+  color: var(--neon);
+}
+.diferencial__corpo h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+.diferencial__corpo p { font-size: .92rem; color: var(--texto-suave); margin-bottom: .55rem; }
+.diferencial__link {
+  display: inline-flex;
+  align-items: center;
+  font-size: .87rem;
+  font-weight: 600;
+  color: var(--neon-claro);
+  text-decoration: none;
+  transition: transform var(--transicao);
+}
+.diferencial__link:hover { transform: translateX(3px); text-decoration: underline; }
+@media (min-width: 800px) {
+  .diferenciais__intro { grid-template-columns: .8fr 1.2fr; }
+  .diferenciais__imagem { max-width: 100%; }
+}
+
 /* Foto do quiosque completo: destaque do pacote em "Investimento" */
 .investimento__destaque {
   max-width: 720px;
