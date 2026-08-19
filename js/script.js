@@ -151,7 +151,7 @@ if (secoesAlvo.length && linksInternos.length && "IntersectionObserver" in windo
   barra.className = "barra-cta";
   const noSimulador = !!document.querySelector(".simulador");
   barra.innerHTML =
-    `<a class="botao" href="#cadastro">Quero ser licenciado</a>` +
+    `<a class="botao" href="#cadastro">Quero fazer parte da Been On</a>` +
     (noSimulador ? "" : `<a class="botao botao--fantasma" href="simulador.html">Simular</a>`);
   document.body.appendChild(barra);
 
