@@ -472,7 +472,7 @@ function recalcularMapa() {
 
   desenharLegendaEscala(vistaUF ? escalaAtual : escalaUFs);
   document.querySelector("#mp-legenda .mp-legenda-titulo").textContent =
-    vistaUF ? `Potencial (SAM) — cidades de ${vistaUF}` : "Potencial (SAM) — por estado";
+    vistaUF ? `Potencial (SAM), cidades de ${vistaUF}` : "Potencial (SAM), por estado";
 
   if (camadaUFs) camadaUFs.setStyle(estiloUF);
   if (camadaMunicipiosUF) camadaMunicipiosUF.setStyle(estiloFeature);
@@ -502,7 +502,7 @@ function montarFiltros() {
   Dados.ufs.forEach((uf) => {
     const op = document.createElement("option");
     op.value = uf;
-    op.textContent = `${uf} — ${UF_NOMES[uf] || uf}`;
+    op.textContent = `${uf}, ${UF_NOMES[uf] || uf}`;
     selUF.appendChild(op);
   });
   selUF.addEventListener("change", () => {
@@ -754,7 +754,7 @@ function abrirPainel(tipo, chave) {
       <div class="mp-card-destaques">
         <div class="d">
           <div class="n">${fmtInt(agregado.qtd)}</div>
-          <div class="l">pontos com potencial de operação — universo endereçável (SAM)</div>
+          <div class="l">pontos com potencial de operação, universo endereçável (SAM)</div>
         </div>
         <div class="d">
           <div class="n">${fmtMoeda(agregado.faturamento / Math.max(1, agregado.qtd))}</div>
@@ -767,7 +767,7 @@ function abrirPainel(tipo, chave) {
         <button type="button" data-abrir-drawer="confianca">o que é isso? ⓘ</button>
       </div>
 
-      ${tipo === "uf-residual" ? `<div class="mp-card-aviso">Este valor é a soma estimada dos municípios menores do estado — não representa uma cidade específica. Os ${TOP_N_MUNICIPIOS} maiores municípios do país aparecem individualizados no mapa; os demais entram nesta linha agregada.</div>` : ""}
+      ${tipo === "uf-residual" ? `<div class="mp-card-aviso">Este valor é a soma estimada dos municípios menores do estado, não representa uma cidade específica. Os ${TOP_N_MUNICIPIOS} maiores municípios do país aparecem individualizados no mapa; os demais entram nesta linha agregada.</div>` : ""}
 
       <div class="mp-card-canais">${linhasCanalHTML}</div>
 
@@ -785,7 +785,7 @@ function abrirPainel(tipo, chave) {
       <button type="button" class="botao botao--grande botao--largura-total mp-cta-abrir" id="mp-cta-abrir">
         Tenho interesse nesta região →
       </button>
-      <p class="mp-cta-micro">Sem compromisso — nossa equipe de expansão retorna logo na sequência.</p>
+      <p class="mp-cta-micro">Sem compromisso, nossa equipe de expansão retorna logo na sequência.</p>
       <div id="mp-cta-container"></div>
     `;
 
@@ -955,32 +955,32 @@ function montarConteudoDrawer() {
 
     <h3>Universo teórico → endereçável → priorizado</h3>
     <p><strong>Universo teórico (TAM):</strong> estimativa nacional do setor antes de qualquer
-    qualificação — é contexto, não é dado por município.</p>
-    <p><strong>Potencial endereçável (SAM):</strong> é o número que este mapa mostra — já
+    qualificação. É contexto, não é dado por município.</p>
+    <p><strong>Potencial endereçável (SAM):</strong> é o número que este mapa mostra, já
     qualificado (critério mínimo de porte/fluxo por canal) e distribuído por município.</p>
     <p><strong>Potencial priorizado:</strong> o mesmo universo endereçável, destacado pelos
-    municípios/canais com maior prioridade de expansão — não é um número novo, é um recorte.</p>
+    municípios/canais com maior prioridade de expansão. Não é um número novo, é um recorte.</p>
 
     <h3 id="drawer-secao-confianca">Como funciona a confiança</h3>
     <p>A confiança sobe quando já existe operação própria em campo naquela região (captura de
-    dado real). Hoje, sem nenhuma unidade Been On Coffee em operação, o teto é <strong>Médio</strong> —
-    o nível <strong>Alto</strong> só passa a aparecer quando o primeiro piloto local fechar um
+    dado real). Hoje, sem nenhuma unidade Been On Coffee em operação, o teto é <strong>Médio</strong>.
+    O nível <strong>Alto</strong> só passa a aparecer quando o primeiro piloto local fechar um
     ciclo completo de operação. Linhas agregadas ("Interior de UF") começam sempre um
     nível abaixo, porque a distribuição dentro do estado é menos certa que num município
     individualizado.</p>
 
     <h3>Como agregamos municípios menores</h3>
     <p>Os ${TOP_N_MUNICIPIOS} maiores municípios do país (por população) aparecem individualizados
-    no mapa. Os demais são somados por estado, na linha "Interior de [UF]" — sem pino,
+    no mapa. Os demais são somados por estado, na linha "Interior de [UF]", sem pino,
     sem nome de cidade específico.</p>
 
     <h3>Limitações conhecidas</h3>
     <ul>
       ${canaisNominais.length ? `<li>${canaisNominais.map(({ canal, subcanal }) => canalCurto(canal, subcanal)).join(", ")}:
-      contagem baseada em <strong>censo setorial real (lista nominal)</strong> — cada unidade da
+      contagem baseada em <strong>censo setorial real (lista nominal)</strong>, cada unidade da
       contagem corresponde a um estabelecimento qualificado existente.</li>` : ""}
       ${canaisProxy.length ? `<li>${canaisProxy.map(({ canal, subcanal }) => canalCurto(canal, subcanal)).join(", ")}:
-      potencial distribuído por população e renda do município (proxy demográfico) — não por
+      potencial distribuído por população e renda do município (proxy demográfico), não por
       lista real de endereços. Migrar para as listas nominais das fontes setoriais (ANAC, CNES,
       INEP, RAIS) está no roadmap.</li>` : ""}
       <li>Split entre tiers (premium/convencional) e coeficientes de captura são premissas da
@@ -1031,7 +1031,7 @@ function montarStats() {
     el.innerHTML = `
       <div class="mp-stat">
         <div class="n">${fmtInt(totalPts)}</div>
-        <div class="l"><strong>pontos com potencial de operação</strong> mapeados no Brasil — universo endereçável estimado (SAM)</div>
+        <div class="l"><strong>pontos com potencial de operação</strong> mapeados no Brasil, universo endereçável estimado (SAM)</div>
       </div>
       <div class="mp-stat">
         <div class="n">${fmtInt(nMunicipios)}</div>
@@ -1039,7 +1039,7 @@ function montarStats() {
       </div>
       <div class="mp-stat">
         <div class="n">${nCanais}</div>
-        <div class="l"><strong>canais de instalação</strong> — de academias e supermercados a shoppings, hospitais e aeroportos</div>
+        <div class="l"><strong>canais de instalação</strong>, de academias e supermercados a shoppings, hospitais e aeroportos</div>
       </div>
     `;
     return;
@@ -1106,7 +1106,7 @@ function montarTopOportunidades() {
 
   cont.innerHTML = "";
   if (!itens.length) {
-    cont.innerHTML = '<div class="mp-top-vazio">Sem estimativa para este recorte — ajuste os filtros de canal/tier.</div>';
+    cont.innerHTML = '<div class="mp-top-vazio">Sem estimativa para este recorte, ajuste os filtros de canal/tier.</div>';
     return;
   }
   itens.slice(0, 6).forEach((it, idx) => {
@@ -1139,12 +1139,12 @@ function montarFunil() {
   document.getElementById("mp-funil").innerHTML = `
     <div class="f"><div class="k">Camada 1</div><h4>Universo teórico (TAM)</h4>
       <p>Estimativa nacional por canal, antes de qualquer qualificação. Não existe por
-      município — é contexto, disponível em "Como calculamos".</p></div>
+      município, é contexto, disponível em "Como calculamos".</p></div>
     <div class="f"><div class="k">Camada 2</div><h4>Universo endereçável (SAM)</h4>
       <p>É o que o mapa plota: potencial já qualificado e distribuído por município. Métrica
       padrão da cor do coroplético.</p></div>
     <div class="f"><div class="k">Camada 3</div><h4>Potencial priorizado</h4>
-      <p>O mesmo universo endereçável, destacado por prioridade de expansão — use "destacar só
+      <p>O mesmo universo endereçável, destacado por prioridade de expansão. Use "destacar só
       prioridade alta" na legenda.</p></div>
   `;
 }

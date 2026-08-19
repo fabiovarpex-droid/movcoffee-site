@@ -58,7 +58,7 @@
       mixNota:
         "~19% do ticket · mix puxado para café preto e bebidas P, com blend tradicional mais barato.",
       premissaExtra:
-        "Blend tradicional fornecido pela rede — custo de insumo menor pareado ao ticket do ponto.",
+        "Blend tradicional fornecido pela rede, custo de insumo menor pareado ao ticket do ponto.",
     },
   };
 
@@ -269,7 +269,7 @@
   function renderPremissas() {
     const p = PERFIS[perfil];
     const tituloEl = el("premissas-titulo");
-    if (tituloEl) tituloEl.textContent = `Premissas da rede — perfil ${p.label}`;
+    if (tituloEl) tituloEl.textContent = `Premissas da rede, perfil ${p.label}`;
     const corpo = el("premissas-corpo");
     if (!corpo) return;
     const totalCmv = p.cmv.cafe + p.cmv.leite + p.cmv.descartaveis + p.cmv.outros;

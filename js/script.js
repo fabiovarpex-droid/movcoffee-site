@@ -466,12 +466,12 @@ const perguntasRapidas = [
   {
     pergunta: "Qual o investimento?",
     resposta:
-      "O quiosque completo custa R$ 72.000 (valor aproximado): máquina, totem, mobiliário e estoque do 1º mês. Não inclui frete, abertura de empresa e capital de giro — no simulador você projeta o total na sua realidade.",
+      "O quiosque completo custa R$ 72.000 (valor aproximado): máquina, totem, mobiliário e estoque do 1º mês. Não inclui frete, abertura de empresa e capital de giro. No simulador você projeta o total na sua realidade.",
   },
   {
     pergunta: "Prazo de instalação?",
     resposta:
-      "Com o contrato do ponto assinado, a instalação leva de 30 a 45 dias em média — o quiosque chega pré-fabricado.",
+      "Com o contrato do ponto assinado, a instalação leva de 30 a 45 dias em média. O quiosque chega pré-fabricado.",
   },
   {
     pergunta: "Preciso de experiência?",
