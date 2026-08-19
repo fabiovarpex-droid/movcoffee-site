@@ -227,10 +227,12 @@ if (heroVideo) {
   const hero = heroVideo.closest(".hero");
   heroVideo.addEventListener("playing", () => hero.classList.add("com-video"));
 
-  // Playlist do hero. Para trocar/adicionar vídeos, edite estas listas.
-  // O 1º arquivo é o mais leve de propósito: é o único usado no celular.
-  const playlistDesktop = ["assets/hero-coffee-novo-2.mp4", "assets/hero-coffee-novo.mp4"];
-  const playlist = telaPequena ? playlistDesktop.slice(0, 1) : playlistDesktop;
+  // Playlist do hero. Para trocar/adicionar vídeos, edite estas constantes.
+  const videoCopo = "assets/hero-coffee-novo.mp4"; // copo de café, close-up (mais pesado)
+  const videoQuiosque = "assets/hero-coffee-novo-2.mp4"; // quiosque no mercado (mais leve)
+  const playlistDesktop = [videoCopo, videoQuiosque];
+  // No celular usamos só o vídeo mais leve (economia de dados), independente da ordem acima.
+  const playlist = telaPequena ? [videoQuiosque] : playlistDesktop;
   let indiceVideo = 0;
 
   function tocarVideoHero(indice) {

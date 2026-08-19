@@ -1052,10 +1052,12 @@ select:focus-visible, summary:focus-visible {
   background: var(--grafite-800);
 }
 .oportunidade__imagem img { width: 100%; height: auto; display: block; }
+.oportunidade__cta { margin-top: 1.4rem; width: 100%; }
 @media (min-width: 800px) {
-  .oportunidade__imagem { order: 2; }
+  .oportunidade__bloco { order: 2; }
   .oportunidade__texto { order: 1; }
   .oportunidade__intro { grid-template-columns: .7fr 1.3fr; }
+  .oportunidade__cta { width: auto; }
 }
 
 /* Foto do quiosque completo: destaque do pacote em "Investimento" */
